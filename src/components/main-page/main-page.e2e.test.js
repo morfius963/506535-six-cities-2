@@ -9,10 +9,12 @@ Enzyme.configure({adapter: new Adapter()});
 describe(`end to end test`, () => {
   it(`Click event correctly works on cards title`, () => {
     const clickHandler = jest.fn();
-    const app = shallow(<MainPage
-      places = {fixtureData.cardItems}
-      onTitleClick = {clickHandler}
-    />);
+    const app = shallow(
+        <MainPage
+          places = {fixtureData.cardItems}
+          onTitleClick = {clickHandler}
+        />
+    );
     const cardTitle = app.find(`.place-card__name a`);
 
     cardTitle.forEach((card) => {

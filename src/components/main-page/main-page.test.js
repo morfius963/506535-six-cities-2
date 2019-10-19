@@ -7,10 +7,12 @@ describe(`snapshot test`, () => {
   it(`App correctly renders`, () => {
     const clickHandler = jest.fn();
     const tree = renderer
-      .create(<MainPage
-        places = {fixtureData.cardItems}
-        onTitleClick = {clickHandler}
-      />)
+      .create(
+          <MainPage
+            places = {fixtureData.cardItems}
+            onTitleClick = {clickHandler}
+          />
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
