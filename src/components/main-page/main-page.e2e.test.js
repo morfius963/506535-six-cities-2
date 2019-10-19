@@ -18,8 +18,8 @@ describe(`end to end test`, () => {
     const cardTitle = app.find(`.place-card__name a`);
 
     cardTitle.forEach((card) => {
-      card.simulate(`click`);
+      card.simulate(`click`, card);
+      expect(clickHandler).toHaveBeenCalledWith(card);
     });
-    expect(clickHandler).toHaveBeenCalledTimes(cardTitle.length);
   });
 });
