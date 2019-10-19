@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const MainPage = ({places}) => {
+const MainPage = ({places, onTitleClick}) => {
   return <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -114,7 +114,7 @@ const MainPage = ({places}) => {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">{title}</a>
+                    <a href="#" onClick={onTitleClick}>{title}</a>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>
@@ -135,7 +135,8 @@ MainPage.propTypes = {
       PropTypes.shape({
         title: PropTypes.string.isRequired,
       })
-  ).isRequired
+  ).isRequired,
+  onTitleClick: PropTypes.func.isRequired
 };
 
 export default MainPage;

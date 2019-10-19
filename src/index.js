@@ -6,7 +6,8 @@ import fixtureData from "./__fixtures__/data.js";
 const init = () => {
   ReactDOM.render(
       <MainPage
-        places = {fixtureData}
+        places = {fixtureData.cardItems}
+        onTitleClick = {fixtureData.onTitleClick}
       />,
       document.querySelector(`#root`)
   );
