@@ -154,7 +154,7 @@ exports[`snapshot test Component correctly renders 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "88.00000000000001%",
+                      "width": "90%",
                     }
                   }
                 />
@@ -187,6 +187,13 @@ exports[`snapshot test Component correctly renders 1`] = `
           onMouseEnter={[Function]}
         >
           <div
+            className="place-card__mark"
+          >
+            <span>
+              Premium
+            </span>
+          </div>
+          <div
             className="cities__image-wrapper place-card__image-wrapper"
           >
             <a
@@ -196,7 +203,7 @@ exports[`snapshot test Component correctly renders 1`] = `
                 alt="Place image"
                 className="place-card__image"
                 height="200"
-                src="img/apartment-03.jpg"
+                src="img/apartment-02.jpg"
                 width="260"
               />
             </a>
@@ -251,7 +258,7 @@ exports[`snapshot test Component correctly renders 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "70%",
+                      "width": "90%",
                     }
                   }
                 />
@@ -268,7 +275,7 @@ exports[`snapshot test Component correctly renders 1`] = `
               <a
                 href="#"
               >
-                Wood and stone place
+                Beautiful &amp; luxurious apartment at great location
               </a>
             </h2>
             <p
@@ -300,7 +307,7 @@ exports[`snapshot test Component correctly renders 1`] = `
                 alt="Place image"
                 className="place-card__image"
                 height="200"
-                src="img/apartment-01.jpg"
+                src="img/apartment-02.jpg"
                 width="260"
               />
             </a>
@@ -355,7 +362,7 @@ exports[`snapshot test Component correctly renders 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "66%",
+                      "width": "90%",
                     }
                   }
                 />
@@ -372,13 +379,13 @@ exports[`snapshot test Component correctly renders 1`] = `
               <a
                 href="#"
               >
-                Nice, cozy, warm big bed apartment
+                Beautiful &amp; luxurious apartment at great location
               </a>
             </h2>
             <p
               className="place-card__type"
             >
-              private room
+              apartment
             </p>
           </div>
         </article>
@@ -404,7 +411,7 @@ exports[`snapshot test Component correctly renders 1`] = `
                 alt="Place image"
                 className="place-card__image"
                 height="200"
-                src="img/apartment-01.jpg"
+                src="img/apartment-02.jpg"
                 width="260"
               />
             </a>
@@ -459,7 +466,7 @@ exports[`snapshot test Component correctly renders 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "6%",
+                      "width": "90%",
                     }
                   }
                 />

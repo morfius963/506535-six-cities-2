@@ -78,7 +78,7 @@ exports[`snapshot test Component correctly renders 1`] = `
         <span
           style={
             Object {
-              "width": "38%",
+              "width": "90%",
             }
           }
         />
@@ -95,13 +95,13 @@ exports[`snapshot test Component correctly renders 1`] = `
       <a
         href="#"
       >
-        Nice, cozy, warm big bed apartment
+        Beautiful &amp; luxurious apartment at great location
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      private room
+      apartment
     </p>
   </div>
 </article>
