@@ -1,10 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import offersPropTypes from "../app/prop-types.js";
 
-const OfferCard = ({offerData, id, mouseEnterHandler}) => {
+const OfferCard = ({offerData, id, cardMouseEnterHandler}) => {
   const {title, isPremium, price, rating, type, previewImage} = offerData;
 
-  return <article className="cities__place-card place-card" id={id} onMouseEnter={mouseEnterHandler}>
+  return <article className="cities__place-card place-card" id={id} onMouseEnter={(evt) => {
+    const cardId = evt.currentTarget.id;
+    cardMouseEnterHandler(cardId);
+  }}>
     {isPremium
       ? <div className="place-card__mark">
         <span>Premium</span>
@@ -43,16 +47,9 @@ const OfferCard = ({offerData, id, mouseEnterHandler}) => {
 };
 
 OfferCard.propTypes = {
-  offerData: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired
-  }).isRequired,
+  offerData: offersPropTypes,
   id: PropTypes.number.isRequired,
-  mouseEnterHandler: PropTypes.func.isRequired
+  cardMouseEnterHandler: PropTypes.func.isRequired
 };
 
 export default OfferCard;
