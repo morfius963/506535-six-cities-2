@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list.jsx";
+import offersPropTypes from "../app/prop-types.js";
 
 const MainPage = ({places}) => {
   return <div className="page page--gray page--main">
@@ -71,14 +72,7 @@ const MainPage = ({places}) => {
 };
 
 MainPage.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired
-  }).isRequired)
+  places: PropTypes.arrayOf(offersPropTypes)
 };
 
 export default MainPage;

@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page.jsx";
+import offersPropTypes from "./prop-types.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -14,14 +15,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired
-  }).isRequired)
+  places: PropTypes.arrayOf(offersPropTypes)
 };
 
 export default App;
