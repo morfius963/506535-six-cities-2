@@ -10,7 +10,7 @@ describe(`snapshot test`, () => {
           <OfferCard
             offerData = {fixtureData[0]}
             id={0}
-            mouseEnterHandler = {jest.fn()}
+            cardMouseEnterHandler = {jest.fn()}
           />
       )
       .toJSON();

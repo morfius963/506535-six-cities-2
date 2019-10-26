@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card.jsx";
+import offersPropTypes from "../app/prop-types.js";
 
 class OffersList extends PureComponent {
   constructor(props) {
@@ -37,7 +38,7 @@ class OffersList extends PureComponent {
             </ul>
           </form>
           <div className="cities__places-list places__list tabs__content">
-            {offers.map((offer, i) => <OfferCard key={Math.random() * i} offerData={offer} id={i} mouseEnterHandler={this._bindedOfferMouseEnterHandler} />)}
+            {offers.map((offer, i) => <OfferCard key={Math.random() * i} offerData={offer} id={i} cardMouseEnterHandler={this._bindedOfferMouseEnterHandler} />)}
           </div>
         </section>
         <div className="cities__right-section">
@@ -47,20 +48,13 @@ class OffersList extends PureComponent {
     </div>;
   }
 
-  _offerMouseEnterHandler(evt) {
-    this.setState({activeCardId: evt.currentTarget.id});
+  _offerMouseEnterHandler(id) {
+    this.setState({activeCardId: id});
   }
 }
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired
-  }).isRequired)
+  offers: PropTypes.arrayOf(offersPropTypes)
 };
 
 export default OffersList;
