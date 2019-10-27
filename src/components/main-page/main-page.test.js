@@ -1,7 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MainPage from "./main-page.jsx";
+import OffersList from "../offers-list/offers-list.jsx";
 import fixtureData from "../../mocks/offers.js";
+
+jest.mock(`../offers-list/offers-list.jsx`, () => jest.fn().mockReturnValue(null));
 
 describe(`snapshot test`, () => {
   it(`App correctly renders`, () => {
@@ -12,6 +15,7 @@ describe(`snapshot test`, () => {
           />
       )
       .toJSON();
+    expect(OffersList).toHaveBeenCalled();
     expect(tree).toMatchSnapshot();
   });
 });
