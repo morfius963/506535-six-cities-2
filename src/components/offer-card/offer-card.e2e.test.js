@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import OfferCard from "./offer-card.jsx";
-import offersData from "../../mocks/offers.js";
+import offersData from "../../__mocks__/offers.js";
 
 Enzyme.configure({adapter: new Adapter()});
 

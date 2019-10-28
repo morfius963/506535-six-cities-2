@@ -1,7 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list.jsx";
-import offersPropTypes from "../app/prop-types.js";
+import propTypes from "./prop-types.js";
 
 const MainPage = ({places}) => {
   return <div className="page page--gray page--main">
@@ -71,8 +70,6 @@ const MainPage = ({places}) => {
   </div>;
 };
 
-MainPage.propTypes = {
-  places: PropTypes.arrayOf(offersPropTypes)
-};
+MainPage.propTypes = propTypes;
 
 export default MainPage;

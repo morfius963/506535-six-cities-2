@@ -1,6 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
-import offersPropTypes from "../app/prop-types.js";
+import propTypes from "./prop-types.js";
 
 const OfferCard = ({offerData, id, cardMouseEnterHandler}) => {
   const {title, isPremium, price, rating, type, previewImage} = offerData;
@@ -46,10 +45,6 @@ const OfferCard = ({offerData, id, cardMouseEnterHandler}) => {
   </article>;
 };
 
-OfferCard.propTypes = {
-  offerData: offersPropTypes,
-  id: PropTypes.number.isRequired,
-  cardMouseEnterHandler: PropTypes.func.isRequired
-};
+OfferCard.propTypes = propTypes;
 
 export default OfferCard;

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-import fixtureData from "./mocks/offers.js";
+import fixtureData from "./__mocks__/offers.js";
 
 const init = () => {
   ReactDOM.render(

@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import OfferCard from "./offer-card.jsx";
-import fixtureData from "../../mocks/offers.js";
+import fixtureData from "../../__mocks__/offers.js";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {

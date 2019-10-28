@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card.jsx";
-import offersPropTypes from "../app/prop-types.js";
+import propTypes from "./prop-types.js";
 
 class OffersList extends PureComponent {
   constructor(props) {
@@ -53,8 +52,6 @@ class OffersList extends PureComponent {
   }
 }
 
-OffersList.propTypes = {
-  offers: PropTypes.arrayOf(offersPropTypes)
-};
+OffersList.propTypes = propTypes;
 
 export default OffersList;
