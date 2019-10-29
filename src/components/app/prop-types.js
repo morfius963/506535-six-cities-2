@@ -7,4 +7,4 @@ export default PropTypes.shape({
   rating: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   previewImage: PropTypes.string.isRequired
-}).isRequired;
+});

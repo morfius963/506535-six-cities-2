@@ -65,7 +65,9 @@ const MainPage = ({places}) => {
           </ul>
         </section>
       </div>
-      {<OffersList offers={places} />}
+
+      <OffersList offers={places} />
+
     </main>
   </div>;
 };
