@@ -1,6 +1,7 @@
 import React from "react";
 import OffersList from "../offers-list/offers-list.jsx";
 import propTypes from "./prop-types.js";
+import Map from "../map/map.jsx";
 
 const MainPage = ({places}) => {
   return <div className="page page--gray page--main">
@@ -66,7 +67,9 @@ const MainPage = ({places}) => {
         </section>
       </div>
 
-      <OffersList offers={places} />
+      <OffersList offers={places}>
+        <Map offers={places} />
+      </OffersList>
 
     </main>
   </div>;
