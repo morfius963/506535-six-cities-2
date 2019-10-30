@@ -14,7 +14,7 @@ class OffersList extends PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, children} = this.props;
 
     return <div className="cities">
       <div className="cities__places-container container">
@@ -41,7 +41,9 @@ class OffersList extends PureComponent {
           </div>
         </section>
         <div className="cities__right-section">
-          <section className="cities__map map"></section>
+
+          {children}
+
         </div>
       </div>
     </div>;
