@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import OfferCard from "./offer-card.jsx";
-import offersData from "../../__mocks__/offers.js";
+import offersData from "../../__fixtures__/offers.js";
 
 describe(`end to end test`, () => {
   it(`Callback func calls with correct data`, () => {

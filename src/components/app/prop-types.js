@@ -6,5 +6,9 @@ export default PropTypes.shape({
   price: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
-  previewImage: PropTypes.string.isRequired
+  previewImage: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    coords: PropTypes.arrayOf(PropTypes.number),
+    zoom: PropTypes.number
+  }).isRequired
 });
