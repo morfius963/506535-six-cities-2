@@ -1,7 +1,6 @@
 import React from "react";
 import OffersList from "../offers-list/offers-list.jsx";
 import propTypes from "./prop-types.js";
-import Map from "../map/map.jsx";
 import Cities from "../cities/cities.jsx";
 
 const MAX_CITIES_COUNT = 6;
@@ -41,9 +40,7 @@ const MainPage = ({offers, activeOffers, city, onCityClick}) => {
 
       </div>
 
-      <OffersList offers={activeOffers} activeCity={city} >
-        <Map offers={activeOffers} />
-      </OffersList>
+      <OffersList offers={activeOffers} activeCity={city} />
 
     </main>
   </div>;

@@ -1,8 +1,10 @@
-import React, {PureComponent} from "react";
+import React from "react";
+
 import OfferCard from "../offer-card/offer-card.jsx";
 import propTypes from "./prop-types.js";
+import Map from "../map/map.jsx";
 
-class OffersList extends PureComponent {
+class OffersList extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -14,7 +16,7 @@ class OffersList extends PureComponent {
   }
 
   render() {
-    const {offers, activeCity, children} = this.props;
+    const {offers, activeCity} = this.props;
 
     return <div className="cities">
       <div className="cities__places-container container">
@@ -37,12 +39,12 @@ class OffersList extends PureComponent {
             </ul>
           </form>
           <div className="cities__places-list places__list tabs__content">
-            {offers.map((offer, i) => <OfferCard key={Math.random() * i} offerData={offer} id={i} cardMouseEnterHandler={this._bindedOfferMouseEnterHandler} />)}
+            {offers.map((offer, i) => <OfferCard key={`${offer.location.coords}-${i}`} offerData={offer} id={i} cardMouseEnterHandler={this._bindedOfferMouseEnterHandler} />)}
           </div>
         </section>
         <div className="cities__right-section">
 
-          {children}
+          <Map offers={offers} activeCard={this.state.activeCardId} />
 
         </div>
       </div>
