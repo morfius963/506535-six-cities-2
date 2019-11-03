@@ -2,8 +2,13 @@ import React from "react";
 import OffersList from "../offers-list/offers-list.jsx";
 import propTypes from "./prop-types.js";
 import Map from "../map/map.jsx";
+import Cities from "../cities/cities.jsx";
 
-const MainPage = ({places}) => {
+const MAX_CITIES_COUNT = 6;
+
+const MainPage = ({offers, activeOffers, city, onCityClick}) => {
+  const allCities = Array.from(new Set(offers.map((offer) => offer.city.name))).slice(0, MAX_CITIES_COUNT);
+
   return <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -31,44 +36,13 @@ const MainPage = ({places}) => {
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
-        <section className="locations container">
-          <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active">
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
-          </ul>
-        </section>
+
+        <Cities cities={allCities} activeCity={city} onCityClick={onCityClick} />
+
       </div>
 
-      <OffersList offers={places}>
-        <Map offers={places} />
+      <OffersList offers={activeOffers} activeCity={city} >
+        <Map offers={activeOffers} />
       </OffersList>
 
     </main>
