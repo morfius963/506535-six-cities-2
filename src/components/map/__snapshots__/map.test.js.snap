@@ -1,112 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`snapshot test Component correctly renders 1`] = `
-<Map
-  offers={
-    Array [
-      Object {
-        "city": Object {
-          "location": Array [
-            52.38333,
-            4.9,
-          ],
-          "name": "Amsterdam",
-        },
-        "isPremium": true,
-        "location": Object {
-          "coords": Array [
-            52.3909553943508,
-            4.85309666406198,
-          ],
-          "zoom": 12,
-        },
-        "previewImage": "img/apartment-02.jpg",
-        "price": 250,
-        "rating": 4.5,
-        "title": "Beautiful &amp; luxurious apartment at great location",
-        "type": "apartment",
-      },
-      Object {
-        "city": Object {
-          "location": Array [
-            52.38333,
-            4.9,
-          ],
-          "name": "Amsterdam",
-        },
-        "isPremium": true,
-        "location": Object {
-          "coords": Array [
-            52.369553943508,
-            4.85309666406198,
-          ],
-          "zoom": 12,
-        },
-        "previewImage": "img/apartment-02.jpg",
-        "price": 250,
-        "rating": 4.5,
-        "title": "Beautiful &amp; luxurious apartment at great location",
-        "type": "apartment",
-      },
-      Object {
-        "city": Object {
-          "location": Array [
-            52.38333,
-            4.9,
-          ],
-          "name": "Amsterdam",
-        },
-        "isPremium": true,
-        "location": Object {
-          "coords": Array [
-            52.3909553943508,
-            4.929309666406198,
-          ],
-          "zoom": 12,
-        },
-        "previewImage": "img/apartment-02.jpg",
-        "price": 250,
-        "rating": 4.5,
-        "title": "Beautiful &amp; luxurious apartment at great location",
-        "type": "apartment",
-      },
-      Object {
-        "city": Object {
-          "location": Array [
-            52.38333,
-            4.9,
-          ],
-          "name": "Amsterdam",
-        },
-        "isPremium": true,
-        "location": Object {
-          "coords": Array [
-            52.3809553943508,
-            4.939309666406198,
-          ],
-          "zoom": 12,
-        },
-        "previewImage": "img/apartment-02.jpg",
-        "price": 250,
-        "rating": 4.5,
-        "title": "Beautiful &amp; luxurious apartment at great location",
-        "type": "apartment",
-      },
-    ]
-  }
+<section
+  className="cities__map map"
 >
-  <section
-    className="cities__map map"
-  >
-    <div
-      id="map"
-      style={
-        Object {
-          "height": "100%",
-          "width": "100%",
-        }
+  <div
+    id="map"
+    style={
+      Object {
+        "height": "100%",
+        "width": "100%",
       }
-    />
-  </section>
-</Map>
+    }
+  />
+</section>
 `;
