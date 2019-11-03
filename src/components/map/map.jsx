@@ -7,7 +7,8 @@ class Map extends React.PureComponent {
     super(props);
 
     this.DEFAULT_ZOOM = 12;
-    this.CITY_COORDS = [52.38333, 4.9];
+    this._map = null;
+    this._layerGroup = null;
   }
 
   render() {
@@ -19,32 +20,57 @@ class Map extends React.PureComponent {
   componentDidMount() {
     const {offers} = this.props;
 
+    this._addMap(offers);
+  }
+
+  componentDidUpdate() {
+    const {activeCard, offers} = this.props;
+    const cityCoords = offers[0].city.location;
     const allOffersCoords = offers.map(({location}) => location.coords);
 
-    const icon = leaflet.icon({
-      iconUrl: `./img/pin.svg`,
-      iconSize: [30, 30]
-    });
-    const map = leaflet.map(`map`, {
-      center: this.CITY_COORDS,
+    this._layerGroup.clearLayers();
+    this._setView(cityCoords, this.DEFAULT_ZOOM);
+    this._createPins(allOffersCoords, activeCard);
+  }
+
+  _addMap(offers) {
+    const {activeCard} = this.props;
+    const cityCoords = offers[0].city.location;
+    const allOffersCoords = offers.map(({location}) => location.coords);
+
+    this._map = leaflet.map(`map`, {
+      center: cityCoords,
       zoom: this.DEFAULT_ZOOM,
       zoomControl: false,
       marker: true
     });
 
-    map.setView(this.CITY_COORDS, this.DEFAULT_ZOOM);
-
+    this._layerGroup = leaflet.layerGroup().addTo(this._map);
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(map);
+      .addTo(this._map);
 
-    allOffersCoords.forEach((offerCoord) => {
+    this._setView(cityCoords, this.DEFAULT_ZOOM);
+    this._createPins(allOffersCoords, activeCard);
+  }
+
+  _createPins(coordinates, id) {
+    coordinates.forEach((offerCoord, i) => {
+      const icon = leaflet.icon({
+        iconUrl: `./img/pin${Number(id) === i ? `-active` : ``}.svg`,
+        iconSize: [30, 30]
+      });
+
       leaflet
         .marker(offerCoord, {icon})
-        .addTo(map);
+        .addTo(this._layerGroup);
     });
+  }
+
+  _setView(coords, zoom) {
+    this._map.setView(coords, zoom);
   }
 }
 

@@ -1,13 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+
 import App from "./components/app/app.jsx";
-import fixtureData from "./__fixtures__/offers.js";
+import {reducer} from "./reducer/reducer.js";
 
 const init = () => {
+  const store = createStore(reducer);
+
   ReactDOM.render(
-      <App
-        places = {fixtureData}
-      />,
+      <Provider store={store} >
+        <App />
+      </Provider>,
       document.querySelector(`#root`)
   );
 };

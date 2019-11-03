@@ -1,8 +1,10 @@
-import React, {PureComponent} from "react";
+import React from "react";
+
 import OfferCard from "../offer-card/offer-card.jsx";
 import propTypes from "./prop-types.js";
+import Map from "../map/map.jsx";
 
-class OffersList extends PureComponent {
+class OffersList extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -14,13 +16,13 @@ class OffersList extends PureComponent {
   }
 
   render() {
-    const {offers, children} = this.props;
+    const {offers, activeCity} = this.props;
 
     return <div className="cities">
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">312 places to stay in Amsterdam</b>
+          <b className="places__found">{offers.length} places to stay in {activeCity}</b>
           <form className="places__sorting" action="#" method="get">
             <span className="places__sorting-caption">Sort by</span>
             <span className="places__sorting-type" tabIndex="0">
@@ -37,12 +39,12 @@ class OffersList extends PureComponent {
             </ul>
           </form>
           <div className="cities__places-list places__list tabs__content">
-            {offers.map((offer, i) => <OfferCard key={Math.random() * i} offerData={offer} id={i} cardMouseEnterHandler={this._bindedOfferMouseEnterHandler} />)}
+            {offers.map((offer, i) => <OfferCard key={`${offer.location.coords}-${i}`} offerData={offer} id={i} cardMouseEnterHandler={this._bindedOfferMouseEnterHandler} />)}
           </div>
         </section>
         <div className="cities__right-section">
 
-          {children}
+          <Map offers={offers} activeCard={this.state.activeCardId} />
 
         </div>
       </div>

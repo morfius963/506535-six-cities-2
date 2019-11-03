@@ -5,6 +5,7 @@ exports[`snapshot test Component correctly renders 1`] = `
   className="cities__place-card place-card"
   id={0}
   onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
   <div
     className="place-card__mark"

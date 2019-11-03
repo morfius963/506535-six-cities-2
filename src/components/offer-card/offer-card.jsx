@@ -2,12 +2,19 @@ import React from "react";
 import propTypes from "./prop-types.js";
 
 const OfferCard = ({offerData, id, cardMouseEnterHandler}) => {
+  const DEFAULT_ACTIVE_CARD_ID = -1;
   const {title, isPremium, price, rating, type, previewImage} = offerData;
 
-  return <article className="cities__place-card place-card" id={id} onMouseEnter={(evt) => {
-    const cardId = evt.currentTarget.id;
-    cardMouseEnterHandler(cardId);
-  }}>
+  return <article
+    className="cities__place-card place-card"
+    id={id}
+    onMouseEnter={(evt) => {
+      const cardId = evt.currentTarget.id;
+      cardMouseEnterHandler(cardId);
+    }}
+    onMouseLeave={() => {
+      cardMouseEnterHandler(DEFAULT_ACTIVE_CARD_ID);
+    }}>
     {isPremium
       ? <div className="place-card__mark">
         <span>Premium</span>
