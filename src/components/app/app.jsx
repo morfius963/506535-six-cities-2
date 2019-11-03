@@ -18,7 +18,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  city: PropTypes.string.isRequired.isRequired,
+  city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(offersPropTypes).isRequired,
   activeOffers: PropTypes.arrayOf(offersPropTypes).isRequired,
   onCityClick: PropTypes.func.isRequired

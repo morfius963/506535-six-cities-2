@@ -3,6 +3,5 @@ import offersPropTypes from "../app/prop-types.js";
 
 export default {
   offers: PropTypes.arrayOf(offersPropTypes).isRequired,
-  activeCity: PropTypes.string.isRequired,
-  children: PropTypes.element
+  activeCity: PropTypes.string.isRequired
 };
