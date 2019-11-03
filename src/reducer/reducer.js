@@ -1,9 +1,12 @@
 import offersList from "../__fixtures__/offers.js";
 
+const activeCity = offersList[0].city.name;
+const activeOffers = offersList.filter(({city}) => city.name === activeCity);
+
 const initialAppState = {
-  city: offersList[0].city.name,
+  city: activeCity,
   offers: offersList,
-  activeOffers: offersList.filter(({city}) => city.name === offersList[0].city.name)
+  activeOffers
 };
 
 const ActionCreator = {
