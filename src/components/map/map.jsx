@@ -8,6 +8,7 @@ class Map extends React.PureComponent {
 
     this.DEFAULT_ZOOM = 12;
     this._map = null;
+    this._layerGroup = null;
   }
 
   render() {
@@ -23,20 +24,19 @@ class Map extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const {offers} = this.props;
+    const {activeCard, offers} = this.props;
+    const cityCoords = offers[0].city.location;
+    const allOffersCoords = offers.map(({location}) => location.coords);
 
-    this._map.remove();
-    this._addMap(offers);
+    this._layerGroup.clearLayers();
+    this._setView(cityCoords, this.DEFAULT_ZOOM);
+    this._createPins(allOffersCoords, activeCard);
   }
 
   _addMap(offers) {
-    const allOffersCoords = offers.map(({location}) => location.coords);
+    const {activeCard} = this.props;
     const cityCoords = offers[0].city.location;
-
-    const icon = leaflet.icon({
-      iconUrl: `./img/pin.svg`,
-      iconSize: [30, 30]
-    });
+    const allOffersCoords = offers.map(({location}) => location.coords);
 
     this._map = leaflet.map(`map`, {
       center: cityCoords,
@@ -45,19 +45,32 @@ class Map extends React.PureComponent {
       marker: true
     });
 
-    this._map.setView(cityCoords, this.DEFAULT_ZOOM);
-
+    this._layerGroup = leaflet.layerGroup().addTo(this._map);
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this._map);
 
-    allOffersCoords.forEach((offerCoord) => {
+    this._setView(cityCoords, this.DEFAULT_ZOOM);
+    this._createPins(allOffersCoords, activeCard);
+  }
+
+  _createPins(coordinates, id) {
+    coordinates.forEach((offerCoord, i) => {
+      const icon = leaflet.icon({
+        iconUrl: `./img/pin${Number(id) === i ? `-active` : ``}.svg`,
+        iconSize: [30, 30]
+      });
+
       leaflet
         .marker(offerCoord, {icon})
-        .addTo(this._map);
+        .addTo(this._layerGroup);
     });
+  }
+
+  _setView(coords, zoom) {
+    this._map.setView(coords, zoom);
   }
 }
 
