@@ -6,10 +6,11 @@ import fixtureData from "../../__fixtures__/offers.js";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
+    const activeOffers = fixtureData.filter((offer) => offer.city.name === `Amsterdam`);
     const div = global.document.createElement(`div`);
     global.document.body.appendChild(div);
 
-    const component = mount(<Map offers = {fixtureData} />, {attachTo: div});
+    const component = mount(<Map offers = {activeOffers} />, {attachTo: div});
     expect(toJson(component)).toMatchSnapshot();
   });
 });

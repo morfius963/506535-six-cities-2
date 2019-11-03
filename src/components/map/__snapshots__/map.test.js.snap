@@ -5,6 +5,13 @@ exports[`snapshot test Component correctly renders 1`] = `
   offers={
     Array [
       Object {
+        "city": Object {
+          "location": Array [
+            52.38333,
+            4.9,
+          ],
+          "name": "Amsterdam",
+        },
         "isPremium": true,
         "location": Object {
           "coords": Array [
@@ -20,6 +27,13 @@ exports[`snapshot test Component correctly renders 1`] = `
         "type": "apartment",
       },
       Object {
+        "city": Object {
+          "location": Array [
+            52.38333,
+            4.9,
+          ],
+          "name": "Amsterdam",
+        },
         "isPremium": true,
         "location": Object {
           "coords": Array [
@@ -35,6 +49,13 @@ exports[`snapshot test Component correctly renders 1`] = `
         "type": "apartment",
       },
       Object {
+        "city": Object {
+          "location": Array [
+            52.38333,
+            4.9,
+          ],
+          "name": "Amsterdam",
+        },
         "isPremium": true,
         "location": Object {
           "coords": Array [
@@ -50,6 +71,13 @@ exports[`snapshot test Component correctly renders 1`] = `
         "type": "apartment",
       },
       Object {
+        "city": Object {
+          "location": Array [
+            52.38333,
+            4.9,
+          ],
+          "name": "Amsterdam",
+        },
         "isPremium": true,
         "location": Object {
           "coords": Array [

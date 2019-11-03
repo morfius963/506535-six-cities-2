@@ -18,7 +18,9 @@ exports[`snapshot test Component correctly renders 1`] = `
       <b
         className="places__found"
       >
-        312 places to stay in Amsterdam
+        4
+         places to stay in 
+        Amsterdam
       </b>
       <form
         action="#"

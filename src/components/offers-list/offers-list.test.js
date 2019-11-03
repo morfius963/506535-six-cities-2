@@ -8,10 +8,12 @@ jest.mock(`../offer-card/offer-card.jsx`, () => jest.fn().mockReturnValue(null))
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
+    const activeOffers = fixtureData.filter((offer) => offer.city.name === `Amsterdam`);
     const tree = renderer
       .create(
           <OffersList
-            offers = {fixtureData}
+            offers = {activeOffers}
+            activeCity={`Amsterdam`}
           />
       )
       .toJSON();
