@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
 
 export default PropTypes.shape({
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.arrayOf(PropTypes.number).isRequired
+  }),
   title: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
   price: PropTypes.number.isRequired,
