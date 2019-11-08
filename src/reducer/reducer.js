@@ -15,23 +15,13 @@ const ActionCreator = {
       type: `SWITCH_CITY`,
       payload: city
     };
-  },
-
-  getOffers: (city) => {
-    return {
-      type: `GET_OFFERS`,
-      payload: city
-    };
   }
 };
 
 const reducer = (state = initialAppState, action) => {
   switch (action.type) {
     case `SWITCH_CITY`: return Object.assign({}, state, {
-      city: action.payload
-    });
-
-    case `GET_OFFERS`: return Object.assign({}, state, {
+      city: action.payload,
       activeOffers: state.offers.filter(({city}) => city.name === action.payload)
     });
   }

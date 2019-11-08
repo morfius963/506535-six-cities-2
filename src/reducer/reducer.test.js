@@ -20,25 +20,6 @@ describe(`Reducer test group`, () => {
     });
   });
 
-  it(`Reducer should correctly switch active offers data`, () => {
-    const expectedOffersList = offersList.filter(({city}) => city.name === `Hamburg`);
-    expect(reducer(
-        {
-          city: `Amsterdam`,
-          offers: offersList,
-          activeOffers: offersList
-        },
-        {
-          type: `GET_OFFERS`,
-          payload: `Hamburg`
-        }
-    )).toEqual({
-      city: `Amsterdam`,
-      offers: offersList,
-      activeOffers: expectedOffersList
-    });
-  });
-
   it(`Reducer should correctly works with incorrect data`, () => {
     const expectedOffersList = offersList.filter(({city}) => city.name === `Amsterdam`);
     expect(reducer(
