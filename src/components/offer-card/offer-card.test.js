@@ -5,15 +5,16 @@ import fixtureData from "../../__fixtures__/offers.js";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
+    const props = {
+      offerData: fixtureData[0],
+      id: 0,
+      cardMouseEnterHandler: jest.fn()
+    };
+
     const tree = renderer
-      .create(
-          <OfferCard
-            offerData = {fixtureData[0]}
-            id={0}
-            cardMouseEnterHandler = {jest.fn()}
-          />
-      )
+      .create(<OfferCard {...props} />)
       .toJSON();
+
     expect(tree).toMatchSnapshot();
   });
 });

@@ -1,4 +1,5 @@
 import React from "react";
+
 import OffersList from "../offers-list/offers-list.jsx";
 import propTypes from "./prop-types.js";
 import Cities from "../cities/cities.jsx";

@@ -12,7 +12,7 @@ class OffersList extends React.PureComponent {
       activeCardId: -1
     };
 
-    this._bindedOfferMouseEnterHandler = this._offerMouseEnterHandler.bind(this);
+    this._offerMouseEnterHandler = this._offerMouseEnterHandler.bind(this);
   }
 
   render() {
@@ -39,12 +39,21 @@ class OffersList extends React.PureComponent {
             </ul>
           </form>
           <div className="cities__places-list places__list tabs__content">
-            {offers.map((offer, i) => <OfferCard key={`${offer.location.coords}-${i}`} offerData={offer} id={i} cardMouseEnterHandler={this._bindedOfferMouseEnterHandler} />)}
+            {offers.map((offer, i) =>
+              <OfferCard
+                key={`${offer.location.coords}-${i}`}
+                id={i}
+                offerData={offer}
+                cardMouseEnterHandler={this._offerMouseEnterHandler}
+              />)}
           </div>
         </section>
         <div className="cities__right-section">
 
-          <Map offers={offers} activeCard={this.state.activeCardId} />
+          <Map
+            offers={offers}
+            activeCard={this.state.activeCardId}
+          />
 
         </div>
       </div>

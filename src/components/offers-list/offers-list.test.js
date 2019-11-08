@@ -11,14 +11,15 @@ jest.mock(`../map/map.jsx`, () => jest.fn().mockReturnValue(null));
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
     const activeOffers = fixtureData.filter((offer) => offer.city.name === `Amsterdam`);
+    const props = {
+      offers: activeOffers,
+      activeCity: `Amsterdam`
+    };
+
     const tree = renderer
-      .create(
-          <OffersList
-            offers = {activeOffers}
-            activeCity={`Amsterdam`}
-          />
-      )
+      .create(<OffersList {...props} />)
       .toJSON();
+
     expect(Map).toHaveBeenCalled();
     expect(OfferCard).toHaveBeenCalled();
     expect(tree).toMatchSnapshot();

@@ -11,17 +11,17 @@ jest.mock(`../cities/cities.jsx`, () => jest.fn().mockReturnValue(null));
 describe(`snapshot test`, () => {
   it(`App correctly renders`, () => {
     const activeOffers = fixtureData.filter((offer) => offer.city.name === `Amsterdam`);
-    const handler = jest.fn();
+    const props = {
+      offers: fixtureData,
+      city: `Amsterdam`,
+      onCityClick: jest.fn(),
+      activeOffers
+    };
+
     const tree = renderer
-      .create(
-          <MainPage
-            offers = {fixtureData}
-            activeOffers={activeOffers}
-            city={`Amsterdam`}
-            onCityClick={handler}
-          />
-      )
+      .create(<MainPage {...props} />)
       .toJSON();
+
     expect(Cities).toHaveBeenCalled();
     expect(OffersList).toHaveBeenCalled();
     expect(tree).toMatchSnapshot();

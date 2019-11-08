@@ -29,7 +29,7 @@ class Map extends React.PureComponent {
     const allOffersCoords = offers.map(({location}) => location.coords);
 
     this._layerGroup.clearLayers();
-    this._setView(cityCoords, this.DEFAULT_ZOOM);
+    this._map.setView(cityCoords, this.DEFAULT_ZOOM);
     this._createPins(allOffersCoords, activeCard);
   }
 
@@ -52,7 +52,7 @@ class Map extends React.PureComponent {
       })
       .addTo(this._map);
 
-    this._setView(cityCoords, this.DEFAULT_ZOOM);
+    this._map.setView(cityCoords, this.DEFAULT_ZOOM);
     this._createPins(allOffersCoords, activeCard);
   }
 
@@ -67,10 +67,6 @@ class Map extends React.PureComponent {
         .marker(offerCoord, {icon})
         .addTo(this._layerGroup);
     });
-  }
-
-  _setView(coords, zoom) {
-    this._map.setView(coords, zoom);
   }
 }
 
