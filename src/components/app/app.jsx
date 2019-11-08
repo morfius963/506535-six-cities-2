@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
@@ -6,7 +6,7 @@ import {ActionCreator} from "../../reducer/reducer.js";
 import MainPage from "../main-page/main-page.jsx";
 import offersPropTypes from "./prop-types.js";
 
-class App extends PureComponent {
+class App extends React.PureComponent {
   constructor(props) {
     super(props);
   }
@@ -24,17 +24,14 @@ App.propTypes = {
   onCityClick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state) => ({
   city: state.city,
   offers: state.offers,
   activeOffers: state.activeOffers
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onCityClick: (city) => {
-    dispatch(ActionCreator.switchCity(city));
-    dispatch(ActionCreator.getOffers(city));
-  },
-});
+const mapDispatchToProps = {
+  onCityClick: (city) => ActionCreator.switchCity(city),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
