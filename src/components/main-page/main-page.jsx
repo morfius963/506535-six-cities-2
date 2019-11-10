@@ -3,10 +3,12 @@ import React from "react";
 import OffersList from "../offers-list/offers-list.jsx";
 import propTypes from "./prop-types.js";
 import Cities from "../cities/cities.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
 const MAX_CITIES_COUNT = 6;
+const OffersListWrapped = withActiveItem(OffersList);
 
-const MainPage = ({offers, activeOffers, city, onCityClick}) => {
+const MainPage = ({offers, activeOffers, city, onCityClick, sortOffers, activeSort}) => {
   const allCities = Array.from(new Set(offers.map((offer) => offer.city.name))).slice(0, MAX_CITIES_COUNT);
 
   return <div className="page page--gray page--main">
@@ -41,7 +43,7 @@ const MainPage = ({offers, activeOffers, city, onCityClick}) => {
 
       </div>
 
-      <OffersList offers={activeOffers} activeCity={city} />
+      <OffersListWrapped offers={activeOffers} activeCity={city} sortOffers={sortOffers} activeSort={activeSort} />
 
     </main>
   </div>;

@@ -59,7 +59,7 @@ class Map extends React.PureComponent {
   _createPins(coordinates, id) {
     coordinates.forEach((offerCoord, i) => {
       const icon = leaflet.icon({
-        iconUrl: `./img/pin${Number(id) === i ? `-active` : ``}.svg`,
+        iconUrl: `./img/pin${id === i ? `-active` : ``}.svg`,
         iconSize: [30, 30]
       });
 
