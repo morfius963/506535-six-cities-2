@@ -1,8 +1,8 @@
 import React from "react";
 
-import OfferCard from "../offer-card/offer-card.jsx";
 import propTypes from "./prop-types.js";
 import Map from "../map/map.jsx";
+import OfferCard from "../offer-card/offer-card.jsx";
 import OffersSort from "../offers-sort/offers-sort.jsx";
 import withActiveSort from "../../hocs/with-active-sort/with-active-sort.jsx";
 

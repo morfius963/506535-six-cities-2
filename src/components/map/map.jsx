@@ -25,12 +25,15 @@ class Map extends React.PureComponent {
 
   componentDidUpdate() {
     const {activeCard, offers} = this.props;
-    const cityCoords = offers[0].city.location;
-    const allOffersCoords = offers.map(({location}) => location.coords);
 
-    this._layerGroup.clearLayers();
-    this._map.setView(cityCoords, this.DEFAULT_ZOOM);
-    this._createPins(allOffersCoords, activeCard);
+    if (offers.length > 0) {
+      const cityCoords = offers[0].city.location;
+      const allOffersCoords = offers.map(({location}) => location.coords);
+
+      this._layerGroup.clearLayers();
+      this._map.setView(cityCoords, this.DEFAULT_ZOOM);
+      this._createPins(allOffersCoords, activeCard);
+    }
   }
 
   _addMap(offers) {
