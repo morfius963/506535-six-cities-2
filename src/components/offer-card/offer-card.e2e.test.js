@@ -13,14 +13,14 @@ describe(`end to end test`, () => {
     };
 
     const app = shallow(<OfferCard {...props} />);
-    const card = app.find(`.cities__place-card`).first();
+    const card = app.find(`.cities__place-card`).at(0);
     const evt = {
       currentTarget: {
-        id: card.id
+        id: card.prop(`id`)
       }
     };
 
-    card.simulate(`mouseenter`, evt);
+    card.simulate(`mouseEnter`, evt);
     expect(mouseEnterHandler).toHaveBeenCalledWith(evt.currentTarget.id);
   });
 });

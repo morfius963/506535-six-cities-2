@@ -15,7 +15,9 @@ describe(`snapshot test`, () => {
       offers: fixtureData,
       city: `Amsterdam`,
       onCityClick: jest.fn(),
-      activeOffers
+      activeOffers,
+      sortOffers: jest.fn(),
+      activeSort: `Popular`
     };
 
     const tree = renderer
