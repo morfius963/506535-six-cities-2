@@ -50,15 +50,15 @@ const offers = [
   }
 ];
 
-const makeMockOffer = (city, cityCoords, offersCoords) => ({
+const makeMockOffer = (city, cityCoords, offersCoords, i) => ({
   city: {
     name: city,
     location: cityCoords
   },
   title: `Beautiful &amp; luxurious apartment at great location`,
   isPremium: true,
-  price: 250,
-  rating: 4.5,
+  price: i * 1000 + 100,
+  rating: i / 2,
   type: `apartment`,
   previewImage: `img/apartment-02.jpg`,
   location: {
@@ -67,8 +67,10 @@ const makeMockOffer = (city, cityCoords, offersCoords) => ({
   }
 });
 
+export const sortValues = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
+
 export default offers.reduce((acc, {city, location, offersCoords}) => {
-  const newOffers = offersCoords.map((coord) => makeMockOffer(city, location, coord));
+  const newOffers = offersCoords.map((coord, i) => makeMockOffer(city, location, coord, i));
 
   return [...acc, ...newOffers];
 }, []);
