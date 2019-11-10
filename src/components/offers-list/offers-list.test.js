@@ -6,8 +6,8 @@ import Map from "../map/map.jsx";
 import OffersSort from "../offers-sort/offers-sort.jsx";
 import fixtureData from "../../__fixtures__/offers.js";
 
-jest.mock(`../offer-card/offer-card.jsx`, () => jest.fn().mockReturnValue(null));
 jest.mock(`../map/map.jsx`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../offer-card/offer-card.jsx`, () => jest.fn().mockReturnValue(null));
 jest.mock(`../offers-sort/offers-sort.jsx`, () => jest.fn().mockReturnValue(null));
 
 describe(`snapshot test`, () => {

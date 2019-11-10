@@ -1,11 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
+
 import MainPage from "./main-page.jsx";
-import OffersList from "../offers-list/offers-list.jsx";
 import Cities from "../cities/cities.jsx";
+import MainHeader from "../main-header/main-header.jsx";
+import OffersList from "../offers-list/offers-list.jsx";
 import fixtureData from "../../__fixtures__/offers.js";
 
 jest.mock(`../offers-list/offers-list.jsx`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../main-header/main-header.jsx`, () => jest.fn().mockReturnValue(null));
 jest.mock(`../cities/cities.jsx`, () => jest.fn().mockReturnValue(null));
 
 describe(`snapshot test`, () => {
@@ -26,6 +29,7 @@ describe(`snapshot test`, () => {
 
     expect(Cities).toHaveBeenCalled();
     expect(OffersList).toHaveBeenCalled();
+    expect(MainHeader).toHaveBeenCalled();
     expect(tree).toMatchSnapshot();
   });
 });
