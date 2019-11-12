@@ -6,21 +6,21 @@ import offersData from "../../__fixtures__/offers.js";
 describe(`end to end test`, () => {
   it(`Callback func calls with correct data`, () => {
     const mouseEnterHandler = jest.fn();
-    const app = shallow(
-        <OfferCard
-          offerData = {offersData[0]}
-          id = {0}
-          cardMouseEnterHandler = {mouseEnterHandler}
-        />
-    );
-    const card = app.find(`.cities__place-card`).first();
+    const props = {
+      offerData: offersData[0],
+      id: 0,
+      cardMouseEnterHandler: mouseEnterHandler
+    };
+
+    const app = shallow(<OfferCard {...props} />);
+    const card = app.find(`.cities__place-card`).at(0);
     const evt = {
       currentTarget: {
-        id: card.id
+        id: card.prop(`id`)
       }
     };
 
-    card.simulate(`mouseenter`, evt);
+    card.simulate(`mouseEnter`, evt);
     expect(mouseEnterHandler).toHaveBeenCalledWith(evt.currentTarget.id);
   });
 });

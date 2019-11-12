@@ -1,18 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import OfferCard from "./offer-card.jsx";
-import fixtureData from "../../__fixtures__/offers.js";
+import MainEmpty from "./main-empty.jsx";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
     const props = {
-      offerData: fixtureData[0],
-      id: 0,
-      cardMouseEnterHandler: jest.fn()
+      city: `Amsterdam`
     };
 
     const tree = renderer
-      .create(<OfferCard {...props} />)
+      .create(<MainEmpty {...props} />)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

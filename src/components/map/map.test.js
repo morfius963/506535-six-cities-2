@@ -6,14 +6,17 @@ import fixtureData from "../../__fixtures__/offers.js";
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
     const activeOffers = fixtureData.filter((offer) => offer.city.name === `Amsterdam`);
+    const props = {
+      offers: activeOffers,
+      activeCard: -1
+    };
     const div = document.createElement(`div`);
+
     div.id = `map`;
     document.body.appendChild(div);
 
     const component = renderer
-      .create(
-          <Map offers = {activeOffers} activeCard={-1} />
-      )
+      .create(<Map {...props} />)
       .toJSON();
 
     expect(component).toMatchSnapshot();

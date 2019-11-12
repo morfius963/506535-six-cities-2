@@ -4,7 +4,7 @@ export default PropTypes.shape({
   city: PropTypes.shape({
     name: PropTypes.string.isRequired,
     location: PropTypes.arrayOf(PropTypes.number).isRequired
-  }),
+  }).isRequired,
   title: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
   price: PropTypes.number.isRequired,

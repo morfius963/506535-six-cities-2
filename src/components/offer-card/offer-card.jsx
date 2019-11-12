@@ -1,20 +1,29 @@
-import React from "react";
+import React, {useCallback} from "react";
 import propTypes from "./prop-types.js";
 
 const OfferCard = ({offerData, id, cardMouseEnterHandler}) => {
   const DEFAULT_ACTIVE_CARD_ID = -1;
   const {title, isPremium, price, rating, type, previewImage} = offerData;
 
+  const mouseEnterHandler = useCallback(
+      (evt) => {
+        const cardId = Number(evt.currentTarget.id);
+        cardMouseEnterHandler(cardId);
+      },
+      [cardMouseEnterHandler]
+  );
+  const mouseLeaveHandler = useCallback(
+      () => {
+        cardMouseEnterHandler(DEFAULT_ACTIVE_CARD_ID);
+      },
+      [cardMouseEnterHandler]
+  );
+
   return <article
     className="cities__place-card place-card"
     id={id}
-    onMouseEnter={(evt) => {
-      const cardId = evt.currentTarget.id;
-      cardMouseEnterHandler(cardId);
-    }}
-    onMouseLeave={() => {
-      cardMouseEnterHandler(DEFAULT_ACTIVE_CARD_ID);
-    }}>
+    onMouseEnter={mouseEnterHandler}
+    onMouseLeave={mouseLeaveHandler}>
     {isPremium
       ? <div className="place-card__mark">
         <span>Premium</span>

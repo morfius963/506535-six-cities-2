@@ -11,31 +11,16 @@ describe(`Reducer test group`, () => {
         },
         {
           type: `SWITCH_CITY`,
-          payload: `Hamburg`
+          payload: {
+            city: `Hamburg`,
+            defaultSort: `Top rated`
+          }
         }
     )).toEqual({
       city: `Hamburg`,
       offers: [],
-      activeOffers: []
-    });
-  });
-
-  it(`Reducer should correctly switch active offers data`, () => {
-    const expectedOffersList = offersList.filter(({city}) => city.name === `Hamburg`);
-    expect(reducer(
-        {
-          city: `Amsterdam`,
-          offers: offersList,
-          activeOffers: offersList
-        },
-        {
-          type: `GET_OFFERS`,
-          payload: `Hamburg`
-        }
-    )).toEqual({
-      city: `Amsterdam`,
-      offers: offersList,
-      activeOffers: expectedOffersList
+      activeOffers: [],
+      activeSort: `Top rated`
     });
   });
 
@@ -50,7 +35,8 @@ describe(`Reducer test group`, () => {
     )).toEqual({
       city: `Amsterdam`,
       offers: offersList,
-      activeOffers: expectedOffersList
+      activeOffers: expectedOffersList,
+      activeSort: `Popular`
     });
   });
 });

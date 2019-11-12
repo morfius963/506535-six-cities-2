@@ -1,18 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import OfferCard from "./offer-card.jsx";
-import fixtureData from "../../__fixtures__/offers.js";
+import OffersSort from "./offers-sort.jsx";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
     const props = {
-      offerData: fixtureData[0],
-      id: 0,
-      cardMouseEnterHandler: jest.fn()
+      activeSort: `Popular`,
+      isOpen: false,
+      toggleSortHandler: jest.fn(),
+      clickSortHandler: jest.fn()
     };
 
     const tree = renderer
-      .create(<OfferCard {...props} />)
+      .create(<OffersSort {...props} />)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
