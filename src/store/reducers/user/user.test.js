@@ -1,13 +1,11 @@
-import {reducer} from "./reducer.js";
-import offersList from "../__fixtures__/offers.js";
+import user from "./user.js";
 
 describe(`Reducer test group`, () => {
   it(`Reducer should correctly switch city`, () => {
-    expect(reducer(
+    expect(user(
         {
           city: `Amsterdam`,
-          offers: [],
-          activeOffers: []
+          activeSort: `Popular`
         },
         {
           type: `SWITCH_CITY`,
@@ -18,24 +16,35 @@ describe(`Reducer test group`, () => {
         }
     )).toEqual({
       city: `Hamburg`,
-      offers: [],
-      activeOffers: [],
       activeSort: `Top rated`
     });
   });
 
+  it(`Reducer should correctly switch sort offers type`, () => {
+    expect(user(
+        {
+          city: `Amsterdam`,
+          activeSort: `Popular`
+        },
+        {
+          type: `SORT_OFFERS`,
+          payload: `Top rated first`
+        }
+    )).toEqual({
+      city: `Amsterdam`,
+      activeSort: `Top rated first`
+    });
+  });
+
   it(`Reducer should correctly works with incorrect data`, () => {
-    const expectedOffersList = offersList.filter(({city}) => city.name === `Amsterdam`);
-    expect(reducer(
+    expect(user(
         undefined,
         {
           type: `qweqweqw`,
           payload: `eqwe`
         }
     )).toEqual({
-      city: `Amsterdam`,
-      offers: offersList,
-      activeOffers: expectedOffersList,
+      city: ``,
       activeSort: `Popular`
     });
   });
