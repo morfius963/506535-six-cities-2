@@ -15,7 +15,7 @@ describe(`snapshot test`, () => {
   it(`App correctly renders`, () => {
     const activeOffers = fixtureData.filter((offer) => offer.city.name === `Amsterdam`);
     const props = {
-      offers: fixtureData,
+      allCities: [`Amsterdam`, `Paris`, `Hamburg`],
       city: `Amsterdam`,
       onCityClick: jest.fn(),
       activeOffers,

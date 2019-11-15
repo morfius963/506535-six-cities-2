@@ -3,7 +3,7 @@ import offersPropTypes from "../app/prop-types.js";
 import {sortValues} from "../../__fixtures__/offers.js";
 
 export default {
-  offers: PropTypes.arrayOf(offersPropTypes).isRequired,
+  allCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeOffers: PropTypes.arrayOf(offersPropTypes).isRequired,
   city: PropTypes.string.isRequired,
   onCityClick: PropTypes.func.isRequired,

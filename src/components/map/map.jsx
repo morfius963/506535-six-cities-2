@@ -27,8 +27,9 @@ class Map extends React.PureComponent {
     const {activeCard, offers} = this.props;
 
     if (offers.length > 0) {
-      const cityCoords = offers[0].city.location;
-      const allOffersCoords = offers.map(({location}) => location.coords);
+      const {latitude, longitude} = offers[0].city.location;
+      const cityCoords = [latitude, longitude];
+      const allOffersCoords = offers.map(({location}) => [location.latitude, location.longitude]);
 
       this._layerGroup.clearLayers();
       this._map.setView(cityCoords, this.DEFAULT_ZOOM);
@@ -38,8 +39,9 @@ class Map extends React.PureComponent {
 
   _addMap(offers) {
     const {activeCard} = this.props;
-    const cityCoords = offers[0].city.location;
-    const allOffersCoords = offers.map(({location}) => location.coords);
+    const {latitude, longitude} = offers[0].city.location;
+    const cityCoords = [latitude, longitude];
+    const allOffersCoords = offers.map(({location}) => [location.latitude, location.longitude]);
 
     this._map = leaflet.map(`map`, {
       center: cityCoords,
@@ -60,9 +62,11 @@ class Map extends React.PureComponent {
   }
 
   _createPins(coordinates, id) {
+    const cardsID = this.props.offers.map((offer) => offer.id);
+
     coordinates.forEach((offerCoord, i) => {
       const icon = leaflet.icon({
-        iconUrl: `./img/pin${id === i ? `-active` : ``}.svg`,
+        iconUrl: `./img/pin${id === cardsID[i] ? `-active` : ``}.svg`,
         iconSize: [30, 30]
       });
 

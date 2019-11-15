@@ -51,9 +51,14 @@ const offers = [
 ];
 
 const makeMockOffer = (city, cityCoords, offersCoords, i) => ({
+  id: i,
   city: {
     name: city,
-    location: cityCoords
+    location: {
+      latitude: cityCoords[0],
+      longitude: cityCoords[1],
+      zoom: 10
+    }
   },
   title: `Beautiful &amp; luxurious apartment at great location`,
   isPremium: true,
@@ -61,9 +66,22 @@ const makeMockOffer = (city, cityCoords, offersCoords, i) => ({
   rating: i / 2,
   type: `apartment`,
   previewImage: `img/apartment-02.jpg`,
+  images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+  isFavorite: false,
+  bedrooms: 1,
+  maxAdults: 3,
+  goods: [`1`, `2`, `3`],
+  description: `Beautiful &amp; luxurious apartment at great location`,
+  host: {
+    id: i,
+    isPro: true,
+    name: `Me`,
+    avatar: `img/apartment-02.jpg`
+  },
   location: {
-    coords: offersCoords,
-    zoom: 12
+    latitude: offersCoords[0],
+    longitude: offersCoords[1],
+    zoom: 10
   }
 });
 

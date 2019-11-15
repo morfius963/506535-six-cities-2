@@ -18,10 +18,10 @@ const OffersList = ({offers, activeCity, activeCardId, cardMouseEnterHandler, so
         <OffersSortWrapped sortOffers={sortOffers} activeSort={activeSort} activeCity={activeCity} />
 
         <div className="cities__places-list places__list tabs__content">
-          {offers.map((offer, i) =>
+          {offers.map((offer) =>
             <OfferCard
-              key={`${offer.location.coords}-${i}`}
-              id={i}
+              key={`${offer.location.coords}-${offer.id}`}
+              id={offer.id}
               offerData={offer}
               cardMouseEnterHandler={cardMouseEnterHandler}
             />)}
