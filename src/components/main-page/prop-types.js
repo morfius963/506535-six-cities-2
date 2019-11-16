@@ -8,5 +8,10 @@ export default {
   city: PropTypes.string.isRequired,
   onCityClick: PropTypes.func.isRequired,
   sortOffers: PropTypes.func.isRequired,
-  activeSort: PropTypes.oneOf(sortValues).isRequired
+  activeSort: PropTypes.oneOf(sortValues).isRequired,
+  userData: PropTypes.shape({
+    name: PropTypes.string,
+    avatar: PropTypes.string
+  }).isRequired,
+  requireAuthorization: PropTypes.func.isRequired
 };
