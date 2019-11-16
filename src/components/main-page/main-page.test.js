@@ -20,7 +20,12 @@ describe(`snapshot test`, () => {
       onCityClick: jest.fn(),
       activeOffers,
       sortOffers: jest.fn(),
-      activeSort: `Popular`
+      activeSort: `Popular`,
+      userData: {
+        name: `Vitalii`,
+        avatar: ``
+      },
+      requireAuthorization: jest.fn()
     };
 
     const tree = renderer
