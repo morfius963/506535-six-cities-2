@@ -6,10 +6,14 @@ import {createSelector} from "reselect";
 import ActionCreator from "../../store/actions/action-creator.js";
 import Operation from "../../store/actions/async-actions.js";
 import MainPage from "../main-page/main-page.jsx";
+import SingIn from "../sing-in/sing-in.jsx";
 import offersPropTypes from "./prop-types.js";
 import {sortValues} from "../../__fixtures__/offers.js";
+import withSingIn from "../../hocs/with-sing-in/with-sing-in.jsx";
 
 const MAX_CITIES_COUNT = 6;
+
+const SingInWrapped = withSingIn(SingIn);
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -21,18 +25,12 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {city, onCityClick, sortOffers, activeSort, activeOffers, isOffersLoading} = this.props;
+    const {isOffersLoading} = this.props;
+
     return (
       isOffersLoading
         ? null
-        : <MainPage
-          allCities={this._getAllCities()}
-          activeOffers={activeOffers}
-          city={city}
-          onCityClick={onCityClick}
-          sortOffers={sortOffers}
-          activeSort={activeSort}
-        />
+        : this._getScreen()
     );
   }
 
@@ -45,6 +43,26 @@ class App extends React.PureComponent {
 
     return this._allCities;
   }
+
+  _getScreen() {
+    const {city, onCityClick, sortOffers, activeSort, activeOffers, isAuthorizationRequired, postUserData, email, requireAuthorization} = this.props;
+    const userData = {email};
+
+    return (
+      isAuthorizationRequired
+        ? <SingInWrapped city={city} onSubmit={postUserData} />
+        : <MainPage
+          allCities={this._getAllCities()}
+          activeOffers={activeOffers}
+          city={city}
+          onCityClick={onCityClick}
+          sortOffers={sortOffers}
+          activeSort={activeSort}
+          requireAuthorization={requireAuthorization}
+          userData={userData}
+        />
+    );
+  }
 }
 
 App.propTypes = {
@@ -55,7 +73,11 @@ App.propTypes = {
   sortOffers: PropTypes.func.isRequired,
   activeSort: PropTypes.oneOf(sortValues).isRequired,
   loadHotels: PropTypes.func.isRequired,
-  isOffersLoading: PropTypes.bool.isRequired
+  isOffersLoading: PropTypes.bool.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  requireAuthorization: PropTypes.func.isRequired,
+  postUserData: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired
 };
 
 const getCityFromState = (state) => state.user.city;
@@ -90,10 +112,13 @@ const getActiveOffers = createSelector(
 
 const mapStateToProps = (state) => ({
   city: state.user.city,
+  activeSort: state.user.activeSort,
+  isAuthorizationRequired: state.user.isAuthorizationRequired,
   offers: state.appData.offers,
   activeOffers: getActiveOffers(state),
-  activeSort: state.user.activeSort,
-  isOffersLoading: state.appData.isOffersLoading
+  isOffersLoading: state.appData.isOffersLoading,
+  name: state.user.name,
+  email: state.user.email
 });
 
 const mapDispatchToProps = {
@@ -101,7 +126,11 @@ const mapDispatchToProps = {
 
   onCityClick: (city) => ActionCreator.switchCity(city),
 
-  sortOffers: (value) => ActionCreator.sortOffers(value)
+  sortOffers: (value) => ActionCreator.sortOffers(value),
+
+  requireAuthorization: () => ActionCreator.requireAuthorization(true),
+
+  postUserData: (userData) => Operation.postUserLogin(userData),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

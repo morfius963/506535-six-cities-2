@@ -9,11 +9,14 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
 const OffersListWrapped = withActiveItem(OffersList);
 
-const MainPage = ({allCities, activeOffers, city, onCityClick, sortOffers, activeSort}) => {
+const MainPage = ({allCities, activeOffers, city, onCityClick, sortOffers, activeSort, userData, requireAuthorization}) => {
   return (
     <div className="page page--gray page--main">
 
-      <MainHeader />
+      <MainHeader
+        requireAuthorization={requireAuthorization}
+        userData={userData}
+      />
 
       <main className={`page__main page__main--index ${activeOffers.length > 0 ? `` : `page__main--index-empty`}`}>
         <h1 className="visually-hidden">Cities</h1>
