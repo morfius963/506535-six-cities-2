@@ -9,34 +9,36 @@ import withActiveSort from "../../hocs/with-active-sort/with-active-sort.jsx";
 const OffersSortWrapped = withActiveSort(OffersSort);
 
 const OffersList = ({offers, activeCity, activeCardId, cardMouseEnterHandler, sortOffers, activeSort}) => {
-  return <div className="cities">
-    <div className="cities__places-container container">
-      <section className="cities__places places">
-        <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{offers.length} places to stay in {activeCity}</b>
+  return (
+    <div className="cities">
+      <div className="cities__places-container container">
+        <section className="cities__places places">
+          <h2 className="visually-hidden">Places</h2>
+          <b className="places__found">{offers.length} places to stay in {activeCity}</b>
 
-        <OffersSortWrapped sortOffers={sortOffers} activeSort={activeSort} activeCity={activeCity} />
+          <OffersSortWrapped sortOffers={sortOffers} activeSort={activeSort} activeCity={activeCity} />
 
-        <div className="cities__places-list places__list tabs__content">
-          {offers.map((offer) =>
-            <OfferCard
-              key={`${offer.location.coords}-${offer.id}`}
-              id={offer.id}
-              offerData={offer}
-              cardMouseEnterHandler={cardMouseEnterHandler}
-            />)}
+          <div className="cities__places-list places__list tabs__content">
+            {offers.map((offer) =>
+              <OfferCard
+                key={`${offer.location.coords}-${offer.id}`}
+                id={offer.id}
+                offerData={offer}
+                cardMouseEnterHandler={cardMouseEnterHandler}
+              />)}
+          </div>
+        </section>
+        <div className="cities__right-section">
+
+          <Map
+            offers={offers}
+            activeCard={activeCardId}
+          />
+
         </div>
-      </section>
-      <div className="cities__right-section">
-
-        <Map
-          offers={offers}
-          activeCard={activeCardId}
-        />
-
       </div>
     </div>
-  </div>;
+  );
 };
 
 OffersList.propTypes = propTypes;

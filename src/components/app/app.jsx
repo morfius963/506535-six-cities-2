@@ -22,16 +22,18 @@ class App extends React.PureComponent {
 
   render() {
     const {city, onCityClick, sortOffers, activeSort, activeOffers, isOffersLoading} = this.props;
-    return isOffersLoading
-      ? null
-      : <MainPage
-        allCities={this._getAllCities()}
-        activeOffers={activeOffers}
-        city={city}
-        onCityClick={onCityClick}
-        sortOffers={sortOffers}
-        activeSort={activeSort}
-      />;
+    return (
+      isOffersLoading
+        ? null
+        : <MainPage
+          allCities={this._getAllCities()}
+          activeOffers={activeOffers}
+          city={city}
+          onCityClick={onCityClick}
+          sortOffers={sortOffers}
+          activeSort={activeSort}
+        />
+    );
   }
 
   _getAllCities() {
@@ -56,9 +58,9 @@ App.propTypes = {
   isOffersLoading: PropTypes.bool.isRequired
 };
 
-const getCityFromState = (state) => state.city;
-const getOffersFromStore = (state) => state.offers;
-const getActiveSortFromStore = (state) => state.activeSort;
+const getCityFromState = (state) => state.user.city;
+const getOffersFromStore = (state) => state.appData.offers;
+const getActiveSortFromStore = (state) => state.user.activeSort;
 
 const getActiveOffers = createSelector(
     [getCityFromState, getOffersFromStore, getActiveSortFromStore],
@@ -89,11 +91,7 @@ const getActiveOffers = createSelector(
 const mapStateToProps = (state) => ({
   city: state.user.city,
   offers: state.appData.offers,
-  activeOffers: getActiveOffers({
-    city: state.user.city,
-    offers: state.appData.offers,
-    activeSort: state.user.activeSort
-  }),
+  activeOffers: getActiveOffers(state),
   activeSort: state.user.activeSort,
   isOffersLoading: state.appData.isOffersLoading
 });
