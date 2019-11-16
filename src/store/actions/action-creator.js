@@ -35,6 +35,36 @@ const ActionCreator = {
       type: ActionTypes.SWITCH_LOADING_STATE,
       payload: false
     };
+  },
+
+  requireAuthorization: (status) => {
+    return {
+      type: ActionTypes.REQUIRE_AUTHORIZATION,
+      payload: status
+    };
+  },
+
+  singIn: (userData) => {
+    const {email, password} = userData;
+
+    return {
+      type: ActionTypes.SING_IN,
+      payload: {
+        email,
+        password,
+      }
+    };
+  },
+
+  setUserData: (data) => {
+    return {
+      type: ActionTypes.SET_USER_DATA,
+      payload: {
+        name: data.name,
+        avatar: data.avatarUrl,
+        isPro: data.isPro
+      }
+    };
   }
 };
 

@@ -10,6 +10,22 @@ const Operation = {
         dispatch(ActionCreator.loadHotels(responseData));
         dispatch(ActionCreator.switchCity(city));
       });
+  },
+
+  postUserLogin: (userData) => (dispatch, state, api) => {
+    dispatch(ActionCreator.singIn(userData));
+
+    return api.post(`/login`, {
+      email: state().user.email,
+      password: state().user.password
+    })
+      .then((response) => {
+        const respData = adapter(response.data);
+        const {name, avatarUrl, isPro} = respData;
+
+        dispatch(ActionCreator.requireAuthorization(false));
+        dispatch(ActionCreator.setUserData({name, avatarUrl, isPro}));
+      });
   }
 };
 
