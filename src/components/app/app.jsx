@@ -122,7 +122,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  loadHotels: () => Operation.loadHotels(),
+  loadHotels: Operation.loadHotels,
 
   onCityClick: (city) => ActionCreator.switchCity(city),
 

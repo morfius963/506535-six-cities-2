@@ -44,9 +44,7 @@ exports[`snapshot test Component correctly renders 1`] = `
               />
               <span
                 className="header__user-name user__name"
-              >
-                Vitalii
-              </span>
+              />
             </a>
           </li>
         </ul>
