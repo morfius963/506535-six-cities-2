@@ -9,25 +9,30 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
 const OffersListWrapped = withActiveItem(OffersList);
 
-const MainPage = ({allCities, activeOffers, city, onCityClick, sortOffers, activeSort}) => {
-  return <div className="page page--gray page--main">
+const MainPage = ({allCities, activeOffers, city, onCityClick, sortOffers, activeSort, userData, requireAuthorization}) => {
+  return (
+    <div className="page page--gray page--main">
 
-    <MainHeader />
+      <MainHeader
+        requireAuthorization={requireAuthorization}
+        userData={userData}
+      />
 
-    <main className={`page__main page__main--index ${activeOffers.length > 0 ? `` : `page__main--index-empty`}`}>
-      <h1 className="visually-hidden">Cities</h1>
-      <div className="tabs">
+      <main className={`page__main page__main--index ${activeOffers.length > 0 ? `` : `page__main--index-empty`}`}>
+        <h1 className="visually-hidden">Cities</h1>
+        <div className="tabs">
 
-        <Cities cities={allCities} activeCity={city} onCityClick={onCityClick} />
+          <Cities cities={allCities} activeCity={city} onCityClick={onCityClick} />
 
-      </div>
+        </div>
 
-      {activeOffers.length > 0
-        ? <OffersListWrapped offers={activeOffers} activeCity={city} sortOffers={sortOffers} activeSort={activeSort} />
-        : <MainEmpty city={city} />}
+        {activeOffers.length > 0
+          ? <OffersListWrapped offers={activeOffers} activeCity={city} sortOffers={sortOffers} activeSort={activeSort} />
+          : <MainEmpty city={city} />}
 
-    </main>
-  </div>;
+      </main>
+    </div>
+  );
 };
 
 MainPage.propTypes = propTypes;
