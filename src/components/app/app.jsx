@@ -2,14 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
+import {Switch, Route} from "react-router-dom";
 
 import ActionCreator from "../../store/actions/action-creator.js";
 import Operation from "../../store/actions/async-actions.js";
 import MainPage from "../main-page/main-page.jsx";
 import SingIn from "../sing-in/sing-in.jsx";
 import offersPropTypes from "./prop-types.js";
-import {sortValues} from "../../__fixtures__/offers.js";
 import withSingIn from "../../hocs/with-sing-in/with-sing-in.jsx";
+import {sortValues} from "../../__fixtures__/offers.js";
 
 const MAX_CITIES_COUNT = 6;
 
@@ -25,12 +26,33 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {isOffersLoading} = this.props;
+    const {city, postUserData} = this.props;
+
+    return (
+      <Switch>
+        <Route path="/" exact render={() => this._renderMainPage()} />
+        <Route path="/login" exact render={(props) => <SingInWrapped {...props} city={city} onSubmit={postUserData} />} />
+      </Switch>
+    );
+  }
+
+  _renderMainPage() {
+    const {city, onCityClick, sortOffers, activeSort, activeOffers, email, isAuthorizationRequired, isOffersLoading} = this.props;
+    const userData = {email};
 
     return (
       isOffersLoading
         ? null
-        : this._getScreen()
+        : <MainPage
+          allCities={this._getAllCities()}
+          activeOffers={activeOffers}
+          city={city}
+          onCityClick={onCityClick}
+          sortOffers={sortOffers}
+          activeSort={activeSort}
+          requireAuthorization={isAuthorizationRequired}
+          userData={userData}
+        />
     );
   }
 
@@ -43,41 +65,21 @@ class App extends React.PureComponent {
 
     return this._allCities;
   }
-
-  _getScreen() {
-    const {city, onCityClick, sortOffers, activeSort, activeOffers, isAuthorizationRequired, postUserData, email, requireAuthorization} = this.props;
-    const userData = {email};
-
-    return (
-      isAuthorizationRequired
-        ? <SingInWrapped city={city} onSubmit={postUserData} />
-        : <MainPage
-          allCities={this._getAllCities()}
-          activeOffers={activeOffers}
-          city={city}
-          onCityClick={onCityClick}
-          sortOffers={sortOffers}
-          activeSort={activeSort}
-          requireAuthorization={requireAuthorization}
-          userData={userData}
-        />
-    );
-  }
 }
 
 App.propTypes = {
   city: PropTypes.string.isRequired,
+  activeSort: PropTypes.oneOf(sortValues).isRequired,
+  email: PropTypes.string.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
   offers: PropTypes.arrayOf(offersPropTypes).isRequired,
   activeOffers: PropTypes.arrayOf(offersPropTypes).isRequired,
+  isOffersLoading: PropTypes.bool.isRequired,
+
   onCityClick: PropTypes.func.isRequired,
   sortOffers: PropTypes.func.isRequired,
-  activeSort: PropTypes.oneOf(sortValues).isRequired,
   loadHotels: PropTypes.func.isRequired,
-  isOffersLoading: PropTypes.bool.isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  requireAuthorization: PropTypes.func.isRequired,
   postUserData: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired
 };
 
 const getCityFromState = (state) => state.user.city;
@@ -113,12 +115,11 @@ const getActiveOffers = createSelector(
 const mapStateToProps = (state) => ({
   city: state.user.city,
   activeSort: state.user.activeSort,
+  email: state.user.email,
   isAuthorizationRequired: state.user.isAuthorizationRequired,
   offers: state.appData.offers,
   activeOffers: getActiveOffers(state),
   isOffersLoading: state.appData.isOffersLoading,
-  name: state.user.name,
-  email: state.user.email
 });
 
 const mapDispatchToProps = {
@@ -128,9 +129,7 @@ const mapDispatchToProps = {
 
   sortOffers: (value) => ActionCreator.sortOffers(value),
 
-  requireAuthorization: () => ActionCreator.requireAuthorization(true),
-
-  postUserData: (userData) => Operation.postUserLogin(userData),
+  postUserData: (userData, pushPath) => Operation.postUserLogin(userData, pushPath),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
