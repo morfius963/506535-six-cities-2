@@ -7,24 +7,19 @@ const Operation = {
       .then((response) => {
         const responseData = response.data.map((elem) => adapter(elem));
         const city = responseData[0].city.name;
+
         dispatch(ActionCreator.loadHotels(responseData));
         dispatch(ActionCreator.switchCity(city));
       });
   },
 
-  postUserLogin: (userData) => (dispatch, state, api) => {
-    dispatch(ActionCreator.singIn(userData));
-
-    return api.post(`/login`, {
-      email: state().user.email,
-      password: state().user.password
-    })
+  postUserLogin: (userData, pushPath) => (dispatch, _, api) => {
+    return api.post(`/login`, userData)
       .then((response) => {
-        const respData = adapter(response.data);
-        const {name, avatarUrl, isPro} = respData;
+        const {name, avatarUrl, isPro, email} = adapter(response.data);
 
-        dispatch(ActionCreator.requireAuthorization(false));
-        dispatch(ActionCreator.setUserData({name, avatarUrl, isPro}));
+        dispatch(ActionCreator.singIn({name, avatarUrl, isPro, email}));
+        pushPath();
       });
   }
 };

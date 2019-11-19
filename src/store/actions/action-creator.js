@@ -37,35 +37,20 @@ const ActionCreator = {
     };
   },
 
-  requireAuthorization: (status) => {
-    return {
-      type: ActionTypes.REQUIRE_AUTHORIZATION,
-      payload: status
-    };
-  },
-
   singIn: (userData) => {
-    const {email, password} = userData;
+    const {name, avatarUrl, isPro, email} = userData;
 
     return {
       type: ActionTypes.SING_IN,
       payload: {
+        name,
+        isPro,
         email,
-        password,
+        avatar: avatarUrl,
+        isAuthorizationRequired: false
       }
     };
   },
-
-  setUserData: (data) => {
-    return {
-      type: ActionTypes.SET_USER_DATA,
-      payload: {
-        name: data.name,
-        avatar: data.avatarUrl,
-        isPro: data.isPro
-      }
-    };
-  }
 };
 
 export default ActionCreator;
