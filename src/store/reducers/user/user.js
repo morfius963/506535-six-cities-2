@@ -5,9 +5,8 @@ const defaultActiveSort = `Popular`;
 const initialAppState = {
   city: ``,
   activeSort: defaultActiveSort,
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
   email: ``,
-  password: ``,
   name: ``,
   avatar: ``,
   isPro: false
@@ -24,19 +23,12 @@ const user = (state = initialAppState, action) => {
       activeSort: action.payload
     });
 
-    case ActionTypes.REQUIRE_AUTHORIZATION: return Object.assign({}, state, {
-      isAuthorizationRequired: action.payload
-    });
-
     case ActionTypes.SING_IN: return Object.assign({}, state, {
       email: action.payload.email,
-      password: action.payload.password
-    });
-
-    case ActionTypes.SET_USER_DATA: return Object.assign({}, state, {
       name: action.payload.name,
       avatar: action.payload.avatar,
-      isPro: action.payload.isPro
+      isPro: action.payload.isPro,
+      isAuthorizationRequired: action.payload.isAuthorizationRequired
     });
   }
 
