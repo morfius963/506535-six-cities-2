@@ -2,6 +2,10 @@ import React from "react";
 import renderer from "react-test-renderer";
 import MainHeader from "./main-header.jsx";
 
+jest.mock(`react-router-dom`, () => ({
+  Link: () => null
+}));
+
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
     const props = {
@@ -9,7 +13,7 @@ describe(`snapshot test`, () => {
         name: `Vitalii`,
         avatar: ``
       },
-      requireAuthorization: jest.fn()
+      requireAuthorization: true
     };
 
     const tree = renderer
