@@ -1,12 +1,15 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import propTypes from "./prop-types.js";
 
 const MainHeader = ({userData, requireAuthorization}) => {
-  const GUEST_VALUE = `Sing In`;
   const {email} = userData;
-  const isLogin = email !== ``;
+  const defaultLinkValue = `Sing In`;
 
-  const singIn = isLogin ? () => {} : requireAuthorization;
+  const linkValue = {
+    text: requireAuthorization ? defaultLinkValue : email,
+    path: requireAuthorization ? `/login` : `/favorites`
+  };
 
   return (
     <header className="header">
@@ -20,15 +23,15 @@ const MainHeader = ({userData, requireAuthorization}) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#" onClick={singIn}>
+
+                <Link className="header__nav-link header__nav-link--profile" to={{pathname: linkValue.path}}>
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   <span className="header__user-name user__name">
-                    {isLogin
-                      ? email
-                      : GUEST_VALUE}
+                    {linkValue.text}
                   </span>
-                </a>
+                </Link>
+
               </li>
             </ul>
           </nav>
