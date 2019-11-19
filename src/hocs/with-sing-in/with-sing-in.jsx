@@ -33,18 +33,25 @@ const withSingIn = (Component) => {
     }
 
     _formSubmitHandler(evt) {
-      const {onSubmit} = this.props;
+      const {onSubmit, history} = this.props;
+      const pushPath = () => {
+        history.push(`/`);
+      };
 
       evt.preventDefault();
-      onSubmit({
-        email: this.state.email,
-        password: this.state.password
-      });
+      onSubmit(
+          {
+            email: this.state.email,
+            password: this.state.password
+          },
+          pushPath
+      );
     }
   }
 
   WithSingIn.propTypes = {
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    history: PropTypes.object
   };
 
   return WithSingIn;
