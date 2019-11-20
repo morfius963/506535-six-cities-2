@@ -8,17 +8,18 @@ const createAPI = (onLoginFail) => {
   });
 
   const onSuccess = (response) => response;
-  const onFali = (err) => {
+
+  const onFail = (err) => {
     if (err.response.status === 401) {
       onLoginFail();
-
-      return;
+    } else if (err.response.status === 400) {
+      throw new Error(`Incorrect data. Please, enter valid email address`);
     }
 
-    throw err;
+    return;
   };
 
-  api.interceptors.response.use(onSuccess, onFali);
+  api.interceptors.response.use(onSuccess, onFail);
 
   return api;
 };
