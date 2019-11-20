@@ -42,10 +42,13 @@ describe(`end to end test`, () => {
     });
 
     form.simulate(`submit`, evt);
-    expect(onSubmit).toHaveBeenCalledWith({
-      email: `morf@gmail.com`,
-      password: ``
-    });
+    expect(onSubmit).toHaveBeenCalledWith(
+        {
+          email: `morf@gmail.com`,
+          password: ``
+        },
+        expect.any(Function)
+    );
 
     passwordField.simulate(`change`, evt2);
     expect(authorizationScreen.state()).toEqual({
@@ -54,9 +57,12 @@ describe(`end to end test`, () => {
     });
 
     form.simulate(`submit`, evt);
-    expect(onSubmit).toHaveBeenCalledWith({
-      email: `morf@gmail.com`,
-      password: `1234567890`
-    });
+    expect(onSubmit).toHaveBeenCalledWith(
+        {
+          email: `morf@gmail.com`,
+          password: `1234567890`
+        },
+        expect.any(Function)
+    );
   });
 });

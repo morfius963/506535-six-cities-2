@@ -8,7 +8,7 @@ import withActiveSort from "../../hocs/with-active-sort/with-active-sort.jsx";
 
 const OffersSortWrapped = withActiveSort(OffersSort);
 
-const OffersList = ({offers, activeCity, activeCardId, cardMouseEnterHandler, sortOffers, activeSort}) => {
+const OffersList = ({offers, activeCity, activeCardId, cardMouseEnterHandler, sortOffers, activeSort, toggleFavoriteCard}) => {
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -25,6 +25,7 @@ const OffersList = ({offers, activeCity, activeCardId, cardMouseEnterHandler, so
                 id={offer.id}
                 offerData={offer}
                 cardMouseEnterHandler={cardMouseEnterHandler}
+                toggleFavoriteCard={toggleFavoriteCard}
               />)}
           </div>
         </section>

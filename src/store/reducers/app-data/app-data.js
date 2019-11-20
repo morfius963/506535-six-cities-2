@@ -11,6 +11,10 @@ const appData = (state = initialAppState, action) => {
       offers: action.payload.hotels,
       isOffersLoading: action.payload.isOffersLoading
     });
+
+    case ActionTypes.SET_FAVORITE_OFFER: return Object.assign({}, state, {
+      offers: action.payload
+    });
   }
 
   return state;

@@ -8,5 +8,6 @@ export default {
   activeCardId: PropTypes.number.isRequired,
   cardMouseEnterHandler: PropTypes.func.isRequired,
   sortOffers: PropTypes.func.isRequired,
-  activeSort: PropTypes.oneOf(sortValues).isRequired
+  activeSort: PropTypes.oneOf(sortValues).isRequired,
+  toggleFavoriteCard: PropTypes.func.isRequired
 };

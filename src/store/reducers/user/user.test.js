@@ -4,9 +4,8 @@ describe(`Reducer test group`, () => {
   const initialAppState = {
     city: ``,
     activeSort: `Popular`,
-    isAuthorizationRequired: false,
+    isAuthorizationRequired: true,
     email: ``,
-    password: ``,
     name: ``,
     avatar: ``,
     isPro: false
@@ -25,9 +24,8 @@ describe(`Reducer test group`, () => {
     )).toEqual({
       city: `Hamburg`,
       activeSort: `Top rated`,
-      isAuthorizationRequired: false,
+      isAuthorizationRequired: true,
       email: ``,
-      password: ``,
       name: ``,
       avatar: ``,
       isPro: false
@@ -44,28 +42,8 @@ describe(`Reducer test group`, () => {
     )).toEqual({
       city: ``,
       activeSort: `Top rated first`,
-      isAuthorizationRequired: false,
-      email: ``,
-      password: ``,
-      name: ``,
-      avatar: ``,
-      isPro: false
-    });
-  });
-
-  it(`Reducer should correctly switch authorization state`, () => {
-    expect(user(
-        initialAppState,
-        {
-          type: `REQUIRE_AUTHORIZATION`,
-          payload: true
-        }
-    )).toEqual({
-      city: ``,
-      activeSort: `Popular`,
       isAuthorizationRequired: true,
       email: ``,
-      password: ``,
       name: ``,
       avatar: ``,
       isPro: false
@@ -79,41 +57,20 @@ describe(`Reducer test group`, () => {
           type: `SING_IN`,
           payload: {
             email: `morf@gmail.com`,
-            password: 12323
-          }
-        }
-    )).toEqual({
-      city: ``,
-      activeSort: `Popular`,
-      isAuthorizationRequired: false,
-      email: `morf@gmail.com`,
-      password: 12323,
-      name: ``,
-      avatar: ``,
-      isPro: false
-    });
-  });
-
-  it(`Reducer should correctly set user data`, () => {
-    expect(user(
-        initialAppState,
-        {
-          type: `SET_USER_DATA`,
-          payload: {
             name: `Vitalii`,
-            avatar: `./img/1.png`,
-            isPro: true
+            isPro: true,
+            avatar: `/img/1.png`,
+            isAuthorizationRequired: false
           }
         }
     )).toEqual({
       city: ``,
       activeSort: `Popular`,
-      isAuthorizationRequired: false,
-      email: ``,
-      password: ``,
+      email: `morf@gmail.com`,
       name: `Vitalii`,
-      avatar: `./img/1.png`,
-      isPro: true
+      isPro: true,
+      avatar: `/img/1.png`,
+      isAuthorizationRequired: false,
     });
   });
 

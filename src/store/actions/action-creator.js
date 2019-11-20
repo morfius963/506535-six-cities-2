@@ -37,35 +37,30 @@ const ActionCreator = {
     };
   },
 
-  requireAuthorization: (status) => {
+  setFavoriteOffer: (oldOffers, newOffer) => {
+    const newOfferIndex = oldOffers.indexOf(oldOffers.find(({id}) => id === newOffer.id));
+    const newOffers = [...oldOffers.slice(0, newOfferIndex), newOffer, ...oldOffers.slice(newOfferIndex + 1)];
+
     return {
-      type: ActionTypes.REQUIRE_AUTHORIZATION,
-      payload: status
+      type: ActionTypes.SET_FAVORITE_OFFER,
+      payload: newOffers
     };
   },
 
   singIn: (userData) => {
-    const {email, password} = userData;
+    const {name, avatarUrl, isPro, email} = userData;
 
     return {
       type: ActionTypes.SING_IN,
       payload: {
+        name,
+        isPro,
         email,
-        password,
+        avatar: avatarUrl,
+        isAuthorizationRequired: false
       }
     };
   },
-
-  setUserData: (data) => {
-    return {
-      type: ActionTypes.SET_USER_DATA,
-      payload: {
-        name: data.name,
-        avatar: data.avatarUrl,
-        isPro: data.isPro
-      }
-    };
-  }
 };
 
 export default ActionCreator;

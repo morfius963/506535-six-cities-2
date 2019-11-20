@@ -6,7 +6,7 @@ import OffersSort from "../../components/offers-sort/offers-sort.jsx";
 const OffersSortWrapped = withActiveSort(OffersSort);
 
 describe(`e2e test`, () => {
-  it(``, () => {
+  it(`Component should correctly switch sort value after click`, () => {
     const sortHandler = jest.fn();
     const props = {
       activeCity: `Amsterdam`,
