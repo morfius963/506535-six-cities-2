@@ -37,7 +37,7 @@ class App extends React.PureComponent {
   }
 
   _renderMainPage() {
-    const {city, onCityClick, sortOffers, activeSort, activeOffers, email, isAuthorizationRequired, isOffersLoading} = this.props;
+    const {city, onCityClick, sortOffers, activeSort, activeOffers, email, isAuthorizationRequired, isOffersLoading, toggleFavoriteCard} = this.props;
     const userData = {email};
 
     return (
@@ -52,6 +52,7 @@ class App extends React.PureComponent {
           activeSort={activeSort}
           requireAuthorization={isAuthorizationRequired}
           userData={userData}
+          toggleFavoriteCard={toggleFavoriteCard}
         />
     );
   }
@@ -80,6 +81,7 @@ App.propTypes = {
   sortOffers: PropTypes.func.isRequired,
   loadHotels: PropTypes.func.isRequired,
   postUserData: PropTypes.func.isRequired,
+  toggleFavoriteCard: PropTypes.func.isRequired
 };
 
 const getCityFromState = (state) => state.user.city;
@@ -130,6 +132,8 @@ const mapDispatchToProps = {
   sortOffers: (value) => ActionCreator.sortOffers(value),
 
   postUserData: (userData, pushPath) => Operation.postUserLogin(userData, pushPath),
+
+  toggleFavoriteCard: (id, status) => Operation.toggleFavoriteCard(id, status)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
