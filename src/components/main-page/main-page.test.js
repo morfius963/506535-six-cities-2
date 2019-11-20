@@ -25,7 +25,8 @@ describe(`snapshot test`, () => {
         name: `Vitalii`,
         avatar: ``
       },
-      requireAuthorization: jest.fn()
+      requireAuthorization: false,
+      toggleFavoriteCard: jest.fn()
     };
 
     const tree = renderer

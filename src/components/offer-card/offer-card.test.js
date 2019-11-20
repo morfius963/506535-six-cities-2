@@ -8,7 +8,8 @@ describe(`snapshot test`, () => {
     const props = {
       offerData: fixtureData[0],
       id: 0,
-      cardMouseEnterHandler: jest.fn()
+      cardMouseEnterHandler: jest.fn(),
+      toggleFavoriteCard: jest.fn()
     };
 
     const tree = renderer

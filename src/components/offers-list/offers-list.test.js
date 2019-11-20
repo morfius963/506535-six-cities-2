@@ -19,7 +19,8 @@ describe(`snapshot test`, () => {
       activeCardId: 0,
       cardMouseEnterHandler: jest.fn(),
       sortOffers: jest.fn(),
-      activeSort: `Popular`
+      activeSort: `Popular`,
+      toggleFavoriteCard: jest.fn()
     };
 
     const tree = renderer
