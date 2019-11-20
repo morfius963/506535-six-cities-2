@@ -37,6 +37,16 @@ const ActionCreator = {
     };
   },
 
+  setFavoriteOffer: (oldOffers, newOffer) => {
+    const newOfferIndex = oldOffers.indexOf(oldOffers.find(({id}) => id === newOffer.id));
+    const newOffers = [...oldOffers.slice(0, newOfferIndex), newOffer, ...oldOffers.slice(newOfferIndex + 1)];
+
+    return {
+      type: ActionTypes.SET_FAVORITE_OFFER,
+      payload: newOffers
+    };
+  },
+
   singIn: (userData) => {
     const {name, avatarUrl, isPro, email} = userData;
 
