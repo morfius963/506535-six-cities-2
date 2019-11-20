@@ -13,5 +13,6 @@ export default {
     name: PropTypes.string,
     avatar: PropTypes.string
   }).isRequired,
-  requireAuthorization: PropTypes.bool.isRequired
+  requireAuthorization: PropTypes.bool.isRequired,
+  toggleFavoriteCard: PropTypes.func.isRequired
 };
