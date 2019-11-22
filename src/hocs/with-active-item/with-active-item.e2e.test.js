@@ -18,9 +18,9 @@ describe(`e2e test`, () => {
     const props = {
       offers: activeOffers,
       activeCity: `Amsterdam`,
-      sortOffers: sortHandler,
       activeSort: `Popular`,
-      toggleFavoriteCard: jest.fn()
+      onOffersSort: sortHandler,
+      onFavoriteCardToggle: jest.fn()
     };
 
     const component = mount(<OffersListWrapped {...props} />);

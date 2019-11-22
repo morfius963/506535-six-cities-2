@@ -10,8 +10,8 @@ describe(`e2e test`, () => {
     const sortHandler = jest.fn();
     const props = {
       activeCity: `Amsterdam`,
-      sortOffers: sortHandler,
-      activeSort: `Popular`
+      activeSort: `Popular`,
+      onOffersSort: sortHandler
     };
     const evt = {
       target: {
@@ -24,7 +24,7 @@ describe(`e2e test`, () => {
     const form = component.find(`.places__options`);
 
     form.simulate(`click`, evt);
-    expect(component.props().sortOffers).toHaveBeenCalledWith(`Top rated first`);
+    expect(sortHandler).toHaveBeenCalledWith(`Top rated first`);
     expect(component.state().isOpen).toEqual(false);
   });
 });

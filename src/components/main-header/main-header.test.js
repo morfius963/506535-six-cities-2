@@ -13,7 +13,7 @@ describe(`snapshot test`, () => {
         name: `Vitalii`,
         avatar: ``
       },
-      requireAuthorization: true
+      isAuthorizationRequired: true
     };
 
     const tree = renderer
