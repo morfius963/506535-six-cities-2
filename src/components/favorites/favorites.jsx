@@ -4,9 +4,7 @@ import OfferCard from "../offer-card/offer-card.jsx";
 import FavoritesOfferList from "../favorites-offer-list/favorites-offer-list.jsx";
 import FavoriteEmpty from "../favorites-empty/favorites-empty.jsx";
 import Footer from "../footer/footer.jsx";
-
-import PropTypes from "prop-types";
-import appPropTypes from "../app/prop-types.js";
+import propTypes from "./prop-types.js";
 
 class Favorites extends React.PureComponent {
   constructor(props) {
@@ -86,16 +84,6 @@ class Favorites extends React.PureComponent {
   }
 }
 
-Favorites.propTypes = {
-  favoriteOffers: PropTypes.arrayOf(
-      PropTypes.shape(appPropTypes)
-  ).isRequired,
-  userData: PropTypes.shape({
-    email: PropTypes.string
-  }).isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  onFavoriteCardToggle: PropTypes.func.isRequired,
-  onFavoriteOffersLoad: PropTypes.func.isRequired
-};
+Favorites.propTypes = propTypes;
 
 export default Favorites;
