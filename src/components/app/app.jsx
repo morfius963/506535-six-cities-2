@@ -9,6 +9,7 @@ import Operation from "../../store/actions/async-actions.js";
 import MainPage from "../main-page/main-page.jsx";
 import SingIn from "../sing-in/sing-in.jsx";
 import Favorites from "../favorites/favorites.jsx";
+import PrivateRoute from "../../hocs/with-private-route/with-private-route.jsx";
 import offersPropTypes from "./prop-types.js";
 import withSingIn from "../../hocs/with-sing-in/with-sing-in.jsx";
 import {sortValues} from "../../__fixtures__/offers.js";
@@ -42,10 +43,11 @@ class App extends React.PureComponent {
           exact
           render={(props) => <SingInWrapped {...props} city={city} onUserDataPost={onUserDataPost} isAuthorizationRequired={isAuthorizationRequired} />}
         />
-        <Route
+        <PrivateRoute
           path="/favorites"
           exact
-          render={() => <Favorites favoriteOffers={favoriteOffers} isAuthorizationRequired={isAuthorizationRequired} userData={userData} onFavoriteCardToggle={onFavoriteCardToggle} onFavoriteOffersLoad={onFavoriteOffersLoad} />}
+          isAuthorizationRequired={isAuthorizationRequired}
+          renderCmp={() => <Favorites favoriteOffers={favoriteOffers} isAuthorizationRequired={isAuthorizationRequired} userData={userData} onFavoriteCardToggle={onFavoriteCardToggle} onFavoriteOffersLoad={onFavoriteOffersLoad} />}
         />
       </Switch>
     );
