@@ -19,14 +19,14 @@ describe(`snapshot test`, () => {
       city: `Amsterdam`,
       onCityClick: jest.fn(),
       activeOffers,
-      sortOffers: jest.fn(),
+      onOffersSort: jest.fn(),
       activeSort: `Popular`,
       userData: {
         name: `Vitalii`,
         avatar: ``
       },
-      requireAuthorization: false,
-      toggleFavoriteCard: jest.fn()
+      isAuthorizationRequired: false,
+      onFavoriteCardToggle: jest.fn()
     };
 
     const tree = renderer
