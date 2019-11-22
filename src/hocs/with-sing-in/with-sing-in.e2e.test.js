@@ -25,7 +25,8 @@ describe(`end to end test`, () => {
       onSubmit,
       city: `Amsterdam`,
       userInputHandler: jest.fn(),
-      formSubmitHandler: jest.fn()
+      formSubmitHandler: jest.fn(),
+      isAuthorizationRequired: false
     };
     const MockComponentWrapped = withSingIn(SingIn);
 
