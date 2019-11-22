@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Redirect} from "react-router-dom";
 
 const withSingIn = (Component) => {
   class WithSingIn extends React.PureComponent {
@@ -16,11 +17,17 @@ const withSingIn = (Component) => {
     }
 
     render() {
-      return <Component
-        {...this.props}
-        userInputHandler={this._handleUserInput}
-        formSubmitHandler={this._formSubmitHandler}
-      />;
+      const {isAuthorizationRequired} = this.props;
+
+      return (
+        !isAuthorizationRequired
+          ? <Redirect to="/" />
+          : <Component
+            {...this.props}
+            userInputHandler={this._handleUserInput}
+            formSubmitHandler={this._formSubmitHandler}
+          />
+      );
     }
 
     _handleUserInput(evt) {
@@ -51,7 +58,8 @@ const withSingIn = (Component) => {
 
   WithSingIn.propTypes = {
     onSubmit: PropTypes.func.isRequired,
-    history: PropTypes.object
+    history: PropTypes.object,
+    isAuthorizationRequired: PropTypes.bool.isRequired
   };
 
   return WithSingIn;
