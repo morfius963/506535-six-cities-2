@@ -2,13 +2,13 @@ import React from "react";
 import {Link} from "react-router-dom";
 import propTypes from "./prop-types.js";
 
-const MainHeader = ({userData, requireAuthorization}) => {
+const MainHeader = ({userData, isAuthorizationRequired}) => {
   const {email} = userData;
   const defaultLinkValue = `Sing In`;
 
   const linkValue = {
-    text: requireAuthorization ? defaultLinkValue : email,
-    path: requireAuthorization ? `/login` : `/favorites`
+    text: isAuthorizationRequired ? defaultLinkValue : email,
+    path: isAuthorizationRequired ? `/login` : `/favorites`
   };
 
   return (

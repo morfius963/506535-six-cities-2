@@ -5,22 +5,25 @@ import FavoritesOfferList from "../favorites-offer-list/favorites-offer-list.jsx
 import FavoriteEmpty from "../favorites-empty/favorites-empty.jsx";
 import Footer from "../footer/footer.jsx";
 
+import PropTypes from "prop-types";
+import appPropTypes from "../app/prop-types.js";
+
 class Favorites extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.props.loadFavoriteOffers();
+    this.props.onFavoriteOffersLoad();
   }
 
   render() {
-    const {requireAuthorization, userData, favoriteOffers} = this.props;
+    const {isAuthorizationRequired, userData, favoriteOffers} = this.props;
     const isEmpty = favoriteOffers.length === 0;
 
     return (
       <div className={`page ${isEmpty ? `page--favorites-empty` : ``}`}>
 
         <MainHeader
-          requireAuthorization={requireAuthorization}
+          isAuthorizationRequired={isAuthorizationRequired}
           userData={userData}
         />
 
@@ -41,7 +44,7 @@ class Favorites extends React.PureComponent {
   }
 
   _renderMainContent() {
-    const {favoriteOffers, toggleFavoriteCard} = this.props;
+    const {favoriteOffers, onFavoriteCardToggle} = this.props;
     const isEmpty = favoriteOffers.length === 0;
 
     return (
@@ -63,8 +66,8 @@ class Favorites extends React.PureComponent {
                       key={`${city}-${offer.price}-${offer.id}`}
                       id={offer.id}
                       offerData={offer}
-                      cardMouseEnterHandler={null}
-                      toggleFavoriteCard={toggleFavoriteCard}
+                      onCardMouseEnter={null}
+                      onFavoriteCardToggle={onFavoriteCardToggle}
                       isInFavoriteList={true}
                     />)}
                 />
@@ -82,5 +85,17 @@ class Favorites extends React.PureComponent {
     return Array.from(new Set(favoriteOffers.map((offer) => offer.city.name)));
   }
 }
+
+Favorites.propTypes = {
+  favoriteOffers: PropTypes.arrayOf(
+      PropTypes.shape(appPropTypes)
+  ).isRequired,
+  userData: PropTypes.shape({
+    email: PropTypes.string
+  }).isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  onFavoriteCardToggle: PropTypes.func.isRequired,
+  onFavoriteOffersLoad: PropTypes.func.isRequired
+};
 
 export default Favorites;

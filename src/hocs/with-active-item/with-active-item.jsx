@@ -9,18 +9,18 @@ const withActiveItem = (Component) => {
         activeCardId: -1
       };
 
-      this._cardMouseEnterHandler = this._cardMouseEnterHandler.bind(this);
+      this._onCardMouseEnter = this._onCardMouseEnter.bind(this);
     }
 
     render() {
       return <Component
         {...this.props}
         activeCardId={this.state.activeCardId}
-        cardMouseEnterHandler={this._cardMouseEnterHandler}
+        onCardMouseEnter={this._onCardMouseEnter}
       />;
     }
 
-    _cardMouseEnterHandler(id) {
+    _onCardMouseEnter(id) {
       this.setState({activeCardId: id});
     }
   }

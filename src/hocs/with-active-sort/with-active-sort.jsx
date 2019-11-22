@@ -48,12 +48,12 @@ const withActiveSort = (Component) => {
       this.setState({
         isOpen: false
       });
-      this.props.sortOffers(value);
+      this.props.onOffersSort(value);
     }
   }
 
   WithActiveSort.propTypes = {
-    sortOffers: PropTypes.func.isRequired,
+    onOffersSort: PropTypes.func.isRequired,
     activeSort: PropTypes.oneOf(sortValues).isRequired,
     activeCity: PropTypes.string.isRequired
   };

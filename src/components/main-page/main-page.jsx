@@ -9,12 +9,12 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
 const OffersListWrapped = withActiveItem(OffersList);
 
-const MainPage = ({allCities, activeOffers, city, onCityClick, sortOffers, activeSort, userData, requireAuthorization, toggleFavoriteCard}) => {
+const MainPage = ({allCities, activeOffers, city, onCityClick, onOffersSort, activeSort, userData, isAuthorizationRequired, onFavoriteCardToggle}) => {
   return (
     <div className="page page--gray page--main">
 
       <MainHeader
-        requireAuthorization={requireAuthorization}
+        isAuthorizationRequired={isAuthorizationRequired}
         userData={userData}
       />
 
@@ -30,9 +30,9 @@ const MainPage = ({allCities, activeOffers, city, onCityClick, sortOffers, activ
           ? <OffersListWrapped
             offers={activeOffers}
             activeCity={city}
-            sortOffers={sortOffers}
             activeSort={activeSort}
-            toggleFavoriteCard={toggleFavoriteCard}
+            onOffersSort={onOffersSort}
+            onFavoriteCardToggle={onFavoriteCardToggle}
           />
           : <MainEmpty city={city} />}
 
