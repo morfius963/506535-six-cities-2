@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
 import {Switch, Route} from "react-router-dom";
-
 import ActionCreator from "../../store/actions/action-creator.js";
 import Operation from "../../store/actions/async-actions.js";
 import MainPage from "../main-page/main-page.jsx";
