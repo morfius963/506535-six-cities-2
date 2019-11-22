@@ -12,8 +12,8 @@ const withSingIn = (Component) => {
         password: ``
       };
 
-      this._handleUserInput = this._handleUserInput.bind(this);
-      this._formSubmitHandler = this._formSubmitHandler.bind(this);
+      this._onUserInput = this._onUserInput.bind(this);
+      this._onFormSubmit = this._onFormSubmit.bind(this);
     }
 
     render() {
@@ -24,13 +24,13 @@ const withSingIn = (Component) => {
           ? <Redirect to="/" />
           : <Component
             {...this.props}
-            userInputHandler={this._handleUserInput}
-            formSubmitHandler={this._formSubmitHandler}
+            onUserInput={this._onUserInput}
+            onFormSubmit={this._onFormSubmit}
           />
       );
     }
 
-    _handleUserInput(evt) {
+    _onUserInput(evt) {
       const name = evt.target.name;
       const value = evt.target.value;
 
@@ -39,14 +39,14 @@ const withSingIn = (Component) => {
       });
     }
 
-    _formSubmitHandler(evt) {
-      const {onSubmit, history} = this.props;
+    _onFormSubmit(evt) {
+      const {onUserDataPost, history} = this.props;
       const pushPath = () => {
         history.push(`/`);
       };
 
       evt.preventDefault();
-      onSubmit(
+      onUserDataPost(
           {
             email: this.state.email,
             password: this.state.password
@@ -57,7 +57,7 @@ const withSingIn = (Component) => {
   }
 
   WithSingIn.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+    onUserDataPost: PropTypes.func.isRequired,
     history: PropTypes.object,
     isAuthorizationRequired: PropTypes.bool.isRequired
   };

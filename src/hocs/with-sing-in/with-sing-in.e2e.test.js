@@ -3,9 +3,14 @@ import {mount} from 'enzyme';
 import withSingIn from "./with-sing-in.jsx";
 import SingIn from "../../components/sing-in/sing-in.jsx";
 
+jest.mock(`react-router-dom`, () => ({
+  Redirect: () => null,
+  Link: () => null
+}));
+
 describe(`end to end test`, () => {
   it(`Component should correctly change state after input`, () => {
-    const onSubmit = jest.fn();
+    const onUserDataPost = jest.fn();
     const evt = {
       preventDefalut: jest.fn()
     };
@@ -22,18 +27,18 @@ describe(`end to end test`, () => {
       }
     };
     const props = {
-      onSubmit,
+      onUserDataPost,
       city: `Amsterdam`,
-      userInputHandler: jest.fn(),
-      formSubmitHandler: jest.fn(),
-      isAuthorizationRequired: false
+      onUserInput: jest.fn(),
+      onFormSubmit: jest.fn(),
+      isAuthorizationRequired: true
     };
     const MockComponentWrapped = withSingIn(SingIn);
 
     const authorizationScreen = mount(<MockComponentWrapped {...props} />);
 
-    const emailField = authorizationScreen.find(`input[name="email"]`);
-    const passwordField = authorizationScreen.find(`input[name="password"]`);
+    const emailField = authorizationScreen.find(`input[type="email"]`);
+    const passwordField = authorizationScreen.find(`input[type="password"]`);
     const form = authorizationScreen.find(`.login__form`);
 
     emailField.simulate(`change`, evt1);
@@ -43,7 +48,7 @@ describe(`end to end test`, () => {
     });
 
     form.simulate(`submit`, evt);
-    expect(onSubmit).toHaveBeenCalledWith(
+    expect(onUserDataPost).toHaveBeenCalledWith(
         {
           email: `morf@gmail.com`,
           password: ``
@@ -58,7 +63,7 @@ describe(`end to end test`, () => {
     });
 
     form.simulate(`submit`, evt);
-    expect(onSubmit).toHaveBeenCalledWith(
+    expect(onUserDataPost).toHaveBeenCalledWith(
         {
           email: `morf@gmail.com`,
           password: `1234567890`

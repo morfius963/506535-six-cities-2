@@ -17,10 +17,10 @@ describe(`snapshot test`, () => {
       offers: activeOffers,
       activeCity: `Amsterdam`,
       activeCardId: 0,
-      cardMouseEnterHandler: jest.fn(),
-      sortOffers: jest.fn(),
       activeSort: `Popular`,
-      toggleFavoriteCard: jest.fn()
+      onFavoriteCardToggle: jest.fn(),
+      onCardMouseEnter: jest.fn(),
+      onOffersSort: jest.fn(),
     };
 
     const tree = renderer

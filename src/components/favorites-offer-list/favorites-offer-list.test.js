@@ -1,21 +1,16 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SingIn from "./sing-in.jsx";
-
-jest.mock(`react-router-dom`, () => ({
-  Link: () => null
-}));
+import FavoritesOfferList from "./favorites-offer-list.jsx";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
     const props = {
       city: `Amsterdam`,
-      onUserInput: jest.fn(),
-      onFormSubmit: jest.fn()
+      renderOffers: jest.fn()
     };
 
     const tree = renderer
-      .create(<SingIn {...props} />)
+      .create(<FavoritesOfferList {...props} />)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

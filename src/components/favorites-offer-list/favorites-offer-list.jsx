@@ -1,4 +1,5 @@
 import React from "react";
+import propTypes from "./prop-types.js";
 
 const FavoritesOfferList = ({city, renderOffers}) => (
   <li className="favorites__locations-items">
@@ -14,5 +15,7 @@ const FavoritesOfferList = ({city, renderOffers}) => (
     </div>
   </li>
 );
+
+FavoritesOfferList.propTypes = propTypes;
 
 export default FavoritesOfferList;

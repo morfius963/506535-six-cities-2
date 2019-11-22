@@ -12,8 +12,8 @@ describe(`end to end test`, () => {
     const props = {
       offerData: offer,
       id: 0,
-      cardMouseEnterHandler: mouseEnterHandler,
-      toggleFavoriteCard: favoriteClickHandler
+      onCardMouseEnter: mouseEnterHandler,
+      onFavoriteCardToggle: favoriteClickHandler
     };
 
     const app = shallow(<OfferCard {...props} />);

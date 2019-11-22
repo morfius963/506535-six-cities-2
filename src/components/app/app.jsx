@@ -9,6 +9,7 @@ import Operation from "../../store/actions/async-actions.js";
 import MainPage from "../main-page/main-page.jsx";
 import SingIn from "../sing-in/sing-in.jsx";
 import Favorites from "../favorites/favorites.jsx";
+import PrivateRoute from "../../hocs/with-private-route/with-private-route.jsx";
 import offersPropTypes from "./prop-types.js";
 import withSingIn from "../../hocs/with-sing-in/with-sing-in.jsx";
 import {sortValues} from "../../__fixtures__/offers.js";
@@ -23,11 +24,11 @@ class App extends React.PureComponent {
 
     this._allCities = null;
 
-    this.props.loadHotels();
+    this.props.onOffersLoad();
   }
 
   render() {
-    const {city, postUserData, isAuthorizationRequired, favoriteOffers, email, toggleFavoriteCard, loadFavoriteOffers} = this.props;
+    const {city, onUserDataPost, isAuthorizationRequired, favoriteOffers, email, onFavoriteCardToggle, onFavoriteOffersLoad} = this.props;
     const userData = {email};
 
     return (
@@ -40,19 +41,20 @@ class App extends React.PureComponent {
         <Route
           path="/login"
           exact
-          render={(props) => <SingInWrapped {...props} city={city} onSubmit={postUserData} isAuthorizationRequired={isAuthorizationRequired} />}
+          render={(props) => <SingInWrapped {...props} city={city} onUserDataPost={onUserDataPost} isAuthorizationRequired={isAuthorizationRequired} />}
         />
-        <Route
+        <PrivateRoute
           path="/favorites"
           exact
-          render={() => <Favorites favoriteOffers={favoriteOffers} requireAuthorization={isAuthorizationRequired} userData={userData} toggleFavoriteCard={toggleFavoriteCard} loadFavoriteOffers={loadFavoriteOffers} />}
+          isAuthorizationRequired={isAuthorizationRequired}
+          renderCmp={() => <Favorites favoriteOffers={favoriteOffers} isAuthorizationRequired={isAuthorizationRequired} userData={userData} onFavoriteCardToggle={onFavoriteCardToggle} onFavoriteOffersLoad={onFavoriteOffersLoad} />}
         />
       </Switch>
     );
   }
 
   _renderMainPage() {
-    const {city, onCityClick, sortOffers, activeSort, activeOffers, email, isAuthorizationRequired, isOffersLoading, toggleFavoriteCard} = this.props;
+    const {city, onCityClick, onOffersSort, activeSort, activeOffers, email, isAuthorizationRequired, isOffersLoading, onFavoriteCardToggle} = this.props;
     const userData = {email};
 
     return (
@@ -62,12 +64,12 @@ class App extends React.PureComponent {
           allCities={this._getAllCities()}
           activeOffers={activeOffers}
           city={city}
-          onCityClick={onCityClick}
-          sortOffers={sortOffers}
           activeSort={activeSort}
-          requireAuthorization={isAuthorizationRequired}
+          isAuthorizationRequired={isAuthorizationRequired}
           userData={userData}
-          toggleFavoriteCard={toggleFavoriteCard}
+          onFavoriteCardToggle={onFavoriteCardToggle}
+          onCityClick={onCityClick}
+          onOffersSort={onOffersSort}
         />
     );
   }
@@ -94,11 +96,11 @@ App.propTypes = {
   isOffersLoading: PropTypes.bool.isRequired,
 
   onCityClick: PropTypes.func.isRequired,
-  sortOffers: PropTypes.func.isRequired,
-  loadHotels: PropTypes.func.isRequired,
-  postUserData: PropTypes.func.isRequired,
-  toggleFavoriteCard: PropTypes.func.isRequired,
-  loadFavoriteOffers: PropTypes.func.isRequired
+  onOffersSort: PropTypes.func.isRequired,
+  onOffersLoad: PropTypes.func.isRequired,
+  onUserDataPost: PropTypes.func.isRequired,
+  onFavoriteCardToggle: PropTypes.func.isRequired,
+  onFavoriteOffersLoad: PropTypes.func.isRequired
 };
 
 const getCityFromState = (state) => state.user.city;
@@ -143,17 +145,17 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  loadHotels: Operation.loadHotels,
+  onOffersLoad: Operation.loadHotels,
 
   onCityClick: (city) => ActionCreator.switchCity(city),
 
-  sortOffers: (value) => ActionCreator.sortOffers(value),
+  onOffersSort: (value) => ActionCreator.sortOffers(value),
 
-  postUserData: (userData, pushPath) => Operation.postUserLogin(userData, pushPath),
+  onUserDataPost: (userData, pushPath) => Operation.postUserLogin(userData, pushPath),
 
-  toggleFavoriteCard: (id, status) => Operation.toggleFavoriteCard(id, status),
+  onFavoriteCardToggle: (id, status) => Operation.toggleFavoriteCard(id, status),
 
-  loadFavoriteOffers: () => Operation.loadFavoriteOffers()
+  onFavoriteOffersLoad: () => Operation.loadFavoriteOffers()
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

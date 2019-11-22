@@ -2,24 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import MainHeader from "../main-header/main-header.jsx";
 
-const SingIn = ({city, userInputHandler, formSubmitHandler}) => {
+const SingIn = ({city, onUserInput, onFormSubmit}) => {
   return (
     <div className="page page--gray page--login">
 
-      <MainHeader userData={{}} requireAuthorization={true} />
+      <MainHeader userData={{}} isAuthorizationRequired={true} />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post" onSubmit={formSubmitHandler}>
+            <form className="login__form form" action="#" method="post" onSubmit={onFormSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
                   className="login__input form__input"
                   type="email" name="email"
                   placeholder="Email"
-                  onChange={userInputHandler}
+                  onChange={onUserInput}
                   required />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -29,7 +29,7 @@ const SingIn = ({city, userInputHandler, formSubmitHandler}) => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  onChange={userInputHandler}
+                  onChange={onUserInput}
                   required />
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
@@ -50,8 +50,8 @@ const SingIn = ({city, userInputHandler, formSubmitHandler}) => {
 
 SingIn.propTypes = {
   city: PropTypes.string.isRequired,
-  userInputHandler: PropTypes.func.isRequired,
-  formSubmitHandler: PropTypes.func.isRequired
+  onUserInput: PropTypes.func.isRequired,
+  onFormSubmit: PropTypes.func.isRequired
 };
 
 export default SingIn;

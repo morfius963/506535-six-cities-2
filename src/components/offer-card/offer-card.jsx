@@ -1,7 +1,7 @@
 import React from "react";
 import propTypes from "./prop-types.js";
 
-const OfferCard = ({offerData, id, cardMouseEnterHandler, toggleFavoriteCard, isInFavoriteList}) => {
+const OfferCard = ({offerData, id, onCardMouseEnter, onFavoriteCardToggle, isInFavoriteList}) => {
   const DEFAULT_ACTIVE_CARD_ID = -1;
   const {title, isPremium, price, rating, type, previewImage, isFavorite} = offerData;
 
@@ -10,22 +10,22 @@ const OfferCard = ({offerData, id, cardMouseEnterHandler, toggleFavoriteCard, is
     height: isInFavoriteList ? 110 : 200
   };
 
-  const mouseEnterHandler = cardMouseEnterHandler === null
+  const mouseEnterHandler = onCardMouseEnter === null
     ? null
     : (evt) => {
       const cardId = Number(evt.currentTarget.id);
-      cardMouseEnterHandler(cardId);
+      onCardMouseEnter(cardId);
     };
 
-  const mouseLeaveHandler = cardMouseEnterHandler === null
+  const mouseLeaveHandler = onCardMouseEnter === null
     ? null
     : () => {
-      cardMouseEnterHandler(DEFAULT_ACTIVE_CARD_ID);
+      onCardMouseEnter(DEFAULT_ACTIVE_CARD_ID);
     };
 
   const favoriteClickHandler = () => {
     const status = isFavorite ? 0 : 1;
-    toggleFavoriteCard(id, status);
+    onFavoriteCardToggle(id, status);
   };
 
   return (
