@@ -8,6 +8,7 @@ import ActionCreator from "../../store/actions/action-creator.js";
 import Operation from "../../store/actions/async-actions.js";
 import MainPage from "../main-page/main-page.jsx";
 import SingIn from "../sing-in/sing-in.jsx";
+import Favorites from "../favorites/favorites.jsx";
 import offersPropTypes from "./prop-types.js";
 import withSingIn from "../../hocs/with-sing-in/with-sing-in.jsx";
 import {sortValues} from "../../__fixtures__/offers.js";
@@ -26,12 +27,26 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {city, postUserData} = this.props;
+    const {city, postUserData, isAuthorizationRequired, favoriteOffers, email, toggleFavoriteCard, loadFavoriteOffers} = this.props;
+    const userData = {email};
 
     return (
       <Switch>
-        <Route path="/" exact render={() => this._renderMainPage()} />
-        <Route path="/login" exact render={(props) => <SingInWrapped {...props} city={city} onSubmit={postUserData} />} />
+        <Route
+          path="/"
+          exact
+          render={() => this._renderMainPage()}
+        />
+        <Route
+          path="/login"
+          exact
+          render={(props) => <SingInWrapped {...props} city={city} onSubmit={postUserData} isAuthorizationRequired={isAuthorizationRequired} />}
+        />
+        <Route
+          path="/favorites"
+          exact
+          render={() => <Favorites favoriteOffers={favoriteOffers} requireAuthorization={isAuthorizationRequired} userData={userData} toggleFavoriteCard={toggleFavoriteCard} loadFavoriteOffers={loadFavoriteOffers} />}
+        />
       </Switch>
     );
   }
@@ -75,13 +90,15 @@ App.propTypes = {
   isAuthorizationRequired: PropTypes.bool.isRequired,
   offers: PropTypes.arrayOf(offersPropTypes).isRequired,
   activeOffers: PropTypes.arrayOf(offersPropTypes).isRequired,
+  favoriteOffers: PropTypes.array.isRequired,
   isOffersLoading: PropTypes.bool.isRequired,
 
   onCityClick: PropTypes.func.isRequired,
   sortOffers: PropTypes.func.isRequired,
   loadHotels: PropTypes.func.isRequired,
   postUserData: PropTypes.func.isRequired,
-  toggleFavoriteCard: PropTypes.func.isRequired
+  toggleFavoriteCard: PropTypes.func.isRequired,
+  loadFavoriteOffers: PropTypes.func.isRequired
 };
 
 const getCityFromState = (state) => state.user.city;
@@ -121,6 +138,7 @@ const mapStateToProps = (state) => ({
   isAuthorizationRequired: state.user.isAuthorizationRequired,
   offers: state.appData.offers,
   activeOffers: getActiveOffers(state),
+  favoriteOffers: state.appData.favoriteOffers,
   isOffersLoading: state.appData.isOffersLoading,
 });
 
@@ -133,7 +151,9 @@ const mapDispatchToProps = {
 
   postUserData: (userData, pushPath) => Operation.postUserLogin(userData, pushPath),
 
-  toggleFavoriteCard: (id, status) => Operation.toggleFavoriteCard(id, status)
+  toggleFavoriteCard: (id, status) => Operation.toggleFavoriteCard(id, status),
+
+  loadFavoriteOffers: () => Operation.loadFavoriteOffers()
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

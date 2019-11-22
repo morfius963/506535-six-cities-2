@@ -1,41 +1,50 @@
-import React, {useCallback} from "react";
+import React from "react";
 import propTypes from "./prop-types.js";
 
-const OfferCard = ({offerData, id, cardMouseEnterHandler, toggleFavoriteCard}) => {
+const OfferCard = ({offerData, id, cardMouseEnterHandler, toggleFavoriteCard, isInFavoriteList}) => {
   const DEFAULT_ACTIVE_CARD_ID = -1;
   const {title, isPremium, price, rating, type, previewImage, isFavorite} = offerData;
 
-  const mouseEnterHandler = useCallback(
-      (evt) => {
-        const cardId = Number(evt.currentTarget.id);
-        cardMouseEnterHandler(cardId);
-      },
-      [cardMouseEnterHandler]
-  );
-  const mouseLeaveHandler = useCallback(
-      () => {
-        cardMouseEnterHandler(DEFAULT_ACTIVE_CARD_ID);
-      },
-      [cardMouseEnterHandler]
-  );
-  const favoriteClickHandler = useCallback(
-      () => {
-        const status = isFavorite ? 0 : 1;
-        toggleFavoriteCard(id, status);
-      },
-      [id, isFavorite, toggleFavoriteCard]
-  );
+  const cardImageSize = {
+    width: isInFavoriteList ? 150 : 260,
+    height: isInFavoriteList ? 110 : 200
+  };
+
+  const mouseEnterHandler = cardMouseEnterHandler === null
+    ? null
+    : (evt) => {
+      const cardId = Number(evt.currentTarget.id);
+      cardMouseEnterHandler(cardId);
+    };
+
+  const mouseLeaveHandler = cardMouseEnterHandler === null
+    ? null
+    : () => {
+      cardMouseEnterHandler(DEFAULT_ACTIVE_CARD_ID);
+    };
+
+  const favoriteClickHandler = () => {
+    const status = isFavorite ? 0 : 1;
+    toggleFavoriteCard(id, status);
+  };
 
   return (
-    <article className="cities__place-card place-card" id={id} onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
+    <article
+      className={`${isInFavoriteList ? `favorites__card` : `cities__place-card`} place-card`}
+      id={id}
+      onMouseEnter={mouseEnterHandler}
+      onMouseLeave={mouseLeaveHandler}
+    >
+
       {isPremium
         ? <div className="place-card__mark">
           <span>Premium</span>
         </div>
         : null}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+
+      <div className={`${isInFavoriteList ? `favorites__image-wrapper` : `cities__image-wrapper`} place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width={cardImageSize.width} height={cardImageSize.height} alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">

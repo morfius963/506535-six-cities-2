@@ -2,6 +2,16 @@ import ActionTypes from "./action-types.js";
 
 const defaultActiveSort = `Popular`;
 
+const replaceArrayItem = (oldItems, newItem) => {
+  const itemIndex = oldItems.findIndex(({id}) => id === newItem.id);
+
+  if (itemIndex === -1) {
+    return [];
+  }
+
+  return [...oldItems.slice(0, itemIndex), newItem, ...oldItems.slice(itemIndex + 1)];
+};
+
 const ActionCreator = {
   switchCity: (city) => {
     return {
@@ -37,13 +47,25 @@ const ActionCreator = {
     };
   },
 
-  setFavoriteOffer: (oldOffers, newOffer) => {
-    const newOfferIndex = oldOffers.indexOf(oldOffers.find(({id}) => id === newOffer.id));
-    const newOffers = [...oldOffers.slice(0, newOfferIndex), newOffer, ...oldOffers.slice(newOfferIndex + 1)];
+  setFavoriteOffer: (newOffer, oldOffers) => {
+    const {cities, favorites} = oldOffers;
+
+    const newCityOffers = replaceArrayItem(cities, newOffer);
+    const newFavoriteOffer = replaceArrayItem(favorites, newOffer);
 
     return {
       type: ActionTypes.SET_FAVORITE_OFFER,
-      payload: newOffers
+      payload: {
+        cities: newCityOffers,
+        favorites: newFavoriteOffer
+      }
+    };
+  },
+
+  getFavoriteOffers: (offers) => {
+    return {
+      type: ActionTypes.GET_FAVORITE_OFFERS,
+      payload: offers
     };
   },
 
