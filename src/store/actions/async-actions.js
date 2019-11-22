@@ -13,6 +13,18 @@ const Operation = {
       });
   },
 
+  loadFavoriteOffers: () => (dispatch, state, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        if (!response) {
+          return;
+        }
+        const responseData = response.data.map((elem) => adapter(elem));
+
+        dispatch(ActionCreator.getFavoriteOffers(responseData));
+      });
+  },
+
   postUserLogin: (userData, pushPath) => (dispatch, state, api) => {
     return api.post(`/login`, userData)
       .then((response) => {
@@ -32,10 +44,17 @@ const Operation = {
           return;
         }
 
-        const oldOffers = state().appData.offers;
+        const oldCitiesOffers = state().appData.offers;
+        const oldFavoritesOffers = state().appData.favoriteOffers;
         const newOffer = adapter(response.data);
 
-        dispatch(ActionCreator.setFavoriteOffer(oldOffers, newOffer));
+        dispatch(ActionCreator.setFavoriteOffer(
+            newOffer,
+            {
+              cities: oldCitiesOffers,
+              favorites: oldFavoritesOffers
+            }
+        ));
       });
   }
 };
