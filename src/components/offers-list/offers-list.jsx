@@ -19,22 +19,26 @@ const OffersList = ({offers, activeCity, activeSort, activeCardId, onCardMouseEn
           <OffersSortWrapped onOffersSort={onOffersSort} activeSort={activeSort} activeCity={activeCity} />
 
           <div className="cities__places-list places__list tabs__content">
-            {offers.map((offer) =>
-              <OfferCard
-                key={`${offer.location.coords}-${offer.id}`}
-                offerData={offer}
-                onCardMouseEnter={onCardMouseEnter}
-                onFavoriteCardToggle={onFavoriteCardToggle}
-              />)}
+            {
+              offers.map((offer) =>
+                <OfferCard
+                  key={`${offer.location.coords}-${offer.id}`}
+                  offerData={offer}
+                  onCardMouseEnter={onCardMouseEnter}
+                  onFavoriteCardToggle={onFavoriteCardToggle}
+                />)
+            }
           </div>
         </section>
         <div className="cities__right-section">
+          <section className="cities__map map">
 
-          <Map
-            offers={offers}
-            activeCard={activeCardId}
-          />
+            <Map
+              offers={offers}
+              activeCard={activeCardId}
+            />
 
+          </section>
         </div>
       </div>
     </div>
