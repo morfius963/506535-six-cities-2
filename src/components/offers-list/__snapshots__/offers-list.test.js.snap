@@ -28,7 +28,11 @@ exports[`snapshot test Component correctly renders 1`] = `
     </section>
     <div
       className="cities__right-section"
-    />
+    >
+      <section
+        className="cities__map map"
+      />
+    </div>
   </div>
 </div>
 `;
