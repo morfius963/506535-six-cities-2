@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import propTypes from "./prop-types.js";
 
-const MainHeader = ({userData, isAuthorizationRequired}) => {
+const MainHeader = ({userData, isAuthorizationRequired, isInDetails}) => {
   const {email} = userData;
   const defaultLinkValue = `Sing In`;
 
@@ -11,13 +11,15 @@ const MainHeader = ({userData, isAuthorizationRequired}) => {
     path: isAuthorizationRequired ? `/login` : `/favorites`
   };
 
+  const logoPath = isInDetails ? `../img/logo.svg` : `img/logo.svg`;
+
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
             <Link to="/" className="header__logo-link header__logo-link--active">
-              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
+              <img className="header__logo" src={logoPath} alt="6 cities logo" width="81" height="41" />
             </Link>
           </div>
           <nav className="header__nav">

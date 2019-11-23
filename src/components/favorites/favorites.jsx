@@ -62,7 +62,6 @@ class Favorites extends React.PureComponent {
                   renderOffers={() => offersInCity.map((offer) =>
                     <OfferCard
                       key={`${city}-${offer.price}-${offer.id}`}
-                      id={offer.id}
                       offerData={offer}
                       onCardMouseEnter={null}
                       onFavoriteCardToggle={onFavoriteCardToggle}

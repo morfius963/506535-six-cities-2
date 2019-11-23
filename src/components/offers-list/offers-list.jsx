@@ -22,7 +22,6 @@ const OffersList = ({offers, activeCity, activeSort, activeCardId, onCardMouseEn
             {offers.map((offer) =>
               <OfferCard
                 key={`${offer.location.coords}-${offer.id}`}
-                id={offer.id}
                 offerData={offer}
                 onCardMouseEnter={onCardMouseEnter}
                 onFavoriteCardToggle={onFavoriteCardToggle}
