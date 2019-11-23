@@ -27,7 +27,7 @@ describe(`snapshot test`, () => {
       userData: {
         email: `Vitalii`
       },
-      isAuthorizationRequired: true,
+      isAuthorizationRequired: false,
       onFavoriteCardToggle: jest.fn()
     };
 
