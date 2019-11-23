@@ -8,6 +8,9 @@ import fixtureData from "../../__fixtures__/offers.js";
 
 jest.mock(`../../components/map/map.jsx`, () => jest.fn().mockReturnValue(null));
 jest.mock(`../../components/offers-sort/offers-sort.jsx`, () => jest.fn().mockReturnValue(null));
+jest.mock(`react-router-dom`, () => ({
+  Link: () => null
+}));
 
 const OffersListWrapped = withActiveItem(OffersList);
 
