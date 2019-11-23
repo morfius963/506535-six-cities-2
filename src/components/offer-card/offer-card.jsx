@@ -2,8 +2,9 @@ import React from "react";
 import {Link} from "react-router-dom";
 import propTypes from "./prop-types.js";
 
+const DEFAULT_ACTIVE_CARD_ID = -1;
+
 const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavoriteList}) => {
-  const DEFAULT_ACTIVE_CARD_ID = -1;
   const {id, title, isPremium, price, rating, type, previewImage, isFavorite} = offerData;
 
   const cardImageSize = {
@@ -45,7 +46,7 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
 
       <div className={`${isInFavoriteList ? `favorites__image-wrapper` : `cities__image-wrapper`} place-card__image-wrapper`}>
         <Link to={{
-          pathname: `offer/${id}`,
+          pathname: `/offer/${id}`,
           state: {
             id
           }
@@ -78,9 +79,9 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
         </div>
         <h2 className="place-card__name">
           <Link to={{
-            pathname: `offer/${id}`,
+            pathname: `/offer/${id}`,
             state: {
-              offer: offerData
+              id
             }
           }}>
             {title}

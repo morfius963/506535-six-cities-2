@@ -13,9 +13,7 @@ class Map extends React.PureComponent {
 
   render() {
     return (
-      <section className="cities__map map">
-        <div id="map" style={{width: `100%`, height: `100%`}}></div>
-      </section>
+      <div id="map" style={{width: `100%`, height: `100%`}}></div>
     );
   }
 
@@ -64,11 +62,14 @@ class Map extends React.PureComponent {
   }
 
   _createPins(coordinates, id) {
-    const cardsID = this.props.offers.map((offer) => offer.id);
+    const {offers, isInOfferDetails} = this.props;
+
+    const cardsID = offers.map((offer) => offer.id);
+    const pinImgPath = isInOfferDetails ? `../` : `./`;
 
     coordinates.forEach((offerCoord, i) => {
       const icon = leaflet.icon({
-        iconUrl: `./img/pin${id === cardsID[i] ? `-active` : ``}.svg`,
+        iconUrl: `${pinImgPath}img/pin${id === cardsID[i] ? `-active` : ``}.svg`,
         iconSize: [30, 30]
       });
 
