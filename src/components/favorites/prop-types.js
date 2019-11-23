@@ -2,9 +2,7 @@ import PropTypes from "prop-types";
 import appPropTypes from "../app/prop-types.js";
 
 export default {
-  favoriteOffers: PropTypes.arrayOf(
-      PropTypes.shape(appPropTypes)
-  ).isRequired,
+  favoriteOffers: PropTypes.arrayOf(appPropTypes).isRequired,
   userData: PropTypes.shape({
     email: PropTypes.string
   }).isRequired,
