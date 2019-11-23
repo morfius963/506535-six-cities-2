@@ -9,6 +9,7 @@ import Operation from "../../store/actions/async-actions.js";
 import MainPage from "../main-page/main-page.jsx";
 import SingIn from "../sing-in/sing-in.jsx";
 import Favorites from "../favorites/favorites.jsx";
+import OfferDetails from "../offer-details/offer-details.jsx";
 import PrivateRoute from "../../hocs/with-private-route/with-private-route.jsx";
 import offersPropTypes from "./prop-types.js";
 import withSingIn from "../../hocs/with-sing-in/with-sing-in.jsx";
@@ -28,7 +29,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {city, onUserDataPost, isAuthorizationRequired, favoriteOffers, email, onFavoriteCardToggle, onFavoriteOffersLoad} = this.props;
+    const {city, offers, onUserDataPost, isAuthorizationRequired, favoriteOffers, email, onFavoriteCardToggle, onFavoriteOffersLoad} = this.props;
     const userData = {email};
 
     return (
@@ -42,6 +43,11 @@ class App extends React.PureComponent {
           path="/login"
           exact
           render={(props) => <SingInWrapped {...props} city={city} onUserDataPost={onUserDataPost} isAuthorizationRequired={isAuthorizationRequired} />}
+        />
+        <Route
+          path="/offer/:id"
+          exact
+          render={(props) => <OfferDetails {...props} offers={offers} isAuthorizationRequired={isAuthorizationRequired} userData={userData} onFavoriteCardToggle={onFavoriteCardToggle} />}
         />
         <PrivateRoute
           path="/favorites"
