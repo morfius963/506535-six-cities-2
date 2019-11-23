@@ -3,6 +3,10 @@ import {shallow} from 'enzyme';
 import OfferCard from "./offer-card.jsx";
 import offersData from "../../__fixtures__/offers.js";
 
+jest.mock(`react-router-dom`, () => ({
+  Link: () => null
+}));
+
 describe(`end to end test`, () => {
   it(`Callback func calls with correct data`, () => {
     const mouseEnterHandler = jest.fn();
@@ -11,7 +15,6 @@ describe(`end to end test`, () => {
     const status = offer.isFavorite ? 0 : 1;
     const props = {
       offerData: offer,
-      id: 0,
       onCardMouseEnter: mouseEnterHandler,
       onFavoriteCardToggle: favoriteClickHandler
     };

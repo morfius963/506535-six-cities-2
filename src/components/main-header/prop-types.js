@@ -5,5 +5,6 @@ export default {
     name: PropTypes.string,
     avatar: PropTypes.string
   }).isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  isInDetails: PropTypes.bool
 };
