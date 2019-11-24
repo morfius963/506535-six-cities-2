@@ -7,7 +7,7 @@ import OfferDetails from "./offer-details.jsx";
 import MainHeader from "../main-header/main-header.jsx";
 import CommentList from "../comments-list/comments-list.jsx";
 import CommentForm from "../comment-form/comment-form.jsx";
-import fixtureData from "../../__fixtures__/offers.js";
+import fixtureData, {commentsData} from "../../__fixtures__/offers.js";
 
 jest.mock(`../map/map.jsx`, () => jest.fn().mockReturnValue(null));
 jest.mock(`../offer-card/offer-card.jsx`, () => jest.fn().mockReturnValue(null));
@@ -28,7 +28,10 @@ describe(`snapshot test`, () => {
         email: `Vitalii`
       },
       isAuthorizationRequired: false,
-      onFavoriteCardToggle: jest.fn()
+      onFavoriteCardToggle: jest.fn(),
+      comments: commentsData,
+      onCommentsLoad: jest.fn(),
+      onReviewSubmit: jest.fn()
     };
 
     const tree = renderer
