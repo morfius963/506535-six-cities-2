@@ -147,6 +147,7 @@ const mapStateToProps = (state) => ({
   activeSort: state.user.activeSort,
   email: state.user.email,
   isAuthorizationRequired: state.user.isAuthorizationRequired,
+
   offers: state.appData.offers,
   activeOffers: getActiveOffers(state),
   favoriteOffers: state.appData.favoriteOffers,
