@@ -87,6 +87,21 @@ const makeMockOffer = (city, cityCoords, offersCoords, i) => ({
 
 export const sortValues = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
 
+export const commentsData = [
+  {
+    id: 1,
+    user: {
+      id: 1,
+      isPro: true,
+      name: `Vitalii`,
+      avatarUrl: ``
+    },
+    rating: 4,
+    comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    date: `2019-05-08T14:13:56.569Z`
+  }
+];
+
 export default offers.reduce((acc, {city, location, offersCoords}) => {
   const newOffers = offersCoords.map((coord, i) => makeMockOffer(city, location, coord, i));
 
