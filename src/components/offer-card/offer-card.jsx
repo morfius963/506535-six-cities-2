@@ -30,6 +30,10 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
     onFavoriteCardToggle(id, status);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <article
       className={`${isInFavoriteList ? `favorites__card` : `cities__place-card`} place-card`}
@@ -45,14 +49,19 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
         : null}
 
       <div className={`${isInFavoriteList ? `favorites__image-wrapper` : `cities__image-wrapper`} place-card__image-wrapper`}>
-        <Link to={{
-          pathname: `/offer/${id}`,
-          state: {
-            id
-          }
-        }}>
+
+        <Link
+          to={{
+            pathname: `/offer/${id}`,
+            state: {
+              id
+            }
+          }}
+          onClick={scrollToTop}
+        >
           <img className="place-card__image" src={previewImage} width={cardImageSize.width} height={cardImageSize.height} alt="Place image" />
         </Link>
+
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -78,14 +87,19 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={{
-            pathname: `/offer/${id}`,
-            state: {
-              id
-            }
-          }}>
+
+          <Link
+            to={{
+              pathname: `/offer/${id}`,
+              state: {
+                id
+              }
+            }}
+            onClick={scrollToTop}
+          >
             {title}
           </Link>
+
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

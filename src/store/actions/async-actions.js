@@ -25,6 +25,30 @@ const Operation = {
       });
   },
 
+  loadComments: (id) => (dispatch, state, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        if (!response) {
+          return;
+        }
+        const responseData = response.data.map((elem) => adapter(elem));
+
+        dispatch(ActionCreator.getComments(responseData));
+      });
+  },
+
+  postComment: (id, commentData) => (dispatch, state, api) => {
+    return api.post(`/comments/${id}`, commentData)
+      .then((response) => {
+        if (!response) {
+          return;
+        }
+        const responseData = response.data.map((elem) => adapter(elem));
+
+        dispatch(ActionCreator.getComments(responseData));
+      });
+  },
+
   postUserLogin: (userData, pushPath) => (dispatch, state, api) => {
     return api.post(`/login`, userData)
       .then((response) => {

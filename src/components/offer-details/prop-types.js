@@ -12,5 +12,6 @@ export default {
     email: PropTypes.string.isRequired
   }),
   isAuthorizationRequired: PropTypes.bool.isRequired,
-  onFavoriteCardToggle: PropTypes.func.isRequired
+  onFavoriteCardToggle: PropTypes.func.isRequired,
+  onReviewSubmit: PropTypes.func.isRequired
 };

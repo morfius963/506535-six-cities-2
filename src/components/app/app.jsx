@@ -29,7 +29,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {city, offers, onUserDataPost, isAuthorizationRequired, favoriteOffers, email, onFavoriteCardToggle, onFavoriteOffersLoad} = this.props;
+    const {city, offers, onUserDataPost, isAuthorizationRequired, favoriteOffers, email, onFavoriteCardToggle, onFavoriteOffersLoad, comments, onCommentsLoad, onReviewSubmit} = this.props;
     const userData = {email};
 
     return (
@@ -47,7 +47,7 @@ class App extends React.PureComponent {
         <Route
           path="/offer/:id"
           exact
-          render={(props) => <OfferDetails {...props} offers={offers} isAuthorizationRequired={isAuthorizationRequired} userData={userData} onFavoriteCardToggle={onFavoriteCardToggle} />}
+          render={(props) => <OfferDetails {...props} offers={offers} isAuthorizationRequired={isAuthorizationRequired} userData={userData} onFavoriteCardToggle={onFavoriteCardToggle} comments={comments} onCommentsLoad={onCommentsLoad} onReviewSubmit={onReviewSubmit} />}
         />
         <PrivateRoute
           path="/favorites"
@@ -100,13 +100,16 @@ App.propTypes = {
   activeOffers: PropTypes.arrayOf(offersPropTypes).isRequired,
   favoriteOffers: PropTypes.array.isRequired,
   isOffersLoading: PropTypes.bool.isRequired,
+  comments: PropTypes.array.isRequired,
 
   onCityClick: PropTypes.func.isRequired,
   onOffersSort: PropTypes.func.isRequired,
   onOffersLoad: PropTypes.func.isRequired,
   onUserDataPost: PropTypes.func.isRequired,
   onFavoriteCardToggle: PropTypes.func.isRequired,
-  onFavoriteOffersLoad: PropTypes.func.isRequired
+  onFavoriteOffersLoad: PropTypes.func.isRequired,
+  onCommentsLoad: PropTypes.func.isRequired,
+  onReviewSubmit: PropTypes.func.isRequired
 };
 
 const getCityFromState = (state) => state.user.city;
@@ -147,6 +150,7 @@ const mapStateToProps = (state) => ({
   offers: state.appData.offers,
   activeOffers: getActiveOffers(state),
   favoriteOffers: state.appData.favoriteOffers,
+  comments: state.appData.comments,
   isOffersLoading: state.appData.isOffersLoading,
 });
 
@@ -161,7 +165,11 @@ const mapDispatchToProps = {
 
   onFavoriteCardToggle: (id, status) => Operation.toggleFavoriteCard(id, status),
 
-  onFavoriteOffersLoad: () => Operation.loadFavoriteOffers()
+  onFavoriteOffersLoad: () => Operation.loadFavoriteOffers(),
+
+  onCommentsLoad: (id) => Operation.loadComments(id),
+
+  onReviewSubmit: (id, commentData) => Operation.postComment(id, commentData)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

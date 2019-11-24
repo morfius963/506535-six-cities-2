@@ -69,6 +69,13 @@ const ActionCreator = {
     };
   },
 
+  getComments: (comments) => {
+    return {
+      type: ActionTypes.GET_COMMENTS,
+      payload: comments
+    };
+  },
+
   singIn: (userData) => {
     const {name, avatarUrl, isPro, email} = userData;
 
