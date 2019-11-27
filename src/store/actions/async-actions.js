@@ -37,7 +37,7 @@ const Operation = {
       });
   },
 
-  postComment: (id, commentData) => (dispatch, state, api) => {
+  postComment: (id, commentData, formResetCb) => (dispatch, state, api) => {
     return api.post(`/comments/${id}`, commentData)
       .then((response) => {
         if (!response) {
@@ -46,15 +46,17 @@ const Operation = {
         const responseData = response.data.map((elem) => adapter(elem));
 
         dispatch(ActionCreator.getComments(responseData));
+        formResetCb();
       });
   },
 
   postUserLogin: (userData, pushPath) => (dispatch, state, api) => {
     return api.post(`/login`, userData)
       .then((response) => {
-        const {name, avatarUrl, isPro, email} = adapter(response.data || {});
+        const responseData = adapter(response.data || {});
 
-        dispatch(ActionCreator.singIn({name, avatarUrl, isPro, email}));
+        localStorage.setItem(`userData`, JSON.stringify(responseData));
+        dispatch(ActionCreator.singIn(responseData));
         pushPath();
       });
   },

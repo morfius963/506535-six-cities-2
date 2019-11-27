@@ -170,7 +170,7 @@ const mapDispatchToProps = {
 
   onCommentsLoad: (id) => Operation.loadComments(id),
 
-  onReviewSubmit: (id, commentData) => Operation.postComment(id, commentData)
+  onReviewSubmit: (id, commentData, formResetCb) => Operation.postComment(id, commentData, formResetCb)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

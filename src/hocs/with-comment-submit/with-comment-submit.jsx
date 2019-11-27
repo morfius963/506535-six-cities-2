@@ -16,6 +16,7 @@ const withCommentSubmit = (Component) => {
 
       this._onUserInput = this._onUserInput.bind(this);
       this._reviewSubmitHandler = this._reviewSubmitHandler.bind(this);
+      this._resetForm = this._resetForm.bind(this);
     }
 
     render() {
@@ -49,8 +50,7 @@ const withCommentSubmit = (Component) => {
         comment: this.state.review
       };
 
-      onReviewSubmit(id, commentData);
-      this._resetForm();
+      onReviewSubmit(id, commentData, this._resetForm);
     }
 
     _validateForm(state) {

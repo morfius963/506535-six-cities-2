@@ -43,7 +43,8 @@ class Favorites extends React.PureComponent {
 
   _renderMainContent() {
     const {favoriteOffers, onFavoriteCardToggle} = this.props;
-    const isEmpty = favoriteOffers.length === 0;
+    const cities = this._getAllCities();
+    const isEmpty = cities.length === 0;
 
     return (
       isEmpty
@@ -53,7 +54,7 @@ class Favorites extends React.PureComponent {
           <ul className="favorites__list">
 
             {this._getAllCities().map((city, i) => {
-              const offersInCity = favoriteOffers.filter((offer) => offer.city.name === city);
+              const offersInCity = favoriteOffers.filter((offer) => offer.city.name === city && offer.isFavorite);
 
               return (
                 <FavoritesOfferList
@@ -78,8 +79,9 @@ class Favorites extends React.PureComponent {
 
   _getAllCities() {
     const {favoriteOffers} = this.props;
+    const currentFavoriteOffers = favoriteOffers.filter(({isFavorite}) => isFavorite);
 
-    return Array.from(new Set(favoriteOffers.map((offer) => offer.city.name)));
+    return Array.from(new Set(currentFavoriteOffers.map((offer) => offer.city.name)));
   }
 }
 
