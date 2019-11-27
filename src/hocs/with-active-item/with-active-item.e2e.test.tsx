@@ -1,13 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 import {mount} from 'enzyme';
-import withActiveItem from "./with-active-item.jsx";
-import OffersList from "../../components/offers-list/offers-list.jsx";
-import Map from "../../components/map/map.jsx";
-import OffersSort from "../../components/offers-sort/offers-sort.jsx";
-import fixtureData from "../../__fixtures__/offers.js";
+import withActiveItem from "./with-active-item";
+import OffersList from "../../components/offers-list/offers-list";
+import Map from "../../components/map/map";
+import OffersSort from "../../components/offers-sort/offers-sort";
+import fixtureData from "../../__fixtures__/offers";
 
-jest.mock(`../../components/map/map.jsx`, () => jest.fn().mockReturnValue(null));
-jest.mock(`../../components/offers-sort/offers-sort.jsx`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../../components/map/map`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../../components/offers-sort/offers-sort`, () => jest.fn().mockReturnValue(null));
 jest.mock(`react-router-dom`, () => ({
   Link: () => null
 }));

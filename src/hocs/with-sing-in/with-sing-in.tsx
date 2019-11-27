@@ -1,9 +1,25 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {Redirect} from "react-router-dom";
 
+interface Props {
+  onUserDataPost: (
+      userData: {email: string, password: string},
+      pushPath: () => void
+  ) => void,
+
+  history: {
+    push: (path: string) => void
+  }
+  isAuthorizationRequired: boolean
+}
+
+interface State {
+  email?: string,
+  password?: string
+}
+
 const withSingIn = (Component) => {
-  class WithSingIn extends React.PureComponent {
+  class WithSingIn extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
 
@@ -55,12 +71,6 @@ const withSingIn = (Component) => {
       );
     }
   }
-
-  WithSingIn.propTypes = {
-    onUserDataPost: PropTypes.func.isRequired,
-    history: PropTypes.object,
-    isAuthorizationRequired: PropTypes.bool.isRequired
-  };
 
   return WithSingIn;
 };

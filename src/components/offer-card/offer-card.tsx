@@ -1,10 +1,10 @@
-import React from "react";
+import * as React from "react";
 import {Link} from "react-router-dom";
-import propTypes from "./prop-types.js";
+import {Props} from "./interface";
 
 const DEFAULT_ACTIVE_CARD_ID = -1;
 
-const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavoriteList}) => {
+const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavoriteList}: Props) => {
   const {id, title, isPremium, price, rating, type, previewImage, isFavorite} = offerData;
 
   const cardImageSize = {
@@ -37,7 +37,7 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
   return (
     <article
       className={`${isInFavoriteList ? `favorites__card` : `cities__place-card`} place-card`}
-      id={id}
+      id={`${id}`}
       onMouseEnter={mouseEnterHandler}
       onMouseLeave={mouseLeaveHandler}
     >
@@ -106,7 +106,5 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
     </article>
   );
 };
-
-OfferCard.propTypes = propTypes;
 
 export default OfferCard;

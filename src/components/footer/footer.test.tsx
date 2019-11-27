@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Footer from "./footer.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import Footer from "./footer";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {

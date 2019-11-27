@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import CommentForm from "./comment-form.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import CommentForm from "./comment-form";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {

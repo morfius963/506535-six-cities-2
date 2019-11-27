@@ -1,11 +1,10 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Cities from "./cities.jsx";
-import fixtureData from "../../__fixtures__/offers.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import Cities from "./cities";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
-    const allCities = Array.from(new Set(fixtureData.map((offer) => offer.city.name)));
+    const allCities = [`Amsterdam`, `Hamburg`, `Paris`];
     const props = {
       cities: allCities,
       activeCity: `Amsterdam`,

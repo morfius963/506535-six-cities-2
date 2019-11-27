@@ -1,12 +1,11 @@
-import PropTypes from "prop-types";
-import appPropTypes from "../app/prop-types.js";
+import {Offer} from "../../types";
 
-export default {
-  favoriteOffers: PropTypes.arrayOf(appPropTypes).isRequired,
-  userData: PropTypes.shape({
-    email: PropTypes.string
-  }).isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  onFavoriteCardToggle: PropTypes.func.isRequired,
-  onFavoriteOffersLoad: PropTypes.func.isRequired
-};
+export interface Props {
+  favoriteOffers: Offer[],
+  userData: {
+    email: string
+  },
+  isAuthorizationRequired: boolean,
+  onFavoriteCardToggle: (id: number, status: number) => void,
+  onFavoriteOffersLoad: () => void
+}

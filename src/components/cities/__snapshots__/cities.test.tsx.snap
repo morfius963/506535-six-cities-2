@@ -28,30 +28,6 @@ exports[`snapshot test Component correctly renders 1`] = `
         href="#"
       >
         <span>
-          Paris
-        </span>
-      </a>
-    </li>
-    <li
-      className="locations__item"
-    >
-      <a
-        className="locations__item-link tabs__item "
-        href="#"
-      >
-        <span>
-          Brussels
-        </span>
-      </a>
-    </li>
-    <li
-      className="locations__item"
-    >
-      <a
-        className="locations__item-link tabs__item "
-        href="#"
-      >
-        <span>
           Hamburg
         </span>
       </a>
@@ -64,7 +40,7 @@ exports[`snapshot test Component correctly renders 1`] = `
         href="#"
       >
         <span>
-          Dusseldorf
+          Paris
         </span>
       </a>
     </li>

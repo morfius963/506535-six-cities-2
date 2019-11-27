@@ -1,18 +1,15 @@
-import PropTypes from "prop-types";
-import offersPropTypes from "../app/prop-types.js";
-import {sortValues} from "../../__fixtures__/offers.js";
+import {Offer} from "../../types";
 
-export default {
-  allCities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  activeOffers: PropTypes.arrayOf(offersPropTypes).isRequired,
-  city: PropTypes.string.isRequired,
-  activeSort: PropTypes.oneOf(sortValues).isRequired,
-  userData: PropTypes.shape({
-    name: PropTypes.string,
-    avatar: PropTypes.string
-  }).isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  onFavoriteCardToggle: PropTypes.func.isRequired,
-  onCityClick: PropTypes.func.isRequired,
-  onOffersSort: PropTypes.func.isRequired,
-};
+export interface Props {
+  allCities: string[],
+  activeOffers: Offer[],
+  city: string,
+  activeSort: string,
+  userData: {
+    email: string
+  },
+  isAuthorizationRequired: boolean,
+  onFavoriteCardToggle: (id: number, status: number) => void,
+  onCityClick: (city: string) => void,
+  onOffersSort: (value: string) => void,
+}

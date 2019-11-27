@@ -1,21 +1,22 @@
-import React from "react";
+import * as React from "react";
 
-import propTypes from "./prop-types.js";
-import Cities from "../cities/cities.jsx";
-import OffersList from "../offers-list/offers-list.jsx";
-import MainHeader from "../main-header/main-header.jsx";
-import MainEmpty from "../main-empty/main-empty.jsx";
-import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+import Cities from "../cities/cities";
+import OffersList from "../offers-list/offers-list";
+import MainHeader from "../main-header/main-header";
+import MainEmpty from "../main-empty/main-empty";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
+import {Props} from "./interface";
 
 const OffersListWrapped = withActiveItem(OffersList);
 
-const MainPage = ({allCities, activeOffers, city, onCityClick, onOffersSort, activeSort, userData, isAuthorizationRequired, onFavoriteCardToggle}) => {
+const MainPage = ({allCities, activeOffers, city, onCityClick, onOffersSort, activeSort, userData, isAuthorizationRequired, onFavoriteCardToggle}: Props) => {
   return (
     <div className="page page--gray page--main">
 
       <MainHeader
         isAuthorizationRequired={isAuthorizationRequired}
         userData={userData}
+        isInDetails={false}
       />
 
       <main className={`page__main page__main--index ${activeOffers.length > 0 ? `` : `page__main--index-empty`}`}>
@@ -40,7 +41,5 @@ const MainPage = ({allCities, activeOffers, city, onCityClick, onOffersSort, act
     </div>
   );
 };
-
-MainPage.propTypes = propTypes;
 
 export default MainPage;

@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import SingIn from "./sing-in.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import SingIn from "./sing-in";
 
 jest.mock(`react-router-dom`, () => ({
   Link: () => null

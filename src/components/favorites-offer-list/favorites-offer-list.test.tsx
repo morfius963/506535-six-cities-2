@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import FavoritesOfferList from "./favorites-offer-list.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import FavoritesOfferList from "./favorites-offer-list";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {

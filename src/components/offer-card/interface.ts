@@ -1,9 +1,8 @@
-import PropTypes from "prop-types";
-import offersPropTypes from "../app/prop-types.js";
+import {Offer} from "../../types";
 
-export default {
-  offerData: offersPropTypes,
-  onCardMouseEnter: PropTypes.func,
-  onFavoriteCardToggle: PropTypes.func.isRequired,
-  isInFavoriteList: PropTypes.bool
-};
+export interface Props {
+  offerData: Offer,
+  isInFavoriteList: boolean | undefined,
+  onCardMouseEnter: (id: number) => void | null,
+  onFavoriteCardToggle: (id: number, status: number) => void,
+}

@@ -1,7 +1,7 @@
-import React from "react";
-import propTypes from "./prop-types.js";
+import * as React from "react";
+import {Props} from "./interface";
 
-const CommentItem = ({commentData}) => {
+const CommentItem = ({commentData}: Props) => {
   const {user, rating, comment, date} = commentData;
 
   const commentDate = new Date(date);
@@ -44,7 +44,5 @@ const CommentItem = ({commentData}) => {
     </li>
   );
 };
-
-CommentItem.propTypes = propTypes;
 
 export default CommentItem;

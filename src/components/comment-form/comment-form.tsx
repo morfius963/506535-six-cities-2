@@ -1,7 +1,7 @@
-import React from "react";
-import protTypes from "./prop-types.js";
+import * as React from "react";
+import {Props} from "./interface";
 
-const CommentForm = ({onFormSubmit, onUserInput, formRef, isValid}) => {
+const CommentForm = ({onFormSubmit, onUserInput, formRef, isValid}: Props) => {
   const starsValue = [`terribly`, `badly`, `not bad`, `good`, `perfect`];
 
   return (
@@ -52,7 +52,5 @@ const CommentForm = ({onFormSubmit, onUserInput, formRef, isValid}) => {
     </form>
   );
 };
-
-CommentForm.propTypes = protTypes;
 
 export default CommentForm;

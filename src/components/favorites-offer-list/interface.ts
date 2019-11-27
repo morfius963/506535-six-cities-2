@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
+import * as React from "react";
 
-export default {
-  city: PropTypes.string.isRequired,
-  renderOffers: PropTypes.func.isRequired
-};
+export interface Props {
+  city: string,
+  renderOffers: () => React.ReactElement[]
+}

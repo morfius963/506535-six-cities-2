@@ -1,14 +1,15 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Map from "./map.jsx";
-import fixtureData from "../../__fixtures__/offers.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import Map from "./map";
+import fixtureData from "../../__fixtures__/offers";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
     const activeOffers = fixtureData.filter((offer) => offer.city.name === `Amsterdam`);
     const props = {
       offers: activeOffers,
-      activeCard: -1
+      activeCard: -1,
+      isInOfferDetails: false
     };
     const div = document.createElement(`div`);
 

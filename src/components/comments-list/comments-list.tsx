@@ -1,9 +1,11 @@
-import React from "react";
+import * as React from "react";
 import {isEqual} from "lodash";
-import propTypes from "./prop-types.js";
-import CommentItem from "../comment-item/comment-item.jsx";
+import CommentItem from "../comment-item/comment-item";
+import {Props} from "./interface";
 
-class CommentsList extends React.Component {
+class CommentsList extends React.Component<Props, null> {
+  _MAX_COMMENTS_COUNT: number;
+
   constructor(props) {
     super(props);
 
@@ -41,7 +43,5 @@ class CommentsList extends React.Component {
     onCommentsLoad(id);
   }
 }
-
-CommentsList.propTypes = propTypes;
 
 export default CommentsList;

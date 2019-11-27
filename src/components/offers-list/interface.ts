@@ -1,13 +1,11 @@
-import PropTypes from "prop-types";
-import offersPropTypes from "../app/prop-types.js";
-import {sortValues} from "../../__fixtures__/offers.js";
+import {Offer} from "../../types";
 
-export default {
-  offers: PropTypes.arrayOf(offersPropTypes).isRequired,
-  activeCity: PropTypes.string.isRequired,
-  activeCardId: PropTypes.number.isRequired,
-  activeSort: PropTypes.oneOf(sortValues).isRequired,
-  onFavoriteCardToggle: PropTypes.func.isRequired,
-  onCardMouseEnter: PropTypes.func.isRequired,
-  onOffersSort: PropTypes.func.isRequired,
-};
+export interface Props {
+  offers: Offer[],
+  activeCity: string,
+  activeCardId: number,
+  activeSort: string,
+  onFavoriteCardToggle: (id: number, status: number) => void,
+  onCardMouseEnter: (id: number) => void,
+  onOffersSort: (value: string) => void,
+}

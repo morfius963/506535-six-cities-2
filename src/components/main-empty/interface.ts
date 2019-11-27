@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
-export default {
-  city: PropTypes.string.isRequired
-};
+export interface Props {
+  city: string
+}

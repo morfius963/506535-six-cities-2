@@ -1,15 +1,15 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import {Router} from "react-router-dom";
 import {createBrowserHistory} from "history";
 
-import App from "./app.jsx";
-import fixtureData from "../../__fixtures__/offers.js";
+import App from "./app";
+import fixtureData from "../../__fixtures__/offers";
 
-jest.mock(`../../store/actions/async-actions.js`, () => ({
+jest.mock(`../../store/actions/async-actions`, () => ({
   Operation: {}
 }));
 

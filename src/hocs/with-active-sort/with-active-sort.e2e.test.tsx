@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import {mount} from 'enzyme';
-import withActiveSort from "./with-active-sort.jsx";
-import OffersSort from "../../components/offers-sort/offers-sort.jsx";
+import withActiveSort from "./with-active-sort";
+import OffersSort from "../../components/offers-sort/offers-sort";
 
 const OffersSortWrapped = withActiveSort(OffersSort);
 

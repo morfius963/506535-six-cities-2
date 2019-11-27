@@ -1,11 +1,11 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Favorites from "./favorites.jsx";
-import Footer from "../footer/footer.jsx";
-import MainHeader from "../main-header/main-header.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import Favorites from "./favorites";
+import Footer from "../footer/footer";
+import MainHeader from "../main-header/main-header";
 
-jest.mock(`../main-header/main-header.jsx`, () => jest.fn().mockReturnValue(null));
-jest.mock(`../footer/footer.jsx`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../main-header/main-header`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../footer/footer`, () => jest.fn().mockReturnValue(null));
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {

@@ -1,10 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import {sortValues} from "../../__fixtures__/offers.js";
+interface Props {
+  onOffersSort: (value: string) => void,
+  activeSort: string,
+  activeCity: string
+}
+
+interface State {
+  activeCity: string,
+  isOpen: boolean
+}
 
 const withActiveSort = (Component) => {
-  class WithActiveSort extends React.PureComponent {
+  class WithActiveSort extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
 
@@ -51,12 +59,6 @@ const withActiveSort = (Component) => {
       this.props.onOffersSort(value);
     }
   }
-
-  WithActiveSort.propTypes = {
-    onOffersSort: PropTypes.func.isRequired,
-    activeSort: PropTypes.oneOf(sortValues).isRequired,
-    activeCity: PropTypes.string.isRequired
-  };
 
   return WithActiveSort;
 };

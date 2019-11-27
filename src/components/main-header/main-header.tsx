@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 import {Link} from "react-router-dom";
-import propTypes from "./prop-types.js";
+import {Props} from "./interface";
 
-const MainHeader = ({userData, isAuthorizationRequired, isInDetails}) => {
+const MainHeader = ({userData, isAuthorizationRequired, isInDetails}: Props) => {
   const {email} = userData;
   const defaultLinkValue = `Sing In`;
 
@@ -42,7 +42,5 @@ const MainHeader = ({userData, isAuthorizationRequired, isInDetails}) => {
     </header>
   );
 };
-
-MainHeader.propTypes = propTypes;
 
 export default MainHeader;

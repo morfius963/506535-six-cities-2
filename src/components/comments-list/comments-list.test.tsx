@@ -1,10 +1,10 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import CommentsList from "./comments-list.jsx";
-import CommentItem from "../comment-item/comment-item.jsx";
-import {commentsData} from "../../__fixtures__/offers.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import CommentsList from "./comments-list";
+import CommentItem from "../comment-item/comment-item";
+import {commentsData} from "../../__fixtures__/offers";
 
-jest.mock(`../comment-item/comment-item.jsx`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../comment-item/comment-item`, () => jest.fn().mockReturnValue(null));
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {

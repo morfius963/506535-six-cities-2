@@ -1,14 +1,14 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import OffersList from "./offers-list.jsx";
-import OfferCard from "../offer-card/offer-card.jsx";
-import Map from "../map/map.jsx";
-import OffersSort from "../offers-sort/offers-sort.jsx";
-import fixtureData from "../../__fixtures__/offers.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import OffersList from "./offers-list";
+import OfferCard from "../offer-card/offer-card";
+import Map from "../map/map";
+import OffersSort from "../offers-sort/offers-sort";
+import fixtureData from "../../__fixtures__/offers";
 
-jest.mock(`../map/map.jsx`, () => jest.fn().mockReturnValue(null));
-jest.mock(`../offer-card/offer-card.jsx`, () => jest.fn().mockReturnValue(null));
-jest.mock(`../offers-sort/offers-sort.jsx`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../map/map`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../offer-card/offer-card`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../offers-sort/offers-sort`, () => jest.fn().mockReturnValue(null));
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {

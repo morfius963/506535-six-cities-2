@@ -1,25 +1,25 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
 import {Switch, Route} from "react-router-dom";
 
-import ActionCreator from "../../store/actions/action-creator.js";
-import Operation from "../../store/actions/async-actions.js";
-import MainPage from "../main-page/main-page.jsx";
-import SingIn from "../sing-in/sing-in.jsx";
-import Favorites from "../favorites/favorites.jsx";
-import OfferDetails from "../offer-details/offer-details.jsx";
-import PrivateRoute from "../../hocs/with-private-route/with-private-route.jsx";
-import offersPropTypes from "./prop-types.js";
-import withSingIn from "../../hocs/with-sing-in/with-sing-in.jsx";
-import {sortValues} from "../../__fixtures__/offers.js";
+import ActionCreator from "../../store/actions/action-creator";
+import Operation from "../../store/actions/async-actions";
+import MainPage from "../main-page/main-page";
+import SingIn from "../sing-in/sing-in";
+import Favorites from "../favorites/favorites";
+import OfferDetails from "../offer-details/offer-details";
+import PrivateRoute from "../../hocs/with-private-route/with-private-route";
+import withSingIn from "../../hocs/with-sing-in/with-sing-in";
+import {Props} from "./interface";
 
 const MAX_CITIES_COUNT = 6;
 
 const SingInWrapped = withSingIn(SingIn);
 
-class App extends React.PureComponent {
+class App extends React.PureComponent<Props, null> {
+  _allCities: null | string[];
+
   constructor(props) {
     super(props);
 
@@ -51,7 +51,6 @@ class App extends React.PureComponent {
         />
         <PrivateRoute
           path="/favorites"
-          exact
           isAuthorizationRequired={isAuthorizationRequired}
           renderCmp={() => <Favorites favoriteOffers={favoriteOffers} isAuthorizationRequired={isAuthorizationRequired} userData={userData} onFavoriteCardToggle={onFavoriteCardToggle} onFavoriteOffersLoad={onFavoriteOffersLoad} />}
         />
@@ -90,27 +89,6 @@ class App extends React.PureComponent {
     return this._allCities;
   }
 }
-
-App.propTypes = {
-  city: PropTypes.string.isRequired,
-  activeSort: PropTypes.oneOf(sortValues).isRequired,
-  email: PropTypes.string.isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  offers: PropTypes.arrayOf(offersPropTypes).isRequired,
-  activeOffers: PropTypes.arrayOf(offersPropTypes).isRequired,
-  favoriteOffers: PropTypes.array.isRequired,
-  isOffersLoading: PropTypes.bool.isRequired,
-  comments: PropTypes.array.isRequired,
-
-  onCityClick: PropTypes.func.isRequired,
-  onOffersSort: PropTypes.func.isRequired,
-  onOffersLoad: PropTypes.func.isRequired,
-  onUserDataPost: PropTypes.func.isRequired,
-  onFavoriteCardToggle: PropTypes.func.isRequired,
-  onFavoriteOffersLoad: PropTypes.func.isRequired,
-  onCommentsLoad: PropTypes.func.isRequired,
-  onReviewSubmit: PropTypes.func.isRequired
-};
 
 const getCityFromState = (state) => state.user.city;
 const getOffersFromStore = (state) => state.appData.offers;
@@ -158,6 +136,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   onOffersLoad: Operation.loadHotels,
 
+  onFavoriteOffersLoad: Operation.loadFavoriteOffers,
+
   onCityClick: (city) => ActionCreator.switchCity(city),
 
   onOffersSort: (value) => ActionCreator.sortOffers(value),
@@ -165,8 +145,6 @@ const mapDispatchToProps = {
   onUserDataPost: (userData, pushPath) => Operation.postUserLogin(userData, pushPath),
 
   onFavoriteCardToggle: (id, status) => Operation.toggleFavoriteCard(id, status),
-
-  onFavoriteOffersLoad: () => Operation.loadFavoriteOffers(),
 
   onCommentsLoad: (id) => Operation.loadComments(id),
 

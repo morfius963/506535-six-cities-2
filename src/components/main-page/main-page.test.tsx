@@ -1,15 +1,15 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import MainPage from "./main-page.jsx";
-import Cities from "../cities/cities.jsx";
-import MainHeader from "../main-header/main-header.jsx";
-import OffersList from "../offers-list/offers-list.jsx";
-import fixtureData from "../../__fixtures__/offers.js";
+import MainPage from "./main-page";
+import Cities from "../cities/cities";
+import MainHeader from "../main-header/main-header";
+import OffersList from "../offers-list/offers-list";
+import fixtureData from "../../__fixtures__/offers";
 
-jest.mock(`../offers-list/offers-list.jsx`, () => jest.fn().mockReturnValue(null));
-jest.mock(`../main-header/main-header.jsx`, () => jest.fn().mockReturnValue(null));
-jest.mock(`../cities/cities.jsx`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../offers-list/offers-list`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../main-header/main-header`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../cities/cities`, () => jest.fn().mockReturnValue(null));
 
 describe(`snapshot test`, () => {
   it(`App correctly renders`, () => {
@@ -17,16 +17,15 @@ describe(`snapshot test`, () => {
     const props = {
       allCities: [`Amsterdam`, `Paris`, `Hamburg`],
       city: `Amsterdam`,
-      onCityClick: jest.fn(),
       activeOffers,
-      onOffersSort: jest.fn(),
       activeSort: `Popular`,
       userData: {
-        name: `Vitalii`,
-        avatar: ``
+        email: `morf@gmail.com`
       },
       isAuthorizationRequired: false,
-      onFavoriteCardToggle: jest.fn()
+      onFavoriteCardToggle: jest.fn(),
+      onOffersSort: jest.fn(),
+      onCityClick: jest.fn(),
     };
 
     const tree = renderer

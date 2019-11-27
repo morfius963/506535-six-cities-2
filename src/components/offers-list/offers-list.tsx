@@ -1,14 +1,14 @@
-import React from "react";
+import * as React from "react";
 
-import propTypes from "./prop-types.js";
-import Map from "../map/map.jsx";
-import OfferCard from "../offer-card/offer-card.jsx";
-import OffersSort from "../offers-sort/offers-sort.jsx";
-import withActiveSort from "../../hocs/with-active-sort/with-active-sort.jsx";
+import Map from "../map/map";
+import OfferCard from "../offer-card/offer-card";
+import OffersSort from "../offers-sort/offers-sort";
+import withActiveSort from "../../hocs/with-active-sort/with-active-sort";
+import {Props} from "./interface";
 
 const OffersSortWrapped = withActiveSort(OffersSort);
 
-const OffersList = ({offers, activeCity, activeSort, activeCardId, onCardMouseEnter, onOffersSort, onFavoriteCardToggle}) => {
+const OffersList = ({offers, activeCity, activeSort, activeCardId, onCardMouseEnter, onOffersSort, onFavoriteCardToggle}: Props) => {
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -22,10 +22,11 @@ const OffersList = ({offers, activeCity, activeSort, activeCardId, onCardMouseEn
             {
               offers.map((offer) =>
                 <OfferCard
-                  key={`${offer.location.coords}-${offer.id}`}
+                  key={`${offer.location.latitude}-${offer.id}`}
                   offerData={offer}
                   onCardMouseEnter={onCardMouseEnter}
                   onFavoriteCardToggle={onFavoriteCardToggle}
+                  isInFavoriteList={false}
                 />)
             }
           </div>
@@ -36,6 +37,7 @@ const OffersList = ({offers, activeCity, activeSort, activeCardId, onCardMouseEn
             <Map
               offers={offers}
               activeCard={activeCardId}
+              isInOfferDetails={false}
             />
 
           </section>
@@ -44,7 +46,5 @@ const OffersList = ({offers, activeCity, activeSort, activeCardId, onCardMouseEn
     </div>
   );
 };
-
-OffersList.propTypes = propTypes;
 
 export default OffersList;

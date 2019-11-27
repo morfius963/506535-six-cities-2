@@ -1,18 +1,19 @@
-import React from "react";
-import propTypes from "./prop-types.js";
+import * as React from "react";
 
-import Map from "../map/map.jsx";
-import OfferCard from "../offer-card/offer-card.jsx";
-import MainHeader from "../main-header/main-header.jsx";
-import CommentList from "../comments-list/comments-list.jsx";
-import CommentForm from "../comment-form/comment-form.jsx";
-import withCommentSubmit from "../../hocs/with-comment-submit/with-comment-submit.jsx";
+import Map from "../map/map";
+import OfferCard from "../offer-card/offer-card";
+import MainHeader from "../main-header/main-header";
+import CommentList from "../comments-list/comments-list";
+import CommentForm from "../comment-form/comment-form";
+import withCommentSubmit from "../../hocs/with-comment-submit/with-comment-submit";
+import {Props} from "./interface";
 
 const MAX_NEIGHBOURHOOD_OFFERS = 3;
 
 const CommentFormWrapped = withCommentSubmit(CommentForm);
 
-const OfferDetails = ({location, offers, isAuthorizationRequired, userData, comments, onFavoriteCardToggle, onCommentsLoad, onReviewSubmit}) => {
+const OfferDetails = ({location, offers, isAuthorizationRequired, userData, comments, onFavoriteCardToggle, onCommentsLoad, onReviewSubmit}: Props) => {
+
   const currentOffer = offers.find((offer) => offer.id === location.state.id);
   const similarOffers = offers
     .filter(({id, city}) => (city.name === currentOffer.city.name) && id !== currentOffer.id)
@@ -156,13 +157,11 @@ const OfferDetails = ({location, offers, isAuthorizationRequired, userData, comm
               {
                 similarOffers.map((offer) =>
                   <OfferCard
-                    key={`${offer.location.coords}-${offer.id}`}
+                    key={`${offer.location.latitude}-${offer.id}`}
                     offerData={offer}
                     onCardMouseEnter={null}
                     onFavoriteCardToggle={onFavoriteCardToggle}
-                    pathSettings={{
-                      isInOfferDetails: true
-                    }}
+                    isInFavoriteList={false}
                   />)
               }
             </div>
@@ -172,7 +171,5 @@ const OfferDetails = ({location, offers, isAuthorizationRequired, userData, comm
     </div>
   );
 };
-
-OfferDetails.propTypes = propTypes;
 
 export default OfferDetails;

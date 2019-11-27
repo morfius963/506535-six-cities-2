@@ -6,12 +6,12 @@ import {Provider} from "react-redux";
 import {compose} from "recompose";
 import {Router} from "react-router-dom";
 
-import App from "./components/app/app.jsx";
-import createAPI from "./api.js";
-import appData from "./store/reducers/app-data/app-data.js";
-import user from "./store/reducers/user/user.js";
-import ActionCreator from "./store/actions/action-creator.js";
-import history from "./history.js";
+import App from "./components/app/app";
+import createAPI from "./api";
+import appData from "./store/reducers/app-data/app-data";
+import user from "./store/reducers/user/user";
+import ActionCreator from "./store/actions/action-creator";
+import history from "./history";
 
 declare const __REDUX_DEVTOOLS_EXTENSION__: () => any;
 

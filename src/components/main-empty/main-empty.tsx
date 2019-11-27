@@ -1,7 +1,7 @@
-import React from "react";
-import propTypes from "./prop-types.js";
+import * as React from "react";
+import {Props} from "./interface";
 
-const MainEmpty = ({city}) => {
+const MainEmpty = ({city}: Props) => {
   return (
     <div className="cities">
       <div className="cities__places-container cities__places-container--empty container">
@@ -16,7 +16,5 @@ const MainEmpty = ({city}) => {
     </div>
   );
 };
-
-MainEmpty.propTypes = propTypes;
 
 export default MainEmpty;

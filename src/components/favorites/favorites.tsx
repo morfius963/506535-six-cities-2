@@ -1,12 +1,12 @@
-import React from "react";
-import MainHeader from "../main-header/main-header.jsx";
-import OfferCard from "../offer-card/offer-card.jsx";
-import FavoritesOfferList from "../favorites-offer-list/favorites-offer-list.jsx";
-import FavoriteEmpty from "../favorites-empty/favorites-empty.jsx";
-import Footer from "../footer/footer.jsx";
-import propTypes from "./prop-types.js";
+import * as React from "react";
+import MainHeader from "../main-header/main-header";
+import OfferCard from "../offer-card/offer-card";
+import FavoritesOfferList from "../favorites-offer-list/favorites-offer-list";
+import FavoriteEmpty from "../favorites-empty/favorites-empty";
+import Footer from "../footer/footer";
+import {Props} from "./interface";
 
-class Favorites extends React.PureComponent {
+class Favorites extends React.PureComponent<Props, null> {
   constructor(props) {
     super(props);
 
@@ -23,6 +23,7 @@ class Favorites extends React.PureComponent {
         <MainHeader
           isAuthorizationRequired={isAuthorizationRequired}
           userData={userData}
+          isInDetails={false}
         />
 
         <main className={`page__main page__main--favorites ${isEmpty ? `page__main--favorites-empty` : ``}`}>
@@ -84,7 +85,5 @@ class Favorites extends React.PureComponent {
     return Array.from(new Set(currentFavoriteOffers.map((offer) => offer.city.name)));
   }
 }
-
-Favorites.propTypes = propTypes;
 
 export default Favorites;

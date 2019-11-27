@@ -1,8 +1,12 @@
-import React from "react";
-import leaflet from "leaflet";
-import propTypes from "./prop-types.js";
+import * as React from "react";
+import * as leaflet from "leaflet";
+import {Props} from "./interface";
 
-class Map extends React.PureComponent {
+class Map extends React.PureComponent<Props, null> {
+  DEFAULT_ZOOM: number;
+  _layerGroup: any;
+  _map: any;
+
   constructor(props) {
     super(props);
 
@@ -79,7 +83,5 @@ class Map extends React.PureComponent {
     });
   }
 }
-
-Map.propTypes = propTypes;
 
 export default Map;

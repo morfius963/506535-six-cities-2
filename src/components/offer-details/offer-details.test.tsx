@@ -1,19 +1,19 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Map from "../map/map.jsx";
-import OfferCard from "../offer-card/offer-card.jsx";
-import OfferDetails from "./offer-details.jsx";
-import MainHeader from "../main-header/main-header.jsx";
-import CommentList from "../comments-list/comments-list.jsx";
-import CommentForm from "../comment-form/comment-form.jsx";
-import fixtureData, {commentsData} from "../../__fixtures__/offers.js";
+import Map from "../map/map";
+import OfferCard from "../offer-card/offer-card";
+import OfferDetails from "./offer-details";
+import MainHeader from "../main-header/main-header";
+import CommentList from "../comments-list/comments-list";
+import CommentForm from "../comment-form/comment-form";
+import fixtureData, {commentsData} from "../../__fixtures__/offers";
 
-jest.mock(`../map/map.jsx`, () => jest.fn().mockReturnValue(null));
-jest.mock(`../offer-card/offer-card.jsx`, () => jest.fn().mockReturnValue(null));
-jest.mock(`../main-header/main-header.jsx`, () => jest.fn().mockReturnValue(null));
-jest.mock(`../comments-list/comments-list.jsx`, () => jest.fn().mockReturnValue(null));
-jest.mock(`../comment-form/comment-form.jsx`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../map/map`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../offer-card/offer-card`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../main-header/main-header`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../comments-list/comments-list`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../comment-form/comment-form`, () => jest.fn().mockReturnValue(null));
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {

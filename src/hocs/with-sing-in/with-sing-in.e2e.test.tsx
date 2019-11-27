@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import {mount} from 'enzyme';
-import withSingIn from "./with-sing-in.jsx";
-import SingIn from "../../components/sing-in/sing-in.jsx";
+import withSingIn from "./with-sing-in";
+import SingIn from "../../components/sing-in/sing-in";
 
 jest.mock(`react-router-dom`, () => ({
   Redirect: () => null,
@@ -31,7 +31,10 @@ describe(`end to end test`, () => {
       city: `Amsterdam`,
       onUserInput: jest.fn(),
       onFormSubmit: jest.fn(),
-      isAuthorizationRequired: true
+      isAuthorizationRequired: true,
+      history: {
+        push: jest.fn()
+      }
     };
     const MockComponentWrapped = withSingIn(SingIn);
 

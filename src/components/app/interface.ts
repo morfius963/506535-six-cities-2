@@ -1,36 +1,22 @@
-import PropTypes from "prop-types";
+import {Offer, Comment, UserData, CommentData, Sort} from "../../types";
 
-export default PropTypes.shape({
-  id: PropTypes.number,
-  city: PropTypes.shape({
-    name: PropTypes.string,
-    location: PropTypes.shape({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-      zoom: PropTypes.number
-    })
-  }),
-  previewImage: PropTypes.string,
-  images: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string,
-  isFavorite: PropTypes.bool,
-  isPremium: PropTypes.bool,
-  price: PropTypes.number,
-  rating: PropTypes.number,
-  type: PropTypes.string,
-  bedrooms: PropTypes.number,
-  maxAdults: PropTypes.number,
-  goods: PropTypes.arrayOf(PropTypes.string),
-  description: PropTypes.string,
-  host: PropTypes.shape({
-    id: PropTypes.number,
-    isPro: PropTypes.bool,
-    name: PropTypes.string,
-    avatar: PropTypes.string,
-  }),
-  location: PropTypes.shape({
-    latitude: PropTypes.number,
-    longitude: PropTypes.number,
-    zoom: PropTypes.number
-  })
-});
+export interface Props {
+  offers: Offer[],
+  activeOffers: Offer[],
+  favoriteOffers: Offer[],
+  activeSort: Sort,
+  city: string,
+  email: string,
+  isAuthorizationRequired: boolean,
+  isOffersLoading: boolean,
+  comments: Comment[],
+
+  onOffersLoad: () => void,
+  onFavoriteOffersLoad: () => void,
+  onCityClick: (city: string) => void,
+  onOffersSort: (value: Sort) => void,
+  onUserDataPost: (userData: UserData, pushPath: () => void) => void,
+  onFavoriteCardToggle: (id: number, status: number) => void,
+  onCommentsLoad: (id: number) => void,
+  onReviewSubmit: (id: number, commentData: CommentData, formResetCb: () => void) => void
+}

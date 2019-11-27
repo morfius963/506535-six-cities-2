@@ -174,7 +174,7 @@ exports[`snapshot test Component correctly renders 1`] = `
             <span
               className="places__sorting-type"
               onClick={[Function]}
-              tabIndex="0"
+              tabIndex={0}
             >
               Popular
               <svg
@@ -193,25 +193,25 @@ exports[`snapshot test Component correctly renders 1`] = `
             >
               <li
                 className="places__option places__option--active"
-                tabIndex="0"
+                tabIndex={0}
               >
                 Popular
               </li>
               <li
                 className="places__option "
-                tabIndex="0"
+                tabIndex={0}
               >
                 Price: low to high
               </li>
               <li
                 className="places__option "
-                tabIndex="0"
+                tabIndex={0}
               >
                 Price: high to low
               </li>
               <li
                 className="places__option "
-                tabIndex="0"
+                tabIndex={0}
               >
                 Top rated first
               </li>
@@ -222,7 +222,7 @@ exports[`snapshot test Component correctly renders 1`] = `
           >
             <article
               className="cities__place-card place-card"
-              id={0}
+              id="0"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
@@ -330,7 +330,7 @@ exports[`snapshot test Component correctly renders 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
-              id={1}
+              id="1"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
@@ -438,7 +438,7 @@ exports[`snapshot test Component correctly renders 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
-              id={2}
+              id="2"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
@@ -546,7 +546,7 @@ exports[`snapshot test Component correctly renders 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
-              id={3}
+              id="3"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >

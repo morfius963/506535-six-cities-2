@@ -82,11 +82,12 @@ describe(`load data test group`, () => {
 
   it(`Should correctly post data to /comments`, () => {
     const id = 0;
+    const formResetCb = jest.fn();
     const commentsData = {
       rating: 4,
       comment: `2oijfiwerjiuwejr`
     };
-    const commentsLoader = Operation.postComment(id, commentsData);
+    const commentsLoader = Operation.postComment(id, commentsData, formResetCb);
     const dispatch = jest.fn();
 
     apiMock
@@ -95,6 +96,7 @@ describe(`load data test group`, () => {
 
     return commentsLoader(dispatch, null, api)
       .then(() => {
+        expect(formResetCb).toHaveBeenCalled();
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: `GET_COMMENTS`,

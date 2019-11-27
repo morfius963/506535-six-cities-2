@@ -1,11 +1,10 @@
-import PropTypes from "prop-types";
+import {SyntheticEvent} from "react";
 
-export default {
-  onFormSubmit: PropTypes.func.isRequired,
-  onUserInput: PropTypes.func.isRequired,
-  isValid: PropTypes.bool.isRequired,
-  formRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({current: PropTypes.instanceOf(Element)})
-  ])
-};
+export interface Props {
+  onFormSubmit: (evt: SyntheticEvent) => void,
+  onUserInput: (evt: SyntheticEvent) => void,
+  isValid: boolean,
+  formRef: {
+    current: HTMLFormElement
+  }
+}

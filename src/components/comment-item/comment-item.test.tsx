@@ -1,7 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import CommentItem from "./comment-item.jsx";
-import {commentsData} from "../../__fixtures__/offers.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import CommentItem from "./comment-item";
+import {commentsData} from "../../__fixtures__/offers";
 
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {

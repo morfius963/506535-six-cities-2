@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import MainHeader from "../main-header/main-header.jsx";
+import * as React from "react";
+import MainHeader from "../main-header/main-header";
+import {Props} from "./interface";
 
-const SingIn = ({city, onUserInput, onFormSubmit}) => {
+const SingIn = ({city, onUserInput, onFormSubmit}: Props) => {
   return (
     <div className="page page--gray page--login">
 
-      <MainHeader userData={{}} isAuthorizationRequired={true} />
+      <MainHeader userData={{email: ``}} isAuthorizationRequired={true} isInDetails={false} />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">
@@ -46,12 +46,6 @@ const SingIn = ({city, onUserInput, onFormSubmit}) => {
       </main>
     </div>
   );
-};
-
-SingIn.propTypes = {
-  city: PropTypes.string.isRequired,
-  onUserInput: PropTypes.func.isRequired,
-  onFormSubmit: PropTypes.func.isRequired
 };
 
 export default SingIn;

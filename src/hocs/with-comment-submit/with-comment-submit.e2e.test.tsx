@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import {mount} from 'enzyme';
-import withCommentSubmit from "./with-comment-submit.jsx";
-import CommentForm from "../../components/comment-form/comment-form.jsx";
+import withCommentSubmit from "./with-comment-submit";
+import CommentForm from "../../components/comment-form/comment-form";
 
 const CommentFormWrapped = withCommentSubmit(CommentForm);
 
@@ -39,10 +39,11 @@ describe(`e2e test`, () => {
 
     const component = mount(<CommentFormWrapped {...props} />);
     const form = component.find(`.reviews__form`);
+    const resetFormHandler = component.instance()._resetForm;
 
     component.setState({rating: 1, review: evt.currentTarget.value});
     form.simulate(`submit`, evt);
 
-    expect(postCommentHandler).toHaveBeenCalledWith(props.id, commentData);
+    expect(postCommentHandler).toHaveBeenCalledWith(props.id, commentData, resetFormHandler);
   });
 });

@@ -1,8 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import {CommentData} from "../../types";
+
+interface Props {
+  id: number,
+  onReviewSubmit: (id: number, commentData: CommentData, formResetCb: () => void) => void
+}
+
+interface State {
+  rating?: string,
+  review?: string,
+  isValid?: boolean
+}
 
 const withCommentSubmit = (Component) => {
-  class WithCommentSubmit extends React.PureComponent {
+  class WithCommentSubmit extends React.PureComponent<Props, State> {
+    _formRef: React.RefObject<HTMLFormElement>;
+
     constructor(props) {
       super(props);
 
@@ -71,11 +84,6 @@ const withCommentSubmit = (Component) => {
       this._formRef.current.reset();
     }
   }
-
-  WithCommentSubmit.propTypes = {
-    onReviewSubmit: PropTypes.func.isRequired,
-    id: PropTypes.number.isRequired
-  };
 
   return WithCommentSubmit;
 };

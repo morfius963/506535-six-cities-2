@@ -1,9 +1,8 @@
-import PropTypes from "prop-types";
-import {sortValues} from "../../__fixtures__/offers.js";
+import {SyntheticEvent} from "react";
 
-export default {
-  activeSort: PropTypes.oneOf(sortValues).isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  clickSortHandler: PropTypes.func.isRequired,
-  toggleSortHandler: PropTypes.func.isRequired
-};
+export interface Props {
+  activeSort: string,
+  isOpen: boolean,
+  clickSortHandler: (evt: SyntheticEvent) => void,
+  toggleSortHandler: () => void
+}

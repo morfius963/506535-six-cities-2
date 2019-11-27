@@ -1,7 +1,8 @@
-import React, {useCallback} from "react";
-import propTypes from "./prop-types.js";
+import * as React from "react";
+import {useCallback} from "react";
+import {Props} from "./interface";
 
-const Cities = ({cities, activeCity, onCityClick}) => {
+const Cities = ({cities, activeCity, onCityClick}: Props) => {
   const cityClickHandler = useCallback(
       (evt) => {
         const target = evt.target;
@@ -27,7 +28,5 @@ const Cities = ({cities, activeCity, onCityClick}) => {
     </section>
   );
 };
-
-Cities.propTypes = propTypes;
 
 export default Cities;
