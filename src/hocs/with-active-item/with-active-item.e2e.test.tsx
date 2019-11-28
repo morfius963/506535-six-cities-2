@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
+
 import withActiveItem from "./with-active-item";
-import OffersList from "../../components/offers-list/offers-list";
+import {OffersList} from "../../components/offers-list/offers-list";
 import Map from "../../components/map/map";
 import OffersSort from "../../components/offers-sort/offers-sort";
 import fixtureData from "../../__fixtures__/offers";
@@ -20,7 +21,7 @@ describe(`e2e test`, () => {
     const sortHandler = jest.fn();
     const props = {
       offers: activeOffers,
-      activeCity: `Amsterdam`,
+      city: `Amsterdam`,
       activeSort: `Popular`,
       onOffersSort: sortHandler,
       onFavoriteCardToggle: jest.fn()

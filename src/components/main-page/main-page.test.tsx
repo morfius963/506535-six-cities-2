@@ -1,5 +1,7 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 
 import MainPage from "./main-page";
 import Cities from "../cities/cities";
@@ -12,24 +14,35 @@ jest.mock(`../main-header/main-header`, () => jest.fn().mockReturnValue(null));
 jest.mock(`../cities/cities`, () => jest.fn().mockReturnValue(null));
 
 describe(`snapshot test`, () => {
+  const appData = {
+    offers: fixtureData,
+    activeOffers: fixtureData
+  };
+  const user = {
+    city: `Amsterdam`,
+    activeSort: `Popular`,
+    email: `morf@gmail.com`,
+    isAuthorizationRequired: false,
+  };
+
+  const mockStore = configureStore([]);
+  const store = mockStore({
+    appData,
+    user
+  });
+
   it(`App correctly renders`, () => {
-    const activeOffers = fixtureData.filter((offer) => offer.city.name === `Amsterdam`);
     const props = {
       allCities: [`Amsterdam`, `Paris`, `Hamburg`],
-      city: `Amsterdam`,
-      activeOffers,
-      activeSort: `Popular`,
-      userData: {
-        email: `morf@gmail.com`
-      },
-      isAuthorizationRequired: false,
-      onFavoriteCardToggle: jest.fn(),
-      onOffersSort: jest.fn(),
       onCityClick: jest.fn(),
     };
 
     const tree = renderer
-      .create(<MainPage {...props} />)
+      .create(
+          <Provider store={store}>
+            <MainPage {...props} />
+          </Provider>
+      )
       .toJSON();
 
     expect(Cities).toHaveBeenCalled();

@@ -221,7 +221,7 @@ exports[`snapshot test Component correctly renders 1`] = `
               <span
                 className="reviews__amount"
               >
-                1
+                0
               </span>
             </h2>
           </section>

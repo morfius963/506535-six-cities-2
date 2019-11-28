@@ -2,16 +2,16 @@
 
 exports[`snapshot test Component correctly renders 1`] = `
 <div
-  className="page page--favorites-empty"
+  className="page "
 >
   <main
-    className="page__main page__main--favorites page__main--favorites-empty"
+    className="page__main page__main--favorites "
   >
     <div
       className="page__favorites-container container"
     >
       <section
-        className="favorites favorites--empty"
+        className="favorites "
       >
         <h1
           className="visually-hidden"

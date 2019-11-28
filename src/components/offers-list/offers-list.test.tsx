@@ -1,5 +1,8 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
+
 import OffersList from "./offers-list";
 import OfferCard from "../offer-card/offer-card";
 import Map from "../map/map";
@@ -11,20 +14,33 @@ jest.mock(`../offer-card/offer-card`, () => jest.fn().mockReturnValue(null));
 jest.mock(`../offers-sort/offers-sort`, () => jest.fn().mockReturnValue(null));
 
 describe(`snapshot test`, () => {
+  const appData = {
+    offers: fixtureData
+  };
+  const user = {
+    city: `Amsterdam`,
+    activeSort: `Popular`
+  };
+
+  const mockStore = configureStore([]);
+  const store = mockStore({
+    appData,
+    user
+  });
+
   it(`Component correctly renders`, () => {
-    const activeOffers = fixtureData.filter((offer) => offer.city.name === `Amsterdam`);
     const props = {
-      offers: activeOffers,
-      activeCity: `Amsterdam`,
       activeCardId: 0,
-      activeSort: `Popular`,
       onFavoriteCardToggle: jest.fn(),
-      onCardMouseEnter: jest.fn(),
-      onOffersSort: jest.fn(),
+      onOffersSort: jest.fn()
     };
 
     const tree = renderer
-      .create(<OffersList {...props} />)
+      .create(
+          <Provider store={store}>
+            <OffersList {...props} />
+          </Provider>
+      )
       .toJSON();
 
     expect(Map).toHaveBeenCalled();
