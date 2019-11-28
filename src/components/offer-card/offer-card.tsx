@@ -25,12 +25,12 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
       onCardMouseEnter(DEFAULT_ACTIVE_CARD_ID);
     };
 
-  const favoriteClickHandler = () => {
+  const handleFavoriteButtonClick = () => {
     const status = isFavorite ? 0 : 1;
     onFavoriteCardToggle(id, status);
   };
 
-  const scrollToTop = () => {
+  const handleOfferScrollTop = () => {
     window.scrollTo(0, 0);
   };
 
@@ -57,7 +57,7 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
               id
             }
           }}
-          onClick={scrollToTop}
+          onClick={handleOfferScrollTop}
         >
           <img className="place-card__image" src={previewImage} width={cardImageSize.width} height={cardImageSize.height} alt="Place image" />
         </Link>
@@ -72,7 +72,7 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
           <button
             className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`}
             type="button"
-            onClick={favoriteClickHandler}
+            onClick={handleFavoriteButtonClick}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -95,7 +95,7 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
                 id
               }
             }}
-            onClick={scrollToTop}
+            onClick={handleOfferScrollTop}
           >
             {title}
           </Link>
