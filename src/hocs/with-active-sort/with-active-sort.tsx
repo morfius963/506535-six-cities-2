@@ -1,15 +1,5 @@
 import * as React from "react";
-
-interface Props {
-  onOffersSort: (value: string) => void,
-  activeSort: string,
-  activeCity: string
-}
-
-interface State {
-  activeCity: string,
-  isOpen: boolean
-}
+import {Props, State} from "./interface";
 
 const withActiveSort = (Component) => {
   class WithActiveSort extends React.PureComponent<Props, State> {
@@ -17,7 +7,7 @@ const withActiveSort = (Component) => {
       super(props);
 
       this.state = {
-        activeCity: this.props.activeCity,
+        activeCity: this.props.city,
         isOpen: false
       };
 
@@ -36,10 +26,10 @@ const withActiveSort = (Component) => {
     }
 
     componentDidUpdate() {
-      if (this.props.activeCity !== this.state.activeCity) {
+      if (this.props.city !== this.state.activeCity) {
         this.setState({
           isOpen: false,
-          activeCity: this.props.activeCity
+          activeCity: this.props.city
         });
       }
     }

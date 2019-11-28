@@ -1,22 +1,6 @@
 import * as React from "react";
 import {Redirect} from "react-router-dom";
-
-interface Props {
-  onUserDataPost: (
-      userData: {email: string, password: string},
-      pushPath: () => void
-  ) => void,
-
-  history: {
-    push: (path: string) => void
-  }
-  isAuthorizationRequired: boolean
-}
-
-interface State {
-  email?: string,
-  password?: string
-}
+import {Props, State} from "./interface";
 
 const withSingIn = (Component) => {
   class WithSingIn extends React.PureComponent<Props, State> {

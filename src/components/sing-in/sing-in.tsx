@@ -6,7 +6,7 @@ const SingIn = ({city, onUserInput, onFormSubmit}: Props) => {
   return (
     <div className="page page--gray page--login">
 
-      <MainHeader userData={{email: ``}} isAuthorizationRequired={true} isInDetails={false} />
+      <MainHeader email={``} isAuthorizationRequired={true} isInDetails={false} />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">

@@ -2,8 +2,7 @@ import * as React from "react";
 import {Link} from "react-router-dom";
 import {Props} from "./interface";
 
-const MainHeader = ({userData, isAuthorizationRequired, isInDetails}: Props) => {
-  const {email} = userData;
+const MainHeader = ({email, isAuthorizationRequired, isInDetails}: Props) => {
   const defaultLinkValue = `Sing In`;
 
   const linkValue = {

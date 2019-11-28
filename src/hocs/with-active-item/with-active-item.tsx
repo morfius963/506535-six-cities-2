@@ -1,20 +1,11 @@
 import * as React from "react";
-import {Offer} from "../../types";
-
-interface Props {
-  offers: Offer[],
-  activeCity: string,
-  activeSort: string,
-  onOffersSort: (value: string) => void,
-  onFavoriteCardToggle: (id: number, status: number) => void,
-}
 
 interface State {
   activeCardId: number
 }
 
 const withActiveItem = (Component) => {
-  class WithActiveItem extends React.PureComponent<Props, State> {
+  class WithActiveItem extends React.PureComponent<{}, State> {
     constructor(props) {
       super(props);
 

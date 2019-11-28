@@ -1,21 +1,24 @@
 import * as React from "react";
+import {connect} from "react-redux";
 
+import ActionCreator from "../../store/actions/action-creator";
 import Cities from "../cities/cities";
 import OffersList from "../offers-list/offers-list";
 import MainHeader from "../main-header/main-header";
 import MainEmpty from "../main-empty/main-empty";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import {Props} from "./interface";
+import {getActiveOffers} from "../../selectors";
 
 const OffersListWrapped = withActiveItem(OffersList);
 
-const MainPage = ({allCities, activeOffers, city, onCityClick, onOffersSort, activeSort, userData, isAuthorizationRequired, onFavoriteCardToggle}: Props) => {
+const MainPage = ({allCities, activeOffers, city, onCityClick, email, isAuthorizationRequired}: Props) => {
   return (
     <div className="page page--gray page--main">
 
       <MainHeader
         isAuthorizationRequired={isAuthorizationRequired}
-        userData={userData}
+        email={email}
         isInDetails={false}
       />
 
@@ -28,13 +31,7 @@ const MainPage = ({allCities, activeOffers, city, onCityClick, onOffersSort, act
         </div>
 
         {activeOffers.length > 0
-          ? <OffersListWrapped
-            offers={activeOffers}
-            activeCity={city}
-            activeSort={activeSort}
-            onOffersSort={onOffersSort}
-            onFavoriteCardToggle={onFavoriteCardToggle}
-          />
+          ? <OffersListWrapped />
           : <MainEmpty city={city} />}
 
       </main>
@@ -42,4 +39,15 @@ const MainPage = ({allCities, activeOffers, city, onCityClick, onOffersSort, act
   );
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  city: state.user.city,
+  email: state.user.email,
+  isAuthorizationRequired: state.user.isAuthorizationRequired,
+  activeOffers: getActiveOffers(state)
+});
+
+const mapDispatchToProps = {
+  onCityClick: (city) => ActionCreator.switchCity(city)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

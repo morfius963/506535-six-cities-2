@@ -1,4 +1,7 @@
 import * as React from "react";
+import {connect} from "react-redux";
+
+import Operation from "../../store/actions/async-actions";
 import MainHeader from "../main-header/main-header";
 import OfferCard from "../offer-card/offer-card";
 import FavoritesOfferList from "../favorites-offer-list/favorites-offer-list";
@@ -14,7 +17,7 @@ class Favorites extends React.PureComponent<Props, null> {
   }
 
   render() {
-    const {isAuthorizationRequired, userData, favoriteOffers} = this.props;
+    const {isAuthorizationRequired, email, favoriteOffers} = this.props;
     const isEmpty = favoriteOffers.length === 0;
 
     return (
@@ -22,7 +25,7 @@ class Favorites extends React.PureComponent<Props, null> {
 
         <MainHeader
           isAuthorizationRequired={isAuthorizationRequired}
-          userData={userData}
+          email={email}
           isInDetails={false}
         />
 
@@ -86,4 +89,15 @@ class Favorites extends React.PureComponent<Props, null> {
   }
 }
 
-export default Favorites;
+const mapStateToProps = (state) => ({
+  email: state.user.email,
+  isAuthorizationRequired: state.user.isAuthorizationRequired,
+  favoriteOffers: state.appData.favoriteOffers,
+});
+
+const mapDispatchToProps = {
+  onFavoriteOffersLoad: Operation.loadFavoriteOffers,
+  onFavoriteCardToggle: (id, status) => Operation.toggleFavoriteCard(id, status)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

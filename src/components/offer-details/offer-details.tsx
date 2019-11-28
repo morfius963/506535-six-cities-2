@@ -1,5 +1,7 @@
 import * as React from "react";
+import {connect} from "react-redux";
 
+import Operation from "../../store/actions/async-actions";
 import Map from "../map/map";
 import OfferCard from "../offer-card/offer-card";
 import MainHeader from "../main-header/main-header";
@@ -12,7 +14,7 @@ const MAX_NEIGHBOURHOOD_OFFERS = 3;
 
 const CommentFormWrapped = withCommentSubmit(CommentForm);
 
-const OfferDetails = ({location, offers, isAuthorizationRequired, userData, comments, onFavoriteCardToggle, onCommentsLoad, onReviewSubmit}: Props) => {
+const OfferDetails = ({location, offers, email, isAuthorizationRequired, comments, onFavoriteCardToggle, onCommentsLoad, onReviewSubmit}: Props) => {
 
   const currentOffer = offers.find((offer) => offer.id === location.state.id);
   const similarOffers = offers
@@ -32,7 +34,7 @@ const OfferDetails = ({location, offers, isAuthorizationRequired, userData, comm
 
       <MainHeader
         isAuthorizationRequired={isAuthorizationRequired}
-        userData={userData}
+        email={email}
         isInDetails={true}
       />
 
@@ -172,4 +174,17 @@ const OfferDetails = ({location, offers, isAuthorizationRequired, userData, comm
   );
 };
 
-export default OfferDetails;
+const mapStateToProps = (state) => ({
+  email: state.user.email,
+  isAuthorizationRequired: state.user.isAuthorizationRequired,
+  offers: state.appData.offers,
+  comments: state.appData.comments,
+});
+
+const mapDispatchToProps = {
+  onFavoriteCardToggle: (id, status) => Operation.toggleFavoriteCard(id, status),
+  onCommentsLoad: (id) => Operation.loadComments(id),
+  onReviewSubmit: (id, commentData, formResetCb) => Operation.postComment(id, commentData, formResetCb)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OfferDetails);

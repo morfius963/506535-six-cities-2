@@ -1,16 +1,5 @@
 import * as React from "react";
-import {CommentData} from "../../types";
-
-interface Props {
-  id: number,
-  onReviewSubmit: (id: number, commentData: CommentData, formResetCb: () => void) => void
-}
-
-interface State {
-  rating?: string,
-  review?: string,
-  isValid?: boolean
-}
+import {Props, State} from "./interface";
 
 const withCommentSubmit = (Component) => {
   class WithCommentSubmit extends React.PureComponent<Props, State> {
