@@ -18,7 +18,7 @@ exports[`snapshot test Component correctly renders 1`] = `
       <b
         className="places__found"
       >
-        19
+        4
          places to stay in 
         Amsterdam
       </b>
