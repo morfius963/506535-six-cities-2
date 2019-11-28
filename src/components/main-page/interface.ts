@@ -4,12 +4,7 @@ export interface Props {
   allCities: string[],
   activeOffers: Offer[],
   city: string,
-  activeSort: string,
-  userData: {
-    email: string
-  },
+  email: string,
   isAuthorizationRequired: boolean,
-  onFavoriteCardToggle: (id: number, status: number) => void,
   onCityClick: (city: string) => void,
-  onOffersSort: (value: string) => void,
 }

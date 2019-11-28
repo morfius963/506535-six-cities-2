@@ -8,9 +8,7 @@ export interface Props {
       id: number
     }
   },
-  userData: {
-    email: string
-  },
+  email: string,
   isAuthorizationRequired: boolean,
   onCommentsLoad: () => void,
   onFavoriteCardToggle: (id: number, status: number) => void,

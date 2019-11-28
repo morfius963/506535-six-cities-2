@@ -1,7 +1,5 @@
 export interface Props {
-  userData: {
-    email: string
-  },
+  email: string,
   isAuthorizationRequired: boolean,
   isInDetails: boolean
 }
