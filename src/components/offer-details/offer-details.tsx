@@ -24,7 +24,7 @@ const OfferDetails = ({location, offers, email, isAuthorizationRequired, comment
 
   const {id, isPremium, title, images, rating, maxAdults, bedrooms, price, goods, host, description, isFavorite} = currentOffer;
 
-  const favoriteClickHandler = () => {
+  const handleFavoriteButtonClick = () => {
     const status = isFavorite ? 0 : 1;
     onFavoriteCardToggle(id, status);
   };
@@ -65,7 +65,7 @@ const OfferDetails = ({location, offers, email, isAuthorizationRequired, comment
                 <button
                   className={`property__bookmark-button button ${isFavorite ? `property__bookmark-button--active` : ``}`}
                   type="button"
-                  onClick={favoriteClickHandler}
+                  onClick={handleFavoriteButtonClick}
                 >
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
