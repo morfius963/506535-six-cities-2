@@ -26,7 +26,6 @@ class Favorites extends React.PureComponent<Props, null> {
         <MainHeader
           isAuthorizationRequired={isAuthorizationRequired}
           email={email}
-          isInDetails={false}
         />
 
         <main className={`page__main page__main--favorites ${isEmpty ? `page__main--favorites-empty` : ``}`}>
