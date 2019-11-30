@@ -19,7 +19,6 @@ const MainPage = ({allCities, activeOffers, city, onCityClick, email, isAuthoriz
       <MainHeader
         isAuthorizationRequired={isAuthorizationRequired}
         email={email}
-        isInDetails={false}
       />
 
       <main className={`page__main page__main--index ${activeOffers.length > 0 ? `` : `page__main--index-empty`}`}>

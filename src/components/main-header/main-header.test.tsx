@@ -10,8 +10,7 @@ describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
     const props = {
       email: `morf@gmail.com`,
-      isAuthorizationRequired: true,
-      isInDetails: false
+      isAuthorizationRequired: true
     };
 
     const tree = renderer
