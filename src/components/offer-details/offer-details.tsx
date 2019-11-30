@@ -146,7 +146,6 @@ const OfferDetails = ({location, offers, email, isAuthorizationRequired, comment
             <Map
               offers={neighbourhoodOffers}
               activeCard={id}
-              isInOfferDetails={true}
             />
 
           </section>

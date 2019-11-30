@@ -66,14 +66,13 @@ class Map extends React.PureComponent<Props, null> {
   }
 
   _createPins(coordinates, id) {
-    const {offers, isInOfferDetails} = this.props;
+    const {offers} = this.props;
 
     const cardsID = offers.map((offer) => offer.id);
-    const pinImgPath = isInOfferDetails ? `../` : `./`;
 
     coordinates.forEach((offerCoord, i) => {
       const icon = leaflet.icon({
-        iconUrl: `${pinImgPath}img/pin${id === cardsID[i] ? `-active` : ``}.svg`,
+        iconUrl: `img/pin${id === cardsID[i] ? `-active` : ``}.svg`,
         iconSize: [30, 30]
       });
 

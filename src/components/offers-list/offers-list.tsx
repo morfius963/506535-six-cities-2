@@ -41,7 +41,6 @@ const OffersList = ({offers, city, activeSort, activeCardId, onCardMouseEnter, o
             <Map
               offers={offers}
               activeCard={activeCardId}
-              isInOfferDetails={false}
             />
 
           </section>
