@@ -6,11 +6,15 @@ import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 
 import App from "./components/app/app";
+import Operation from "./store/actions/async-actions";
 import createAPI from "./api";
 import appData from "./store/reducers/app-data/app-data";
 import user from "./store/reducers/user/user";
 import ActionCreator from "./store/actions/action-creator";
 import history from "./history";
+import withScreenSwitch from "./hocs/with-screen-switch/with-screen-switch";
+
+const AppWrapped = withScreenSwitch(App);
 
 const init = () => {
   const reducer = combineReducers({
@@ -28,10 +32,12 @@ const init = () => {
     store.dispatch(ActionCreator.singIn(JSON.parse(userData)));
   }
 
+  store.dispatch(Operation.loadHotels());
+
   ReactDOM.render(
       <Provider store={store} >
         <Router history={history}>
-          <App />
+          <AppWrapped />
         </Router>
       </Provider>,
       document.querySelector(`#root`)
