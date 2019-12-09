@@ -24,7 +24,9 @@ class Map extends React.PureComponent<Props, null> {
   componentDidMount() {
     const {offers} = this.props;
 
-    this._addMap(offers);
+    if (offers.length > 0) {
+      this._addMap(offers);
+    }
   }
 
   componentDidUpdate() {
