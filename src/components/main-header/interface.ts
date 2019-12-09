@@ -1,4 +1,7 @@
 export interface Props {
-  email: string,
+  userData: {
+    email: string,
+    avatar: string
+  },
   isAuthorizationRequired: boolean,
 }

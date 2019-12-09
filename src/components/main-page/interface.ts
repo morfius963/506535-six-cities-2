@@ -5,6 +5,7 @@ export interface Props {
   activeOffers: Offer[],
   city: string,
   email: string,
+  avatar: string,
   isAuthorizationRequired: boolean,
   onCityClick: (city: string) => void,
 }
