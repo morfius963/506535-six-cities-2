@@ -14,15 +14,20 @@ const MAX_NEIGHBOURHOOD_OFFERS = 3;
 
 const CommentFormWrapped = withCommentSubmit(CommentForm);
 
-const OfferDetails = ({location, offers, email, isAuthorizationRequired, comments, onFavoriteCardToggle, onCommentsLoad, onReviewSubmit}: Props) => {
+const OfferDetails = ({location, offers, email, avatar, isAuthorizationRequired, comments, onFavoriteCardToggle, onCommentsLoad, onReviewSubmit}: Props) => {
 
-  const currentOffer = offers.find((offer) => offer.id === location.state.id);
-  const similarOffers = offers
+  const userData = {email, avatar};
+  const allOffers = offers.length !== 0 ? offers : [];
+
+  const currentOfferId = Number(location.pathname.split(`/`).reverse()[0]);
+  const currentOffer = allOffers.find((offer) => offer.id === currentOfferId);
+
+  const similarOffers = allOffers
     .filter(({id, city}) => (city.name === currentOffer.city.name) && id !== currentOffer.id)
     .slice(0, MAX_NEIGHBOURHOOD_OFFERS);
   const neighbourhoodOffers = [currentOffer, ...similarOffers];
 
-  const {id, isPremium, title, images, rating, maxAdults, bedrooms, price, goods, host, description, isFavorite} = currentOffer;
+  const {id, isPremium, title, rating, maxAdults, bedrooms, price, description, isFavorite, images = [], goods = [], host = {} as any} = currentOffer || {};
 
   const handleFavoriteButtonClick = () => {
     const status = isFavorite ? 0 : 1;
@@ -34,7 +39,7 @@ const OfferDetails = ({location, offers, email, isAuthorizationRequired, comment
 
       <MainHeader
         isAuthorizationRequired={isAuthorizationRequired}
-        email={email}
+        userData={userData}
       />
 
       <main className="page__main page__main--property">
@@ -130,7 +135,11 @@ const OfferDetails = ({location, offers, email, isAuthorizationRequired, comment
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews · <span className="reviews__amount">{comments.length}</span></h2>
 
-                <CommentList id={id} comments={comments} onCommentsLoad={onCommentsLoad} />
+                {
+                  allOffers.length > 0
+                    ? <CommentList id={id} comments={comments} onCommentsLoad={onCommentsLoad} />
+                    : null
+                }
 
                 {
                   isAuthorizationRequired
@@ -143,10 +152,14 @@ const OfferDetails = ({location, offers, email, isAuthorizationRequired, comment
           </div>
           <section className="property__map map container">
 
-            <Map
-              offers={neighbourhoodOffers}
-              activeCard={id}
-            />
+          {
+            allOffers.length > 0
+              ? <Map
+                offers={neighbourhoodOffers}
+                activeCard={id}
+              />
+              : null
+          }
 
           </section>
         </section>
@@ -174,6 +187,7 @@ const OfferDetails = ({location, offers, email, isAuthorizationRequired, comment
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
+  avatar: state.user.avatar,
   isAuthorizationRequired: state.user.isAuthorizationRequired,
   offers: state.appData.offers,
   comments: state.appData.comments,
