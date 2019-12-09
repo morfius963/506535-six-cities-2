@@ -51,12 +51,7 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
       <div className={`${isInFavoriteList ? `favorites__image-wrapper` : `cities__image-wrapper`} place-card__image-wrapper`}>
 
         <Link
-          to={{
-            pathname: `/offer/${id}`,
-            state: {
-              id
-            }
-          }}
+          to={`/offer/${id}`}
           onClick={handleOfferScrollTop}
         >
           <img className="place-card__image" src={previewImage} width={cardImageSize.width} height={cardImageSize.height} alt="Place image" />
@@ -89,12 +84,7 @@ const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavor
         <h2 className="place-card__name">
 
           <Link
-            to={{
-              pathname: `/offer/${id}`,
-              state: {
-                id
-              }
-            }}
+            to={`/offer/${id}`}
             onClick={handleOfferScrollTop}
           >
             {title}
