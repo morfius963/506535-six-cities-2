@@ -36,9 +36,7 @@ describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
     const props = {
       location: {
-        state: {
-          id: 0
-        }
+        pathname: `/offer/2`
       },
       email: `Vitalii`,
       onFavoriteCardToggle: jest.fn(),

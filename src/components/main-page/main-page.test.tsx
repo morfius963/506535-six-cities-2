@@ -22,6 +22,7 @@ describe(`snapshot test`, () => {
     city: `Amsterdam`,
     activeSort: `Popular`,
     email: `morf@gmail.com`,
+    avatar: ``,
     isAuthorizationRequired: false,
   };
 

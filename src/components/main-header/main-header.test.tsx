@@ -9,7 +9,10 @@ jest.mock(`react-router-dom`, () => ({
 describe(`snapshot test`, () => {
   it(`Component correctly renders`, () => {
     const props = {
-      email: `morf@gmail.com`,
+      userData: {
+        email: `morf@gmail.com`,
+        avatar: ``
+      },
       isAuthorizationRequired: true
     };
 

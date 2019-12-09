@@ -87,7 +87,7 @@ exports[`snapshot test Component correctly renders 1`] = `
               <span
                 style={
                   Object {
-                    "width": "0%",
+                    "width": "20%",
                   }
                 }
               />
@@ -100,7 +100,7 @@ exports[`snapshot test Component correctly renders 1`] = `
             <span
               className="property__rating-value rating__value"
             >
-              0
+              1
             </span>
           </div>
           <ul
@@ -132,7 +132,7 @@ exports[`snapshot test Component correctly renders 1`] = `
               className="property__price-value"
             >
               €
-              100
+              2100
             </b>
             <span
               className="property__price-text"
@@ -186,7 +186,6 @@ exports[`snapshot test Component correctly renders 1`] = `
                   alt="Host avatar"
                   className="property__avatar user__avatar"
                   height={74}
-                  src="../undefined"
                   width={74}
                 />
               </div>

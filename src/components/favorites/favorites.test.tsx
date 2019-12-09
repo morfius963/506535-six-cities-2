@@ -21,7 +21,8 @@ describe(`snapshot test`, () => {
   };
   const user = {
     isAuthorizationRequired: true,
-    email: `marf@gmail.com`
+    email: `marf@gmail.com`,
+    avatar: ``
   };
 
   const mockStore = configureStore([thunk]);
