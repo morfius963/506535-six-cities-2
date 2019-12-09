@@ -2,9 +2,13 @@ import * as React from "react";
 import {Link} from "react-router-dom";
 import {Props} from "./interface";
 
-const MainHeader = ({email, isAuthorizationRequired}: Props) => {
+const MainHeader = ({userData, isAuthorizationRequired}: Props) => {
   const defaultLinkValue = `Sing In`;
+  const {email, avatar} = userData;
 
+  const userAvatarPath = isAuthorizationRequired
+    ? `../img/avatar.svg`
+    : `https://htmlacademy-react-2.appspot.com/six-cities${avatar}`;
   const linkValue = {
     text: isAuthorizationRequired ? defaultLinkValue : email,
     path: isAuthorizationRequired ? `/login` : `/favorites`
@@ -24,7 +28,7 @@ const MainHeader = ({email, isAuthorizationRequired}: Props) => {
               <li className="header__nav-item user">
 
                 <Link className="header__nav-link header__nav-link--profile" to={{pathname: linkValue.path}}>
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
+                  <div className="header__avatar-wrapper user__avatar-wrapper" style={{backgroundImage: `url(${userAvatarPath})`}}>
                   </div>
                   <span className="header__user-name user__name">
                     {linkValue.text}

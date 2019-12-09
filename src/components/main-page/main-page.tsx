@@ -12,13 +12,15 @@ import {getActiveOffers} from "../../selectors";
 
 const OffersListWrapped = withActiveItem(OffersList);
 
-const MainPage = ({allCities, activeOffers, city, onCityClick, email, isAuthorizationRequired}: Props) => {
+const MainPage = ({allCities, activeOffers, city, onCityClick, email, avatar, isAuthorizationRequired}: Props) => {
+  const userData = {email, avatar};
+
   return (
     <div className="page page--gray page--main">
 
       <MainHeader
         isAuthorizationRequired={isAuthorizationRequired}
-        email={email}
+        userData={userData}
       />
 
       <main className={`page__main page__main--index ${activeOffers.length > 0 ? `` : `page__main--index-empty`}`}>
@@ -41,6 +43,7 @@ const MainPage = ({allCities, activeOffers, city, onCityClick, email, isAuthoriz
 const mapStateToProps = (state) => ({
   city: state.user.city,
   email: state.user.email,
+  avatar: state.user.avatar,
   isAuthorizationRequired: state.user.isAuthorizationRequired,
   activeOffers: getActiveOffers(state)
 });
