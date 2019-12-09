@@ -7,7 +7,7 @@ const MainHeader = ({userData, isAuthorizationRequired}: Props) => {
   const {email, avatar} = userData;
 
   const userAvatarPath = isAuthorizationRequired
-    ? `../img/avatar.svg`
+    ? `./img/avatar.svg`
     : `https://htmlacademy-react-2.appspot.com/six-cities${avatar}`;
   const linkValue = {
     text: isAuthorizationRequired ? defaultLinkValue : email,
