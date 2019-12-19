@@ -53,4 +53,11 @@ export interface Offer {
   maxAdults: number
 };
 
+export interface OfferRefData {
+  id: number,
+  ref: {
+    current: HTMLDivElement
+  }
+}
+
 export type Sort = `Popular` | `Price: low to high` | `Price: high to low` | `Top rated first`;
