@@ -5,7 +5,8 @@ const defaultActiveSort = `Popular`;
 const initialAppState = {
   city: ``,
   activeSort: defaultActiveSort,
-  priceRange: [-Infinity, Infinity]
+  priceRange: [-Infinity, Infinity],
+  rating: `5.0`
 };
 
 const filters = (state = initialAppState, action) => {
@@ -24,6 +25,10 @@ const filters = (state = initialAppState, action) => {
 
     case ActionTypes.RESET_CITY_FILTERS: return Object.assign({}, initialAppState, {
       city: state.city
+    });
+
+    case ActionTypes.SET_CITY_RATING: return Object.assign({}, state, {
+      rating: action.payload
     });
   }
 

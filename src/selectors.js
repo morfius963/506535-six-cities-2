@@ -4,10 +4,11 @@ const getCityFromState = (state) => state.filters.city;
 const getOffersFromStore = (state) => state.appData.offers;
 const getActiveSortFromStore = (state) => state.filters.activeSort;
 const getPriceRangeFromState = (state) => state.filters.priceRange;
+const getRatingFromState = (state) => state.filters.rating;
 
 export const getActiveOffers = createSelector(
-    [getCityFromState, getOffersFromStore, getActiveSortFromStore, getPriceRangeFromState],
-    (city, offers, activeSort, priceRange) => {
+    [getCityFromState, getOffersFromStore, getActiveSortFromStore, getPriceRangeFromState, getRatingFromState],
+    (city, offers, activeSort, priceRange, rating) => {
       const [minPrice, maxPrice] = priceRange;
       let sortFunc = null;
 
@@ -29,6 +30,7 @@ export const getActiveOffers = createSelector(
         .slice()
         .filter((offer) => (
           offer.city.name === city &&
+          offer.rating <= Number(rating) &&
           (offer.price >= minPrice && offer.price <= maxPrice)
         ))
         .sort(sortFunc);

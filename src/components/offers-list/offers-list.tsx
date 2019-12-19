@@ -7,6 +7,7 @@ import Map from "../map/map";
 import OfferCard from "../offer-card/offer-card";
 import OffersSort from "../offers-sort/offers-sort";
 import OffersFilterPrice from "../offers-filter-price/offers-filter-price";
+import OffersFilterRating from "../offers-filter-rating/offers-filter-rating";
 import withActiveSort from "../../hocs/with-active-sort/with-active-sort";
 import {Props} from "./interface";
 import {getActiveOffers} from "../../selectors";
@@ -23,11 +24,11 @@ const OffersList = ({offers, allOffers, city, activeSort, activeCardId, onCardMo
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">{offers.length} places to stay in {city}</b>
 
-          <div className="cities__components-wrapper">
-            <OffersSortWrapped onOffersSort={onOffersSort} activeSort={activeSort} city={city} />
+          <OffersSortWrapped onOffersSort={onOffersSort} activeSort={activeSort} city={city} />
 
-            <OffersFilterPrice offers={offersByCity} />
-          </div>
+          <OffersFilterPrice offers={offersByCity} />
+
+          <OffersFilterRating />
 
           <div className="cities__places-list places__list tabs__content">
             {

@@ -66,8 +66,15 @@ const ActionCreator = {
 
   setPriceRange: (range) => {
     return {
-      type: `SET_PRICE_RANGE`,
+      type: ActionTypes.SET_PRICE_RANGE,
       payload: range
+    };
+  },
+
+  setCityRating: (rating) => {
+    return {
+      type: ActionTypes.SET_CITY_RATING,
+      payload: rating
     };
   },
 
