@@ -18,18 +18,16 @@ describe(`snapshot test`, () => {
     offers: fixtureData,
     activeOffers: fixtureData
   };
-  const user = {
+  const filters = {
     city: `Amsterdam`,
     activeSort: `Popular`,
-    email: `morf@gmail.com`,
-    avatar: ``,
-    isAuthorizationRequired: false,
-  };
+    priceRange: [-Infinity, Infinity]
+  }
 
   const mockStore = configureStore([]);
   const store = mockStore({
     appData,
-    user
+    filters
   });
 
   it(`App correctly renders`, () => {

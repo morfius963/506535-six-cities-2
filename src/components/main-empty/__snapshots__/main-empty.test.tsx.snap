@@ -23,6 +23,13 @@ exports[`snapshot test Component correctly renders 1`] = `
         >
           We could not find any property availbale at the moment in 
           Amsterdam
+          .
+          <button
+            onClick={[MockFunction]}
+          >
+            Click
+          </button>
+           to reset filters for this city.
         </p>
       </div>
     </section>

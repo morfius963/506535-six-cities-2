@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import OfferCard from "./offer-card";
+import {OfferCard} from "./offer-card";
 import fixtureData from "../../__fixtures__/offers";
 
 jest.mock(`react-router-dom`, () => ({
@@ -13,6 +13,8 @@ describe(`snapshot test`, () => {
       offerData: fixtureData[0],
       onCardMouseEnter: jest.fn(),
       onFavoriteCardToggle: jest.fn(),
+      onRefAdd: jest.fn(),
+      onRefRemove: jest.fn(),
       isInFavoriteList: false
     };
 

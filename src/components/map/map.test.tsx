@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import Map from "./map";
+import {Map} from "./map";
 import fixtureData from "../../__fixtures__/offers";
 
 describe(`snapshot test`, () => {
@@ -9,7 +9,13 @@ describe(`snapshot test`, () => {
     const props = {
       offers: activeOffers,
       activeCard: -1,
-      isInOfferDetails: false
+      isInOfferDetails: false,
+      offersRefs: [{
+        id: 0,
+        ref: {
+          current: document.createElement(`div`)
+        }
+      }]
     };
     const div = document.createElement(`div`);
 

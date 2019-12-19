@@ -19,17 +19,9 @@ describe(`snapshot test`, () => {
   const appData = {
     favoriteOffers: fixtureData
   };
-  const user = {
-    isAuthorizationRequired: true,
-    email: `marf@gmail.com`,
-    avatar: ``
-  };
 
   const mockStore = configureStore([thunk]);
-  const store = mockStore({
-    appData,
-    user
-  });
+  const store = mockStore({appData});
 
   it(`Component correctly renders`, () => {
     const props = {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {shallow} from 'enzyme';
-import OfferCard from "./offer-card";
+import {OfferCard} from "./offer-card";
 import offersData from "../../__fixtures__/offers";
 
 jest.mock(`react-router-dom`, () => ({
@@ -17,8 +17,16 @@ describe(`end to end test`, () => {
       offerData: offer,
       onCardMouseEnter: mouseEnterHandler,
       onFavoriteCardToggle: favoriteClickHandler,
-      isInFavoriteList: false
+      isInFavoriteList: false,
+      onRefAdd: jest.fn(),
+      onRefRemove: jest.fn(),
     };
+
+    const ref = {
+      current: document.createElement(`div`)
+    };
+
+    jest.spyOn(React, `createRef`).mockImplementation(() => ref);
 
     const app = shallow(<OfferCard {...props} />);
     const card = app.find(`.cities__place-card`).at(0);
@@ -28,9 +36,6 @@ describe(`end to end test`, () => {
         id: Number(card.prop(`id`))
       }
     };
-
-    card.simulate(`mouseEnter`, evt);
-    expect(mouseEnterHandler).toHaveBeenCalledWith(evt.currentTarget.id);
 
     favoriteButton.simulate(`click`);
     expect(favoriteClickHandler).toHaveBeenCalledWith(evt.currentTarget.id, status);

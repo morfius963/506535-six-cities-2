@@ -17,15 +17,16 @@ describe(`snapshot test`, () => {
   const appData = {
     offers: fixtureData
   };
-  const user = {
+  const filters = {
     city: `Amsterdam`,
-    activeSort: `Popular`
+    activeSort: `Popular`,
+    priceRange: [-Infinity, Infinity]
   };
 
   const mockStore = configureStore([]);
   const store = mockStore({
     appData,
-    user
+    filters
   });
 
   it(`Component correctly renders`, () => {

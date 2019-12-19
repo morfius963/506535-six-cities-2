@@ -23,6 +23,42 @@ exports[`snapshot test Component correctly renders 1`] = `
         Amsterdam
       </b>
       <div
+        className="cities__components-wrapper"
+      >
+        <div
+          className="price-filter"
+        >
+          <span
+            className="price-filter__value"
+          >
+            Choose price: 
+            100€ - 3100€
+          </span>
+          <input
+            className="price-filter__input"
+            id="currentMinPrice"
+            max={3100}
+            min={100}
+            onChange={[Function]}
+            onMouseUp={[Function]}
+            step="10"
+            type="range"
+            value={100}
+          />
+          <input
+            className="price-filter__input"
+            id="currentMaxPrice"
+            max={3100}
+            min={100}
+            onChange={[Function]}
+            onMouseUp={[Function]}
+            step="10"
+            type="range"
+            value={3100}
+          />
+        </div>
+      </div>
+      <div
         className="cities__places-list places__list tabs__content"
       />
     </section>

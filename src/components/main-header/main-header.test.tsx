@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import MainHeader from "./main-header";
+import {MainHeader} from "./main-header";
 
 jest.mock(`react-router-dom`, () => ({
   Link: () => null
@@ -13,7 +13,8 @@ describe(`snapshot test`, () => {
         email: `morf@gmail.com`,
         avatar: ``
       },
-      isAuthorizationRequired: true
+      isAuthorizationRequired: true,
+      resetCityFilters: jest.fn()
     };
 
     const tree = renderer

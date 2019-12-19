@@ -2,7 +2,9 @@ import * as React from 'react';
 import {mount} from 'enzyme';
 import withSingIn from "./with-sing-in";
 import SingIn from "../../components/sing-in/sing-in";
+import MainHeader from "../../components/main-header/main-header";
 
+jest.mock(`../../components/main-header/main-header`, () => jest.fn().mockReturnValue(null));
 jest.mock(`react-router-dom`, () => ({
   Redirect: () => null,
   Link: () => null
@@ -73,5 +75,7 @@ describe(`end to end test`, () => {
         },
         expect.any(Function)
     );
+
+    expect(MainHeader).toHaveBeenCalled();
   });
 });
