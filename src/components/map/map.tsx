@@ -1,6 +1,9 @@
 import * as React from "react";
 import * as leaflet from "leaflet";
+import {connect} from "react-redux";
 import {Props} from "./interface";
+import history from "../../history";
+import {debounce, clearInterval} from "../../debounce";
 
 class Map extends React.PureComponent<Props, null> {
   DEFAULT_ZOOM: number;
@@ -68,8 +71,12 @@ class Map extends React.PureComponent<Props, null> {
   }
 
   _createPins(coordinates, id) {
-    const {offers} = this.props;
+    const {offers, offersRefs} = this.props;
 
+    if (offersRefs.length === 0) {
+      return;
+    }
+  
     const cardsID = offers.map((offer) => offer.id);
 
     coordinates.forEach((offerCoord, i) => {
@@ -78,11 +85,59 @@ class Map extends React.PureComponent<Props, null> {
         iconSize: [30, 30]
       });
 
+      const handleIconMouseMove = (evt) => {
+        if (id === cardsID[i]) {
+          return;
+        }
+
+        const activeOffer = offersRefs.find(({id}) => id === cardsID[i]);
+        const activeOfferRef = activeOffer.ref.current;
+
+        let offerOpacityValue = `1`;
+
+        if (evt.type === `mouseover`) {
+          if (offers.length > 4) {
+            activeOfferRef.scrollIntoView({behavior: `smooth`, block: `start`});
+          }
+
+          offerOpacityValue = `0.6`;
+        }
+
+        activeOfferRef.style.opacity = offerOpacityValue;
+      };
+
+      const handleIconClick = () => {
+        history.push(`/offer/${cardsID[i]}`);
+        window.scrollTo(0, 0);
+      };
+
+      const mouseOverIconCb = (evt) => {
+        icon.options.iconUrl = `img/pin-active.svg`;
+        evt.target.setIcon(icon);
+        debounce(() => handleIconMouseMove(evt));
+      };
+
+      const mouseOutIconCb = (evt) => {
+        icon.options.iconUrl = `img/pin.svg`;
+        evt.target.setIcon(icon);
+        handleIconMouseMove(evt);
+        clearInterval();
+      }
+
       leaflet
         .marker(offerCoord, {icon})
+        .on(`mouseover`, mouseOverIconCb)
+        .on(`mouseout`, mouseOutIconCb)
+        .on(`click`, handleIconClick)
         .addTo(this._layerGroup);
     });
   }
 }
 
-export default Map;
+const mapStateToProps = (state) => ({
+  offersRefs: state.appData.offersRefs
+});
+
+export {Map};
+
+export default connect(mapStateToProps, null)(Map);

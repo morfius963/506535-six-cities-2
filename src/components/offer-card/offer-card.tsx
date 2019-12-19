@@ -1,100 +1,145 @@
 import * as React from "react";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {Props} from "./interface";
+import ActionCreator from "../../store/actions/action-creator";
 
 const DEFAULT_ACTIVE_CARD_ID = -1;
 
-const OfferCard = ({offerData, onCardMouseEnter, onFavoriteCardToggle, isInFavoriteList}: Props) => {
-  const {id, title, isPremium, price, rating, type, previewImage, isFavorite} = offerData;
+class OfferCard extends React.PureComponent<Props, null> {
+  offerRef: {current: HTMLFormElement};
+  cardImageSize: {width: number; height: number};
 
-  const cardImageSize = {
-    width: isInFavoriteList ? 150 : 260,
-    height: isInFavoriteList ? 110 : 200
-  };
+  constructor(props) {
+    super(props);
 
-  const mouseEnterHandler = onCardMouseEnter === null
-    ? null
-    : (evt) => {
-      const cardId = Number(evt.currentTarget.id);
-      onCardMouseEnter(cardId);
+    this.cardImageSize = {
+      width: this.props.isInFavoriteList ? 150 : 260,
+      height: this.props.isInFavoriteList ? 110 : 200
     };
 
-  const mouseLeaveHandler = onCardMouseEnter === null
-    ? null
-    : () => {
-      onCardMouseEnter(DEFAULT_ACTIVE_CARD_ID);
-    };
+    this.offerRef = React.createRef();
 
-  const handleFavoriteButtonClick = () => {
-    const status = isFavorite ? 0 : 1;
-    onFavoriteCardToggle(id, status);
-  };
+    this.mouseEnterHandler = this.mouseEnterHandler.bind(this);
+    this.handleOfferScrollTop = this.handleOfferScrollTop.bind(this);
+    this.handleFavoriteButtonClick = this.handleFavoriteButtonClick.bind(this);
+  }
 
-  const handleOfferScrollTop = () => {
-    window.scrollTo(0, 0);
-  };
+  componentDidMount() {
+    const {onRefAdd} = this.props;
+    const {id} = this.props.offerData;
 
-  return (
-    <article
-      className={`${isInFavoriteList ? `favorites__card` : `cities__place-card`} place-card`}
-      id={`${id}`}
-      onMouseEnter={mouseEnterHandler}
-      onMouseLeave={mouseLeaveHandler}
-    >
+    onRefAdd(this.offerRef, id);
+  }
 
-      {isPremium
-        ? <div className="place-card__mark">
-          <span>Premium</span>
-        </div>
-        : null}
+  componentWillUnmount() {
+    const {onRefRemove} = this.props;
+    const {id} = this.props.offerData;
 
-      <div className={`${isInFavoriteList ? `favorites__image-wrapper` : `cities__image-wrapper`} place-card__image-wrapper`}>
+    onRefRemove(this.offerRef, id);
+  }
 
-        <Link
-          to={`/offer/${id}`}
-          onClick={handleOfferScrollTop}
-        >
-          <img className="place-card__image" src={previewImage} width={cardImageSize.width} height={cardImageSize.height} alt="Place image" />
-        </Link>
+  render() {
+    const {offerData, isInFavoriteList} = this.props;
+    const {id, title, isPremium, price, rating, type, previewImage, isFavorite} = offerData;
 
-      </div>
-      <div className="place-card__info">
-        <div className="place-card__price-wrapper">
-          <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{price}</b>
-            <span className="place-card__price-text">&#47;&nbsp;night</span>
+    return (
+      <article
+        className={`${isInFavoriteList ? `favorites__card` : `cities__place-card`} place-card`}
+        id={`${id}`}
+        onMouseEnter={this.mouseEnterHandler}
+        onMouseLeave={this.mouseEnterHandler}
+        ref={this.offerRef}
+      >
+  
+        {isPremium
+          ? <div className="place-card__mark">
+            <span>Premium</span>
           </div>
-          <button
-            className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`}
-            type="button"
-            onClick={handleFavoriteButtonClick}
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
-        </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{width: `${(rating * 100) / 5}%`}}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
-        <h2 className="place-card__name">
-
+          : null}
+  
+        <div className={`${isInFavoriteList ? `favorites__image-wrapper` : `cities__image-wrapper`} place-card__image-wrapper`}>
+  
           <Link
             to={`/offer/${id}`}
-            onClick={handleOfferScrollTop}
+            onClick={this.handleOfferScrollTop}
           >
-            {title}
+            <img className="place-card__image" src={previewImage} width={this.cardImageSize.width} height={this.cardImageSize.height} alt="Place image" />
           </Link>
+  
+        </div>
+        <div className="place-card__info">
+          <div className="place-card__price-wrapper">
+            <div className="place-card__price">
+              <b className="place-card__price-value">&euro;{price}</b>
+              <span className="place-card__price-text">&#47;&nbsp;night</span>
+            </div>
+            <button
+              className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`}
+              type="button"
+              onClick={this.handleFavoriteButtonClick}
+            >
+              <svg className="place-card__bookmark-icon" width="18" height="19">
+                <use xlinkHref="#icon-bookmark"></use>
+              </svg>
+              <span className="visually-hidden">In bookmarks</span>
+            </button>
+          </div>
+          <div className="place-card__rating rating">
+            <div className="place-card__stars rating__stars">
+              <span style={{width: `${(rating * 100) / 5}%`}}></span>
+              <span className="visually-hidden">Rating</span>
+            </div>
+          </div>
+          <h2 className="place-card__name">
+  
+            <Link
+              to={`/offer/${id}`}
+              onClick={this.handleOfferScrollTop}
+            >
+              {title}
+            </Link>
+  
+          </h2>
+          <p className="place-card__type">{type}</p>
+        </div>
+      </article>
+    );
+  }
 
-        </h2>
-        <p className="place-card__type">{type}</p>
-      </div>
-    </article>
-  );
+  mouseEnterHandler(evt) {
+    const {onCardMouseEnter} = this.props;
+    const cardMouseEnterHandler = onCardMouseEnter === null ? () => {} : onCardMouseEnter;
+
+    if (evt.type === `mouseleave`) {
+      cardMouseEnterHandler(DEFAULT_ACTIVE_CARD_ID);
+      this.offerRef.current.style.opacity = `1`;
+      return;
+    }
+
+    const cardId = Number(evt.currentTarget.id);
+    this.offerRef.current.style.opacity = `0.6`;
+    cardMouseEnterHandler(cardId);
+  }
+
+  handleFavoriteButtonClick() {
+    const {offerData, onFavoriteCardToggle} = this.props;
+    const {id, isFavorite} = offerData;
+
+    const status = isFavorite ? 0 : 1;
+    onFavoriteCardToggle(id, status);
+  }
+
+  handleOfferScrollTop() {
+    window.scrollTo(0, 0);
+  }
+}
+
+const mapDispatchToProps = {
+  onRefAdd: (ref, id) => ActionCreator.setOfferRef(ref, id),
+  onRefRemove: (ref, id) => ActionCreator.deleteOfferRef(ref, id)
 };
 
-export default OfferCard;
+export {OfferCard};
+
+export default connect(null, mapDispatchToProps)(OfferCard);
