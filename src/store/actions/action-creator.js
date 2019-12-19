@@ -1,7 +1,5 @@
 import ActionTypes from "./action-types.js";
 
-const defaultActiveSort = `Popular`;
-
 const replaceArrayItem = (oldItems, newItem) => {
   const itemIndex = oldItems.findIndex(({id}) => id === newItem.id);
 
@@ -18,7 +16,6 @@ const ActionCreator = {
       type: ActionTypes.SWITCH_CITY,
       payload: {
         city,
-        defaultSort: defaultActiveSort
       }
     };
   },
@@ -47,6 +44,33 @@ const ActionCreator = {
     };
   },
 
+  setOfferRef: (ref, id) => {
+    return {
+      type: ActionTypes.SET_OFFER_REF,
+      payload: {
+        ref,
+        id
+      }
+    };
+  },
+
+  deleteOfferRef: (ref, id) => {
+    return {
+      type: ActionTypes.DELETE_OFFER_REF,
+      payload: {
+        ref,
+        id
+      }
+    };
+  },
+
+  setPriceRange: (range) => {
+    return {
+      type: `SET_PRICE_RANGE`,
+      payload: range
+    };
+  },
+
   setFavoriteOffer: (newOffer, oldOffers) => {
     const {cities, favorites} = oldOffers;
 
@@ -59,6 +83,12 @@ const ActionCreator = {
         cities: newCityOffers,
         favorites: newFavoriteOffer
       }
+    };
+  },
+
+  resetCityFilters: () => {
+    return {
+      type: ActionTypes.RESET_CITY_FILTERS
     };
   },
 
