@@ -4,4 +4,5 @@ export interface Props {
     avatar: string
   },
   isAuthorizationRequired: boolean,
+  resetCityFilters: () => void
 }

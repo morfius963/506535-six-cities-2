@@ -1,3 +1,4 @@
 export interface Props {
-  city: string
+  city: string,
+  resetCityFilters: () => void
 }

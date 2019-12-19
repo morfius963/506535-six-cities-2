@@ -6,8 +6,6 @@ export interface Props {
   location: {
     pathname: string
   },
-  email: string,
-  avatar: string,
   isAuthorizationRequired: boolean,
   onCommentsLoad: () => void,
   onFavoriteCardToggle: (id: number, status: number) => void,
