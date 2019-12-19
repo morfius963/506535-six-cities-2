@@ -10,6 +10,7 @@ import Operation from "./store/actions/async-actions";
 import createAPI from "./api";
 import appData from "./store/reducers/app-data/app-data";
 import user from "./store/reducers/user/user";
+import filters from "./store/reducers/filters/filters";
 import ActionCreator from "./store/actions/action-creator";
 import history from "./history";
 import withScreenSwitch from "./hocs/with-screen-switch/with-screen-switch";
@@ -19,7 +20,8 @@ const AppWrapped = withScreenSwitch(App);
 const init = () => {
   const reducer = combineReducers({
     appData,
-    user
+    user,
+    filters
   });
   const api = createAPI(() => history.push(`/login`));
   const store = createStore(
