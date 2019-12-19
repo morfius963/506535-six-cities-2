@@ -7,13 +7,13 @@ const Cities = ({cities, activeCity, onCityClick}: Props) => {
       (evt) => {
         const target = evt.target;
 
-        if (target.tagName.toLowerCase() !== `a` && target.tagName.toLowerCase() !== `span`) {
+        if ((target.tagName.toLowerCase() !== `a` && target.tagName.toLowerCase() !== `span`) || target.textContent === activeCity) {
           return;
         }
 
         onCityClick(target.textContent);
       },
-      [onCityClick]
+      [activeCity]
   );
 
   return (

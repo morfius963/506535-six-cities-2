@@ -6,13 +6,16 @@ import Operation from "../../store/actions/async-actions";
 import Map from "../map/map";
 import OfferCard from "../offer-card/offer-card";
 import OffersSort from "../offers-sort/offers-sort";
+import OffersFilterPrice from "../offers-filter-price/offers-filter-price";
 import withActiveSort from "../../hocs/with-active-sort/with-active-sort";
 import {Props} from "./interface";
 import {getActiveOffers} from "../../selectors";
 
 const OffersSortWrapped = withActiveSort(OffersSort);
 
-const OffersList = ({offers, city, activeSort, activeCardId, onCardMouseEnter, onOffersSort, onFavoriteCardToggle}: Props) => {
+const OffersList = ({offers, allOffers, city, activeSort, activeCardId, onCardMouseEnter, onOffersSort, onFavoriteCardToggle}: Props) => {
+  const offersByCity = allOffers.filter((offer) => offer.city.name === city);
+
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -20,7 +23,11 @@ const OffersList = ({offers, city, activeSort, activeCardId, onCardMouseEnter, o
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">{offers.length} places to stay in {city}</b>
 
-          <OffersSortWrapped onOffersSort={onOffersSort} activeSort={activeSort} city={city} />
+          <div className="cities__components-wrapper">
+            <OffersSortWrapped onOffersSort={onOffersSort} activeSort={activeSort} city={city} />
+
+            <OffersFilterPrice offers={offersByCity} />
+          </div>
 
           <div className="cities__places-list places__list tabs__content">
             {
@@ -51,9 +58,10 @@ const OffersList = ({offers, city, activeSort, activeCardId, onCardMouseEnter, o
 };
 
 const mapStateToProps = (state) => ({
-  city: state.user.city,
-  activeSort: state.user.activeSort,
+  city: state.filters.city,
+  activeSort: state.filters.activeSort,
   offers: getActiveOffers(state),
+  allOffers: state.appData.offers
 });
 
 const mapDispatchToProps = {

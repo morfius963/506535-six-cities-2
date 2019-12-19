@@ -17,17 +17,13 @@ class Favorites extends React.PureComponent<Props, null> {
   }
 
   render() {
-    const {isAuthorizationRequired, email, avatar, favoriteOffers} = this.props;
-    const userData = {email, avatar};
+    const {favoriteOffers} = this.props;
     const isEmpty = favoriteOffers.length === 0;
 
     return (
       <div className={`page ${isEmpty ? `page--favorites-empty` : ``}`}>
 
-        <MainHeader
-          isAuthorizationRequired={isAuthorizationRequired}
-          userData={userData}
-        />
+        <MainHeader />
 
         <main className={`page__main page__main--favorites ${isEmpty ? `page__main--favorites-empty` : ``}`}>
           <div className="page__favorites-container container">
@@ -90,9 +86,6 @@ class Favorites extends React.PureComponent<Props, null> {
 }
 
 const mapStateToProps = (state) => ({
-  email: state.user.email,
-  avatar: state.user.avatar,
-  isAuthorizationRequired: state.user.isAuthorizationRequired,
   favoriteOffers: state.appData.favoriteOffers,
 });
 

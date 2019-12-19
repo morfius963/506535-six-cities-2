@@ -1,8 +1,10 @@
 import * as React from "react";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import ActionCreator from "../../store/actions/action-creator";
 import {Props} from "./interface";
 
-const MainHeader = ({userData, isAuthorizationRequired}: Props) => {
+const MainHeader = ({userData, isAuthorizationRequired, resetCityFilters}: Props) => {
   const defaultLinkValue = `Sing In`;
   const {email, avatar} = userData;
 
@@ -14,12 +16,21 @@ const MainHeader = ({userData, isAuthorizationRequired}: Props) => {
     path: isAuthorizationRequired ? `/login` : `/favorites`
   };
 
+  const handleCityFiltersReset = () => {
+    const hash = window.location.href.split(`/`).reverse()[0];
+
+    if (hash === ``) {
+      return;
+    }
+    resetCityFilters();
+  }
+
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link to="/" className="header__logo-link header__logo-link--active">
+            <Link to="/" onClick={handleCityFiltersReset} className="header__logo-link header__logo-link--active" >
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </Link>
           </div>
@@ -44,4 +55,18 @@ const MainHeader = ({userData, isAuthorizationRequired}: Props) => {
   );
 };
 
-export default MainHeader;
+const mapStateToProps = (state) => ({
+  isAuthorizationRequired: state.user.isAuthorizationRequired,
+  userData: {
+    email: state.user.email,
+    avatar: state.user.avatar,
+  }
+});
+
+const mapDispatchToProps = {
+  resetCityFilters: () => ActionCreator.resetCityFilters()
+};
+
+export {MainHeader};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);

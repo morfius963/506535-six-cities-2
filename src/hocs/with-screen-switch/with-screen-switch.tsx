@@ -45,7 +45,7 @@ const withScreenSwitch = (Component) => {
   }
 
   const mapStateToProps = (state) => ({
-    city: state.user.city,
+    city: state.filters.city,
     isAuthorizationRequired: state.user.isAuthorizationRequired
   });
   

@@ -14,9 +14,8 @@ const MAX_NEIGHBOURHOOD_OFFERS = 3;
 
 const CommentFormWrapped = withCommentSubmit(CommentForm);
 
-const OfferDetails = ({location, offers, email, avatar, isAuthorizationRequired, comments, onFavoriteCardToggle, onCommentsLoad, onReviewSubmit}: Props) => {
+const OfferDetails = ({location, offers, isAuthorizationRequired, comments, onFavoriteCardToggle, onCommentsLoad, onReviewSubmit}: Props) => {
 
-  const userData = {email, avatar};
   const allOffers = offers.length !== 0 ? offers : [];
 
   const currentOfferId = Number(location.pathname.split(`/`).reverse()[0]);
@@ -37,10 +36,7 @@ const OfferDetails = ({location, offers, email, avatar, isAuthorizationRequired,
   return (
     <div className="page">
 
-      <MainHeader
-        isAuthorizationRequired={isAuthorizationRequired}
-        userData={userData}
-      />
+      <MainHeader />
 
       <main className="page__main page__main--property">
         <section className="property">
@@ -136,7 +132,7 @@ const OfferDetails = ({location, offers, email, avatar, isAuthorizationRequired,
                 <h2 className="reviews__title">Reviews · <span className="reviews__amount">{comments.length}</span></h2>
 
                 {
-                  allOffers.length > 0
+                  comments.length > 0
                     ? <CommentList id={id} comments={comments} onCommentsLoad={onCommentsLoad} />
                     : null
                 }
@@ -186,8 +182,6 @@ const OfferDetails = ({location, offers, email, avatar, isAuthorizationRequired,
 };
 
 const mapStateToProps = (state) => ({
-  email: state.user.email,
-  avatar: state.user.avatar,
   isAuthorizationRequired: state.user.isAuthorizationRequired,
   offers: state.appData.offers,
   comments: state.appData.comments,
