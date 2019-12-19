@@ -1,11 +1,10 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {Offer} from "../../types";
 import {Props, State} from "./interface";
 import ActionCreator from "../../store/actions/action-creator";
 
 class OffersFilterPrice extends React.PureComponent<Props, State> {
-  _offers: Offer[] | null;
+  _city: string | null;
 
   constructor(props) {
     super(props);
@@ -15,7 +14,7 @@ class OffersFilterPrice extends React.PureComponent<Props, State> {
       currentPrice: [0, 0]
     };
 
-    this._offers = null;
+    this._city = this.props.city;
 
     this.onPriceChange = this.onPriceChange.bind(this);
     this.onPriceMouseUp = this.onPriceMouseUp.bind(this);
@@ -23,19 +22,16 @@ class OffersFilterPrice extends React.PureComponent<Props, State> {
 
   componentDidMount() {
     const {offers} = this.props;
-    this._offers = offers;
 
-    this.setDefaultPrice(this._offers);
+    this.setDefaultPrice(offers);
   }
 
   componentDidUpdate() {
-    const {offers} = this.props;
-    const oldOffersCity = this._offers[0].city.name;
-    const newOffersCity = offers[0].city.name;
+    const {city, offers} = this.props;
 
-    if (oldOffersCity !== newOffersCity) {
-      this._offers = offers;
-      this.setDefaultPrice(this._offers);
+    if (city !== this._city) {
+      this._city = city;
+      this.setDefaultPrice(offers);
     }
   }
 
@@ -104,6 +100,7 @@ class OffersFilterPrice extends React.PureComponent<Props, State> {
     const sortedByPriceOffers = offers.slice().sort((a, b) => a.price - b.price);
     const minPrice = sortedByPriceOffers[0].price;
     const maxPrice = sortedByPriceOffers[sortedByPriceOffers.length - 1].price;
+    // это для красоты заокруглил к ближайшему числу
     const formattedMinPrice = Math.floor(minPrice / 10) * 10;
     const formattedMaxPrice = Math.ceil(maxPrice / 10) * 10;
     const priceRange = [formattedMinPrice, formattedMaxPrice];
@@ -115,8 +112,12 @@ class OffersFilterPrice extends React.PureComponent<Props, State> {
   }
 }
 
+const mapStateToProps = (state) => ({
+  city: state.filters.city
+});
+
 const mapDispatchToProps = {
   setPriceRange: (range) => ActionCreator.setPriceRange(range)
 };
 
-export default connect(null, mapDispatchToProps)(OffersFilterPrice);
+export default connect(mapStateToProps, mapDispatchToProps)(OffersFilterPrice);

@@ -132,7 +132,7 @@ const OfferDetails = ({location, offers, isAuthorizationRequired, comments, onFa
                 <h2 className="reviews__title">Reviews · <span className="reviews__amount">{comments.length}</span></h2>
 
                 {
-                  comments.length > 0
+                  allOffers.length > 0
                     ? <CommentList id={id} comments={comments} onCommentsLoad={onCommentsLoad} />
                     : null
                 }

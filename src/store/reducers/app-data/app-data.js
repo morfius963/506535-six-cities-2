@@ -33,8 +33,7 @@ const appData = (state = initialAppState, action) => {
     });
 
     case ActionTypes.DELETE_OFFER_REF:
-      const refIndex = state.offersRefs.findIndex(({id}) => id === action.payload.id);
-      const newOffersRefs = [...state.offersRefs.slice(0, refIndex), ...state.offersRefs.slice(refIndex + 1)];
+      const newOffersRefs = state.offersRefs.filter(({id}) => id !== action.payload.id);
 
       return Object.assign({}, state, {
         offersRefs: newOffersRefs
