@@ -18,45 +18,60 @@ exports[`snapshot test Component correctly renders 1`] = `
       <b
         className="places__found"
       >
-        4
+        0
          places to stay in 
         Amsterdam
       </b>
       <div
-        className="cities__components-wrapper"
+        className="price-filter"
       >
-        <div
-          className="price-filter"
+        <span
+          className="price-filter__value"
         >
-          <span
-            className="price-filter__value"
-          >
-            Choose price: 
-            100€ - 3100€
-          </span>
-          <input
-            className="price-filter__input"
-            id="currentMinPrice"
-            max={3100}
-            min={100}
-            onChange={[Function]}
-            onMouseUp={[Function]}
-            step="10"
-            type="range"
-            value={100}
-          />
-          <input
-            className="price-filter__input"
-            id="currentMaxPrice"
-            max={3100}
-            min={100}
-            onChange={[Function]}
-            onMouseUp={[Function]}
-            step="10"
-            type="range"
-            value={3100}
-          />
-        </div>
+          Choose price: 
+          100€ - 3100€
+        </span>
+        <input
+          className="price-filter__input"
+          id="currentMinPrice"
+          max={3100}
+          min={100}
+          onChange={[Function]}
+          onMouseUp={[Function]}
+          step="10"
+          type="range"
+          value={100}
+        />
+        <input
+          className="price-filter__input"
+          id="currentMaxPrice"
+          max={3100}
+          min={100}
+          onChange={[Function]}
+          onMouseUp={[Function]}
+          step="10"
+          type="range"
+          value={3100}
+        />
+      </div>
+      <div
+        className="offer-rating"
+      >
+        <span>
+          Choose max rating:
+        </span>
+        <input
+          className="offer-rating__value"
+          maxLength={3}
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="text"
+        />
+        <span
+          className="offer-rating__description"
+        >
+          * input numbers from 0 to 5 to choose offer rating
+        </span>
       </div>
       <div
         className="cities__places-list places__list tabs__content"

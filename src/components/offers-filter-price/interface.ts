@@ -7,6 +7,7 @@ export interface State {
 
 export interface Props {
   offers: Offer[],
+  city: string,
   priceRange: number[],
   setPriceRange: (range: number[]) => void
 };

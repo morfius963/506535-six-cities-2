@@ -45,7 +45,6 @@ describe(`snapshot test`, () => {
       .toJSON();
 
     expect(Map).toHaveBeenCalled();
-    expect(OfferCard).toHaveBeenCalled();
     expect(OffersSort).toHaveBeenCalled();
     expect(tree).toMatchSnapshot();
   });

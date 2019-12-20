@@ -6,7 +6,6 @@ import configureStore from 'redux-mock-store';
 import MainPage from "./main-page";
 import Cities from "../cities/cities";
 import MainHeader from "../main-header/main-header";
-import OffersList from "../offers-list/offers-list";
 import fixtureData from "../../__fixtures__/offers";
 
 jest.mock(`../offers-list/offers-list`, () => jest.fn().mockReturnValue(null));
@@ -45,7 +44,6 @@ describe(`snapshot test`, () => {
       .toJSON();
 
     expect(Cities).toHaveBeenCalled();
-    expect(OffersList).toHaveBeenCalled();
     expect(MainHeader).toHaveBeenCalled();
     expect(tree).toMatchSnapshot();
   });

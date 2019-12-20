@@ -4,7 +4,8 @@ describe(`Reducer test group`, () => {
   const initialAppState = {
     city: ``,
     activeSort: `Popular`,
-    priceRange: [-Infinity, Infinity]
+    priceRange: [-Infinity, Infinity],
+    rating: `5.0`
   };
 
   it(`Reducer should correctly switch city`, () => {
@@ -19,7 +20,8 @@ describe(`Reducer test group`, () => {
     )).toEqual({
       city: `Hamburg`,
       activeSort: `Popular`,
-      priceRange: [-Infinity, Infinity]
+      priceRange: [-Infinity, Infinity],
+      rating: `5.0`
     });
   });
 
@@ -33,7 +35,8 @@ describe(`Reducer test group`, () => {
     )).toEqual({
       city: ``,
       activeSort: `Top rated first`,
-      priceRange: [-Infinity, Infinity]
+      priceRange: [-Infinity, Infinity],
+      rating: `5.0`
     });
   });
 
