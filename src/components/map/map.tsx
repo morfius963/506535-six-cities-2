@@ -97,7 +97,7 @@ class Map extends React.PureComponent<Props, null> {
 
         if (evt.type === `mouseover`) {
           if (offers.length > 4) {
-            activeOfferRef.scrollIntoView({behavior: `smooth`, block: `start`});
+            debounce(() => activeOfferRef.scrollIntoView({behavior: `smooth`, block: `start`}))
           }
 
           offerOpacityValue = `0.6`;
@@ -114,7 +114,7 @@ class Map extends React.PureComponent<Props, null> {
       const mouseOverIconCb = (evt) => {
         icon.options.iconUrl = `img/pin-active.svg`;
         evt.target.setIcon(icon);
-        debounce(() => handleIconMouseMove(evt));
+        handleIconMouseMove(evt)
       };
 
       const mouseOutIconCb = (evt) => {
