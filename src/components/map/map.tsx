@@ -94,15 +94,19 @@ class Map extends React.PureComponent<Props, null> {
         const activeOfferRef = activeOffer.ref.current;
 
         let offerOpacityValue = `1`;
+        let iconImgUrl = `img/pin.svg`;
 
         if (evt.type === `mouseover`) {
           if (offers.length > 4) {
             debounce(() => activeOfferRef.scrollIntoView({behavior: `smooth`, block: `start`}))
           }
 
+          iconImgUrl = `img/pin-active.svg`;
           offerOpacityValue = `0.6`;
         }
 
+        icon.options.iconUrl = iconImgUrl;
+        evt.target.setIcon(icon);
         activeOfferRef.style.opacity = offerOpacityValue;
       };
 
@@ -111,22 +115,14 @@ class Map extends React.PureComponent<Props, null> {
         window.scrollTo(0, 0);
       };
 
-      const mouseOverIconCb = (evt) => {
-        icon.options.iconUrl = `img/pin-active.svg`;
-        evt.target.setIcon(icon);
-        handleIconMouseMove(evt)
-      };
-
       const mouseOutIconCb = (evt) => {
-        icon.options.iconUrl = `img/pin.svg`;
-        evt.target.setIcon(icon);
         handleIconMouseMove(evt);
         clearInterval();
       }
 
       leaflet
         .marker(offerCoord, {icon})
-        .on(`mouseover`, mouseOverIconCb)
+        .on(`mouseover`, handleIconMouseMove)
         .on(`mouseout`, mouseOutIconCb)
         .on(`click`, handleIconClick)
         .addTo(this._layerGroup);
